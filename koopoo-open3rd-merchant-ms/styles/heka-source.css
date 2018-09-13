@@ -1,0 +1,70 @@
+#source{
+	min-height: 400px;
+}
+
+/*素材组样式*/
+.source-group{
+	border-bottom: 1px solid #737373;
+	padding: 0 0 20px 0;
+	/*height: 100%;*/
+}
+.source-pic{
+	display: inline-block;
+	text-decoration: none!important;
+	color: #000000!important;
+	width: 190px;
+}
+
+.source-audio{
+	text-decoration: none!important;
+	color: #000000!important;
+	width: 290px;
+}
+
+
+/*素材的图片样式*/
+.source-border{
+	border: 2px solid red!important;
+}
+.source-pic-size{
+	margin: 0 auto;
+	max-width: 180px;
+	height: 100px;
+	display: block;
+	border-radius: 5px;
+	border: 2px solid transparent;
+}
+.source-audio-width{
+	border: 2px solid #737373;
+	border-radius: 5px;
+	width: 35%;
+	height: 50px;
+	margin-bottom: 10px;
+	line-height: 45px;
+	padding: 0 10px;
+}
+
+.source-audio-width img{
+	height: 35px;
+	margin-right: 5px;
+}
+
+/*素材操作按钮*/
+.source-btn-group{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.source-btn-group .btn{
+	margin-right: 10px;
+	width: 82px;
+}
+.btn-outline {
+    color: inherit;
+    background-color: transparent;
+    -webkit-transition: all .5s;
+    transition: all .5s
+}
+
+.source-notice{ color: gray; }
+
+

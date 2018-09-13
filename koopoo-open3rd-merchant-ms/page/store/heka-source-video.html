@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>评论</title>
+	<link href="../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../styles/common.css" rel="stylesheet">
+	<link href="../../styles/animate.min.css" rel="stylesheet">
+	<link href="../../styles/heka-source.css" rel="stylesheet"/>
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="page-list-container">
+		<div class="search-wrapper mc-bg-white border">
+			<div id="source" class="p-15">
+                
+			</div>
+		</div>
+
+	</div>
+
+	<!--设置金额 Modal-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="exampleModalLabel">设置金额</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	          <div class="form-group">
+	            <label for="recipient-name" class="control-label"></label>
+	            <input type="number" class="form-control" id="price-input" placeholder="请输入价格">
+	          </div>	      
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	        <button type="button" class="btn-set-price btn btn-primary">确认</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!--素材列表模板-->
+	<script type="text/html" id="sourceTemplate">
+		<!--素材列表-->
+		<div class="ml-5 source-group">
+            {{each list as item i}}<a class="text-center source-pic" data-index="{{i}}" href="javascript:;">
+            	<video class="source-pic-size {{i===0?'source-border':''}}" poster="{{item.imageUrl}}" src="{{item.url}}" data-sourceid="{{item.sourceMaterialId}}" alt="资源图片"/>
+            	<span class="price">{{item.price>0 ? item.price+'元': '免费'}}</span>
+            </a>{{/each}}
+            
+            <!-- 新增的资源-->
+            <a class="text-center source-pic" style="display: none!important;" href="javascript:;" data-index="{{list.length}}">
+	        	<video class="source-pic-size" id="lastVideo" src="{{imgSrc||''}}" controls="controls" poster=""/>
+	        	<span class="price">免费</span>
+	        </a>
+        </div>
+        <!--操作按钮-->
+        <div class="ml-5 source-btn-group">
+			<button class="btn btn-outline btn-primary source-upload">上传视频</button>
+        	<input type="file" name="file_data" style="display: none!important;" id="fileUploadImage" size="1"/>
+        	<button class="btn btn-outline btn-primary source-price" data-toggle="modal" data-target="#myModal">设置价格</button>
+        	<button class="btn btn-outline btn-primary source-delete">删除</button>
+        </div>
+        <p class="ml-5 source-notice">注：{{notice ||'无素材'}}</p>
+	</script>
+
+	<script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+		var sourceType = 'video';
+        loadJs({
+            fileUploadJs: true,
+            files: [
+                '../../scripts/local/heka-source.js'
+            ]
+        });
+	</script>
+</body>
+</html>
+

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>商品分类</title>
+	<link href="../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../styles/common.css" rel="stylesheet">
+	<link href="../../styles/animate.min.css" rel="stylesheet">
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="page-list-container">
+		<div class="search-wrapper mc-bg-white border">
+			<div class="p-15 box-clear">
+				<div class="fl">
+					<button class="btn btn-sm btn-primary mr-5" id="btnShowAddBox"><i class="fa fa-plus-circle"></i> 添加</button>
+				</div>
+				<div class="ml-5 fl">
+					<div class="input-group search-bar box-clear fl" id="searchBar">
+						<i class="fa fa-search"></i>
+						<input type="text" name="keyword" class="form-control" placeholder="名称查询">
+						<span class="search-btn-reset"><i class="fa fa-remove"></i></span>
+						<span class="input-group-addon btn btn-default" id="btnSearch">搜索</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mc-bg-white mt-10 mb-10 border">
+			<div class="page-main-wrapper">
+				<table class="mc-list-table main-list main-images-list" id="categoriesTable" data-mode="edit">
+					<thead>
+					<tr>
+						<td width="50">选择</td>
+						<td width="50">顺序</td>
+						<td width="80">是否禁用</td>
+						<td width="80" data-bind="iconTitle" id="tableIconTitle" hidden></td>
+						<td>名称</td>
+						<td width="80">操作</td>
+					</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+
+				<div class="box-clear mc-list-tools pt-20 pb-20 pl-15 pr-15" id="listTools" hidden>
+					<div class="list-tools-left fl">
+						<div class="mc-table-checkbox-bar ml-5 mr-10 fl">
+							<label><input type="checkbox" id="checkedAll"> 全选</label>
+						</div>
+						<button class="btn btn-sm btn-warning mr-5" id="btnListRemove" disabled="disabled"><i class="fa fa-trash"></i> 禁用</button>
+					</div>
+
+					<div class="fr" id="pageNavWrapper"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 新增、修改 -->
+	<div class="mc-bg-white border p-15 box-clear" id="editFormContainer" hidden>
+		<div class="form-header box-clear mb-30 b-b">
+			<!--<div class="mr-10 fl f16"><i class="fa fa-pencil-square"></i> 修改分类</div>-->
+			<div class="mr-10 fl f18" id="editTile">
+				<span data-mode="new"><i class="fa fa-plus-square"></i> <span>新增分类</span></span>
+				<span data-mode="edit"><i class="fa fa-pencil-square"></i> <span>修改分类</span></span>
+			</div>
+		</div>
+
+		<div class="form-group-wrapper">
+			<div class="row box-clear">
+				<div class="form-item pb-10" id="editCover">
+					<span class="form-item-title"><span data-bind="#editIconTip"></span><span data-bind="iconTitle">图片</span>：</span>
+					<div class="form-item-content">
+						<input type="hidden" name="img_src" id="editImageSrc" data-bind="img_src"/>
+						<div class="form-image-wrapper fl">
+							<span class="image-contain" data-bind="img_src_string" data-bind-type="bg-img" style="background-image:url(../../images/upload-default-img.png);"></span>
+						</div>
+						<div class="mt-15 ml-15 color-light-gray fl">
+							<span class="btn btn-info btn-sm btn-file">
+								<input type="file" id="fileUploadImageOfEdit" size="1"/>上传<span data-bind="iconTitle">图片</span>
+							</span>
+							<p class="mt-5">
+								<small>仅支持jpg、gif、png，大小不超过1MB</small>
+								<small class="block">建议尺寸: <span class="color-orange" data-bind="#size"></span></small>
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-item">
+					<span class="form-item-title"><span class="color-red">*</span> 分类名称：</span>
+					<div class="form-item-content">
+						<input type="text" class="form-control form-input" name="name" data-bind="name" data-width="normal" data-not-null="1" placeholder="分类名称">
+					</div>
+				</div>
+
+				<div class="form-item">
+					<span class="form-item-title"><span class="color-red">*</span> 顺序：</span>
+					<div class="form-item-content">
+						<input type="number" class="form-control form-input" name="orders" data-bind="orders" data-width="normal" data-type="number" data-limit="0" data-limit-type="number" data-not-null="1" placeholder="显示的顺序">
+					</div>
+				</div>
+
+				<div class="form-item">
+					<span class="form-item-title">是否禁用：</span>
+					<div class="form-item-content">
+						<input type="checkbox" name="is_deleted" data-size="small" data-on-color="warning" data-on-text="是" data-off-text="否" />
+					</div>
+				</div>
+			</div>
+
+			<hr>
+			<div class="form-item mt-30 mb-15">
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<button class="btn btn-sm btn-primary btn-big mr-5" id="btnEditFormSubmit" type="button" op-btn="default">保存</button>
+					<button class="btn btn-sm btn-default btn-big" id="btnEditFormCancel" type="button" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 列表模板 -->
+	<script type="text/html" id="listTemplate">
+		{{each result as item}}<tr data-id="{{item.product_category_id}}" data-p-id="{{item.parent_id}}">
+			<td><input type="checkbox"></td>
+			<td>{{item.orders}}</td>
+			<td>{{if item.is_deleted}}<span class="color-dark-gray">已禁用</span>{{else}}<span class="color-light-gray">否</span>{{/if}}</td>
+			<td {{if noIcon}}hidden{{/if}}><div class="image-contain wh-40" style="background-image: url({{item.img_src_string || default_img_src}});"></div></td>
+			<td><span class="text-cover">{{item.name}}</span></td>
+			<td><span class="mc-btn-text btn-edit">修改</span> </td>
+		</tr>{{/each}}
+		{{if !result.length}}<tr><td colspan="{{noIcon ? 5 : 6}}" class="td-none text-center">暂无内容</td></tr>{{/if}}
+	</script>
+
+	<script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: true,
+            files: [
+                '../../scripts/local/store-categories.js'
+            ]
+        });
+	</script>
+</body>
+</html>

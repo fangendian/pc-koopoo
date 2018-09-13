@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页 - 靠谱</title>
+    <meta name="keywords" content="靠谱-微信第三方平台管理系统">
+    <meta name="description" content="靠谱-微信第三方平台管理系统，基于Bootstrap3最新版本开发的扁平化系统，使用了Html5+CSS3等现代技术">
+    <link href="../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../scripts/bootstrap/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="../../scripts/fontawesome/css/font-awesome.min.css?v=4.6.3" rel="stylesheet">
+    <link href="../../scripts/gritter/css/jquery.gritter.min.css?v=1.7.4" rel="stylesheet">
+    <link href="../../styles/common.css" rel="stylesheet">
+    <link href="../../styles/animate.min.css" rel="stylesheet">
+    <link href="../../styles/common-shop.css" rel="stylesheet">
+    <style>
+        .header { width:100%; position:fixed; left:0; top:0; z-index:100;}
+
+        /* 页面左侧 */
+        .page-left { width:200px; height:calc(100vh - 60px - 20px); position:fixed; left:0; bottom:0;}
+        .shop-avatar { width:60px; height:60px; margin:0 auto;}
+
+        .left-tabs>.nav-tabs { border-bottom:none;}
+        .left-tabs li { width:100%; margin-bottom:0!important; border-bottom:1px solid #e5e5e5; font-size:14px; font-weight:bold; cursor:pointer;}
+        .left-tabs a { padding:0 0 0 25px!important; margin:0!important; display:block; color:#555!important; line-height:60px!important; border:none!important;}
+        .left-tabs li i { width:30px; height:30px; margin-top:16px; margin-right:12px; background-color:#e5e5e5; display:block; border-radius:50%; text-align:center; font-size:16px; line-height:30px; font-weight:normal; font-style:normal; float:left;}
+        .left-tabs li>a:hover { background-color:#f8f8f8!important; border:none!important; color:#333!important;}
+        .left-tabs li.active>a { background-color:#f2f2f2!important; color:#7c83d9!important;}
+        .left-tabs li.active i { background-color:#7c83d9; color:white;}
+
+
+
+        /* 页面右侧 - 主要内容 */
+        .page-right { width:calc(100% - 230px); margin:70px 10px 0 220px; float:left;}
+        .page-content { min-height:calc(100vh - 60px - 60px); overflow:hidden;}
+
+
+        /* 我的小程序 */
+        .shop-list-ul { margin-right:-10px;}
+        .shop-list-ul li { width:calc(100% / 3 - 10px); margin:0 10px 10px 0; margin-right:9px\0; padding:20px 15px 10px 15px; background-color:white; border-top-width:3px; cursor:pointer; float:left;}
+        .shop-list-ul .f14 { color:#333; font-weight:400;}
+        .shop-item-bottom { height:20px; line-height:20px;}
+        .shop-opera { display:none;}
+        .shop-type { padding:0 5px; border:1px solid orangered; color:orangered;}
+        .btn-remove { color:#ff6600;}
+        .btn-remove:hover { color:#e60000;}
+        .shop-list-ul li:hover { color:#555;}
+        .shop-list-ul li:hover .shop-opera { display:block;}
+
+
+        /* 分类 */
+        .store-categories { height:60px; line-height:56px;}
+        .store-categories li { padding:0 25px; font-size:14px; color:#666; border-bottom:2px solid transparent; cursor:pointer; float:left;}
+        .store-categories li:hover { background-color:#f5f5f5; color:#333;}
+        .store-categories li.active { background-color:white; border-bottom-color:#5e68f0; font-weight:bold; color:#5e68f0;}
+
+        /* 列表 */
+        .store-list { width:100%; min-height:300px; /*margin-right:-10px;*/}
+        .store-list>ul { margin-right:0; margin-left:-10px;}
+        .store-list li { margin-bottom:10px; padding-right:0; padding-left:10px;}
+        .store-item-wrapper { /*width:270px;*/ width:100%; height:330px; /*margin:0 10px 10px 0; margin-bottom:10px;*/ padding:19px; background-color:white; transition:300ms ease all; overflow:hidden; text-align:left; float:left;}
+        .template-item-header { /*width:230px;*/ width:100%; height:150px; position:relative; z-index:0;}
+        .template-item-image { width:100%; height:100%;}
+        .template-item-tools { width:100%; height:100%; padding-top:60px; position:absolute; left:0; top:0; z-index:-1; background-color:rgba(75,83,192,0.9); text-align:center; transition:300ms ease all; opacity:0;}
+        .template-item-tools > .btn { width:80px; height:36px; padding-top:0; padding-bottom:0; line-height:34px; font-size:12px;}
+        .template-item-tools > .btn-view { background-color:white; color:#555;}
+        .template-item-tools > .btn-use { background-color:#ffc936; color:#4b3700;}
+        .template-content { overflow:hidden;}
+        .template-content .h4 { color:#333;}
+        .template-description { color:#aaa; text-align:justify;}
+        .template-description.create-mode { display:block;}
+
+        .store-item-wrapper.normal:hover { background-color:#5e68f0; color:white;}
+        .store-item-wrapper.normal:hover .template-description, .store-list li:hover .h4 { color:rgba(255,255,255,0.85);}
+        .store-item-wrapper.normal:hover .template-item-tools { z-index:10; opacity:1;}
+
+        /* 创建模板 */
+        .create-form {}
+        .btn-create-close { cursor:pointer;}
+        .create-template { width:270px; min-height:330px; margin:0 10px 10px 0; padding:19px; float:left;}
+        /*小程序预览Logo v2.0*/
+        .create-template-heka { width:270px; min-height:330px; margin:0 10px 10px 0; padding:19px; float:left;}
+        #imgPreview { width:calc(100% - 7px); }
+        #logoPreview {position: relative; width: 45px; height: 45px; border-radius:50%; left: 90px; top: -385px;border:2px solid white;}
+
+        /*翻牌红包预览Logo v2.0*/
+        .create-template-poker { width:270px; min-height:330px; margin:0 10px 10px 0; padding:19px; float:left;}
+        #imgPokerPreview { width:calc(100% - 7px); }
+        #logoPokerPreview {position: relative; width: 45px; height: 45px; border-radius:50%; left: 90px; top: -385px;border:2px solid white;}
+        
+        .template-cover { width:230px; height:150px;}
+
+        .create-content { max-width:600px; width:calc(100% - 290px); margin-left:10px; float:left;}
+        .create-form .form-item-title { width:100px;}
+        .item-select-wrapper>.select-item { width:calc((100% - 20px) / 3); margin-right:10px; float:left;}
+        .item-select-wrapper>.select-item:last-child { margin-right:0;}
+        .form-item-content { width:calc(100% - 100px); padding-right:0;}
+
+        .step-last-bottom .mc-btn-big { width:220px; padding:0 10px;}
+        a.mc-btn-green:hover { color:white; text-decoration:none;}
+
+
+        .page-nav { margin:15px 0;}
+
+
+        /* 处理不同屏幕宽度 */
+        @media screen and (min-width:1500px){
+            .store-list li { width:20%;}
+        }
+        @media screen and (min-width:1740px){
+            .store-list li { width:calc(100% / 6);}
+        }
+        @media screen and (min-width:1921px){
+            .shop-list-ul li { width:calc(100% / 7);}
+        }
+        @media screen and (max-width:1300px){
+            .shop-list-ul li { width:calc(100% / 2 - 10px);}
+            .create-form .form-item-title { width:83px;}
+            .form-item-content { width:calc(100% - 83px);}
+            input[data-width=normal] { max-width:100%;}
+        }
+        @media screen and (max-width:920px){
+            .shop-list-ul li { width:calc(100% - 10px); padding-right:0;}
+            .store-categories li { padding:0 20px;}
+        }
+    </style>
+</head>
+<body class="body-bg-gray">
+    <div class="header" id="header">
+        <div class="header-container">
+            <div class="header-left fl">
+                <div class="logo fl"><h4><img src="../../../img/logo-sig.png"> <strong>靠谱</strong></h4></div>
+                <div class="header-title ml-10 pl-10 f16 b-l fl">个人中心</div>
+            </div>
+            <div class="header-right fr">
+                欢迎，<span data-bind="nickname"></span>
+                <span class="mc-btn-text ml-5" id="btnLogout"><i class="glyphicon glyphicon-log-out"></i> 安全退出</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-left m-10 mr-0 mc-bg-white border" id="pageLeft">
+        <div class="p-15 b-b text-center">
+            <p class="shop-avatar img-circle image-cover border" style="background-image:url(../../images/user_avatar_default.jpg);"></p>
+            <div class="pt-5">
+                <b class="f14" data-bind="nickname"></b>
+                <span class="mt-5 mb-10 block" data-bind="mobile_no"></span>
+                <a class="mc-btn-text ml-5" href="profiles.html">账户设置</a>
+            </div>
+        </div>
+
+        <div class="left-tabs">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#myContainer" data-toggle="tab" id="tabMyprogram"><i class="fa fa-list-alt"></i>我的小程序</a></li>
+                <li><a href="#storeContainer" data-toggle="tab" id="tabStore"><i class="fa fa-th"></i>模板中心</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="page-right box-clear">
+        <div class="page-content tab-content">
+            <!-- 我的小程序 -->
+            <div class="tab-pane active" id="myContainer">
+                <div class="p-15 mb-10 border mc-bg-white">
+                    <button class="mc-btn mc-btn-blue mc-btn-big btnCreate" disabled="disabled">创建小程序</button>
+                    <!--<button class="mc-btn mc-btn-red mc-btn-big btnCreate create-heka" disabled="disabled">创建互赏</button>
+                    <button class="mc-btn mc-btn-red mc-btn-big btnCreate create-poker" disabled="disabled">创建翻牌红包</button>-->
+                    <p class="color-gray mt-10 f12">您是普通账户，可以限时体验小程序。</p>
+                </div>
+                <ul class="shop-list-ul color-gray box-clear" id="shopListUl"></ul>
+            </div>
+
+            <!-- 模板中心 -->
+            <div class="tab-pane" id="storeContainer">
+                <div class="store-container">
+                    <div class="store-categories border mc-bg-white">
+                        <ul class="content-container" id="categoriesUl"></ul>
+                    </div>
+                    <div class="store-list mt-10">
+                        <ul class="box-clear row" id="templateUl"></ul>
+                        <div class="p-10" id="pageNav"></div>
+                    </div>
+                </div>
+
+                <!-- 创建小程序 #create container-->
+                <div class="create-container box-clear p-20 border mc-bg-white" id="createContainer" hidden>
+                    <div class="pb-5 pt-5">
+                        <p class="btn-create-close mc-btn-text fr" id="btnCreateClose"><i class="fa fa-times"></i> 关闭</p>
+                        <h4><i class="fa fa-pencil-square mr-5"></i>创建小程序</h4>
+                    </div>
+
+                    <div class="create-form pt-30 pb-20" hidden>
+                        <div class="create-template border" hidden>
+                            <p class="template-cover image-cover" data-bind="cover_src_string_small" data-bind-type="bg-img"></p>
+                            <div class="template-content mt-30">
+                                <span class="h4" data-bind="template_name"></span>
+                                <p class="template-description mt-20 f12" data-bind="description"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="create-template-heka border" hidden>
+                            <!-- 图片预览 v2.0-->
+                            <img id="imgPreview" src="../../images/logo-background.jpg"/>
+                            <img id="logoPreview" src="../../images/logo-heka.png"/>
+                        </div>
+
+                        <div class="create-template-poker border" hidden>
+                            <!-- 翻牌红包预览 v2.0-->
+                            <img id="imgPokerPreview" src="../../images/logo-background-poker.jpg"/>
+                            <img id="logoPokerPreview" src="../../images/logo-heka.png"/>
+                        </div>
+                        
+                        <div class="create-content pt-10 pb-30">
+                            <div class="form-item">
+                                <span class="form-item-title">小程序名称：</span>
+                                <div class="form-item-content">
+                                    <input type="text" class="form-control form-input" data-width="normal" name="shop_name" data-not-null="1" placeholder="请输入小程序名称">
+                                </div>
+                            </div>
+
+                            <!--上传logo v2.0-->
+                            <div class="form-item form-upload-Logo" hidden>
+                                <span class="form-item-title">上传Logo：</span>
+                                <div class="form-item-content">
+                                    <span class="mc-btn mc-btn-blue mc-btn-big mr-10 mb-10" id="btnUploadLogo">上传</span>
+                                    <a id="showToolTip" data-toggle="tooltip" data-placement="right" title="建议上传长宽相等的图片。">
+										<i class="glyphicon glyphicon-question-sign"></i>
+									</a>
+                                </div>
+                                
+                                <div class="form-item-content">
+                                	<input type="file" style="display: none!important;" name="file_data" id="fileUploadImage" size="1"/>
+								</div>
+                            </div>
+                            
+                            <div class="form-item">
+                                <span class="form-item-title">联系地址：</span>
+                                <div class="form-item-content item-select-wrapper" id="locationWrapper">
+                                    <div class="select-item"><select class="form-control" name="province_id" data-not-null="1"><option>请选择省</option></select></div>
+                                    <div class="select-item"><select class="form-control" name="city_id" data-not-null="1"><option>请选择市</option></select></div>
+                                    <div class="select-item"><select class="form-control" name="district_id" data-not-null="1"><option>请选择地区</option></select></div>
+                                </div>
+                            </div>
+                            <div class="form-item">
+                                <span class="form-item-title">&nbsp;</span>
+                                <div class="form-item-content">
+                                    <input type="text" class="form-control form-input" name="address" data-not-null="1" placeholder="请填写具体地址">
+                                </div>
+                            </div>
+
+                            <div class="form-item">
+                                <span class="form-item-title"> 公司名称：</span>
+                                <div class="form-item-content">
+                                    <input type="text" class="form-control form-input" data-width="normal" name="company_name" data-not-null="1" placeholder="请输入营业执照上的公司全名">
+                                </div>
+                            </div>
+
+                            <div class="form-item">
+                                <span class="form-item-title">&nbsp;</span>
+                                <div class="form-item-content">
+                                    <label><input type="checkbox" name="checked_agree" data-not-null="1" data-give-up="1" id="checkboxAgree" class="fl" style="margin:2px 5px 0 0;"> 我已阅读并同意</label>
+                                    <a href="#">担保交易服务协议</a>
+                                </div>
+                            </div>
+
+                            <div class="form-item">
+                                <span class="form-item-title">&nbsp;</span>
+                                <div class="form-item-content">
+                                    <span class="mc-btn mc-btn-blue mc-btn-big mr-10 mb-10" id="btnCreateSubmit">确定创建</span>
+                                    <span class="mc-btn mc-btn-gray-line mc-btn-big" id="btnCreateCancel">取消</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="create-complete pb-30 text-center" hidden>
+                        <div class="pt-40">
+                            <h4 class="color-green"><strong>恭喜你，小程序已经创建成功！</strong></h4>
+                            <p class="mt-10">为了确保所有功能正常，授权小程序时请保持默认选择，将权限统一授权给靠谱</p>
+                        </div>
+
+                        <div class="step-last-bottom text-center m-30">
+                            <p>
+                                <a class="mc-btn mc-btn-green mc-btn-big disabled" href="#" target="_blank" id="btnSetup">立即绑定微信小程序</a>
+                            </p>
+                            <p class="mt-15">
+                                <button class="mc-btn mc-btn-blue mc-btn-big" id="btnDone">稍后再说，进入管理后台</button>
+                            </p>
+                        </div>
+                    </div>
+                </div><!-- /#END create container -->
+            </div>
+
+        </div>
+
+        <div class="p-10 page-footer text-center">&copy; 2018 靠谱 版权所有</div>
+    </div>
+
+
+    <!-- 我的小程序HTML模板 -->
+    <script type="text/html" id="shopListTemplate">
+        {{each result as item}}<li class="border" data-id="{{item.shop_id}}" data-t-id="{{item.template_id}}" data-i-id="{{item.industry_id}}" data-a-id="{{item.authorizer_appid}}" style="border-top-color:{{item.color}};">
+            <p class="f14 shop-name">{{if item.template_name}}<span class="color-gray">[{{item.template_name}}] </span>{{/if}}{{if !item.template_id}}[未选模板] {{/if}}{{item.shop_name}}</p>
+            <p class="mt-10">授权状态：{{#item.authorizer_text}}</p>
+            <p class="mt-5">有效期至：{{item.expired_date}} {{#item.expired_text}}</p>
+            <div class="box-clear shop-item-bottom mt-5">
+                <p class="shop-opera">
+                    <span class="mc-btn-text btn-edit pr-5"><i class="fa fa-gear"></i> 设置</span>
+                    <span class="mc-btn-text btn-remove pr-5 ml-10"><i class="fa fa-times-circle"></i> 删除</span>
+                </p>
+            </div>
+        </li>{{/each}}
+        {{if !result.length}}<p class="color-gray">还没有创建小程序~</p>{{/if}}
+    </script>
+
+
+
+    <!-- 浏览图片 -->
+    <div class="template-slide-wrapper" id="slideWrapper" hidden>
+        <div class="template-slide-bg"></div>
+        <div id="templateCarousel" class="carousel slide template-slide">
+            <!-- Indicators -->
+            <ol class="carousel-indicators"></ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox"></div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#templateCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#templateCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 浏览图片的HTML模板 -->
+    <script type="text/html" id="indicatorsTemplate">
+        {{each imgs as item index}}<li class="{{if !index}}active{{/if}}" data-target="#templateCarousel" data-slide-to="{{index}}"></li>{{/each}}
+    </script>
+    <script type="text/html" id="innerTemplate">
+        {{each imgs as item index}}<div class="item {{if !index}}active{{/if}}" style="background-image:url({{item.file_resource_name_string}});"></div>{{/each}}
+    </script>
+
+    <!-- 行业分类 -->
+    <script type="text/html" id="categoriesTemplate">
+        <li class="active">全部</li>
+        {{each result as item index}}<li data-id="{{item.industry_id}}">{{item.industry_name}}</li>{{/each}}
+    </script>
+
+    <!-- 模板列表 -->
+    <script type="text/html" id="storeListTemplate">
+        {{each result as item index}}<li class="col-lg-3 col-md-4 col-sm-6 col-xs-6" data-id="{{item.template_id}}">
+            <div class="store-item-wrapper normal border">
+                <div class="template-item-header">
+                    <p class="image-cover template-item-image" style="background-image:url({{item.cover_src_string}})"></p>
+                    <p class="template-item-tools">
+                        <span class="btn btn-view mr-5">预览</span>
+                        <span class="btn btn-use">立即使用</span>
+                    </p>
+                </div>
+                <div class="template-content mt-30">
+                    <span class="h4">{{item.template_name || '靠谱模板'}}</span>
+                    <p class="template-description mt-20 f12">{{item.description || '暂无描述'}}</p>
+                </div>
+            </div>
+        </li>{{/each}}
+        {{if !result.length}}<li class="none">
+            <div class="border mc-bg-white p-40 color-light-gray f14 text-center"><i class="fa fa-smile-o f40 mb-10 block"></i>模板即将上线，敬请期待</div>
+        </li>{{/if}}
+    </script>
+
+    <script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+    <script type="text/javascript">
+        loadJs({
+        	fileUploadJs: true,
+            files: [
+                '../../scripts/local/user-main.js'
+            ]
+        });
+    </script>
+</body>
+</html>

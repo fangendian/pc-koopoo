@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置 - 靠谱</title>
+	<link href="../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../styles/animate.min.css?v=3.1.0" rel="stylesheet">
+    <link href="../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../styles/common.css" rel="stylesheet">
+	<style>
+		.mc-btn-big { min-width:160px;}
+		/*.qrcode-box img { height:200px;}*/
+		.wx-avatar { width:70px; height:70px; margin-left:auto; margin-right:auto;}
+	</style>
+</head>
+<body class="body-bg-gray p-10">
+	<div class="mc-bg-white box-clear p-10 border">
+		<div class="alert alert-warning mb-10 text-center" id="alertWarning" hidden><i class="fa fa-info-circle"></i> 提示：一个微信小程序账号只能绑定一个靠谱小程序！<br>
+			<span class="f12">如果您需要取消绑定，请在‘<span class="mc-btn-text btn-tomyapp f12">我的小程序</span>’<strong>删除</strong>当前小程序（当前的所有数据将清空），也可在<a href="https://mp.weixin.qq.com/" target="_blank">微信公众平台</a>停止授权（同时系统将自动删除当前小程序）。请谨慎操作！</span></div>
+
+		<div class="mc-tabs-bar pt-20 box-clear" id="headerBar">
+			<p data-bar="bindWxBox">绑定小程序</p>
+			<p class="disabled" data-bar="setPayBox">配置小程序</p>
+			<p class="disabled" data-bar="manageUserBox">管理体验者</p>
+			<p class="disabled" data-bar="viewBox">预览</p>
+		</div>
+
+		<div class="min-height" id="contentContainer">
+			<div class="mt-40 p-30 text-center" id="bindWxBox" hidden>
+				<div class="box-content" hidden>
+					<h4>请先绑定您的小程序</h4>
+					<p>点击“绑定”按钮，会跳转至微信公众平台，然后扫描二维码授权绑定即完成。</p>
+					<a href="#" class="btn btn-success mc-btn-big mt-10" id="btnBindWx" disabled="disabled"><i class="fa fa-wechat"></i> 绑定</a>
+				</div>
+				<div class="box-result" id="bindWxResult" hidden>
+					<p class="wx-avatar img-circle image-cover" data-bind="head_img_src_string" data-bind-type="bg-img"></p>
+					<div>
+						<h4 data-bind="nick_name" data-default-value="暂无名称"></h4>
+						<small data-bind="principal_name"></small><br>
+						<small><span data-bind="authorizer_appid"></span></small>
+					</div>
+				</div>
+			</div>
+
+			<div class="mt-40 p-30 text-center" id="setPayBox" hidden>
+				<div class="box-before" hidden>
+					<div class="heka-hidden">
+						<h4>微信支付</h4>
+						<p>配置微信支付功能！需要使用商户ID和API Key。</p>
+						<span class="btn btn-primary mc-btn-big" data-toggle="modal" data-target="#setPayModal"><i class="fa fa-credit-card-alt"></i> 配置支付</span>
+					</div>
+
+					<div class="heka-show">
+						<h4>小程序配置</h4>
+						<p>配置小程序！需要使用商户ID、API Key、小程序的Appid、secret和商户证书。</p>
+						<span class="btn btn-primary mc-btn-big" data-toggle="modal" data-target="#setPayModal"><i class="fa fa-credit-card-alt"></i> 配置小程序</span>
+					</div>
+				</div>
+				<div class="box-content" hidden>
+					<div class="heka-hidden">
+						<h4>微信支付</h4>
+						<p class="color-green"><span>您已配置过支付，</span>商户ID：<span data-bind="mch_id"></span></p>
+						<p>可以再次修改配置，需要使用商户ID和API Key。</p>
+						<span class="btn btn-primary mc-btn-big mt-10" data-toggle="modal" data-target="#setPayModal"><i class="fa fa-credit-card-alt"></i> 修改配置</span>
+					</div>
+
+					<div class="heka-show">
+						<h4>小程序配置</h4>
+						<p class="color-green"><span>您已配置过小程序，</span>商户ID：<span id="heka-shopid" data-bind="mchId"></span></p>
+						<p>可以再次修改配置，需要使用商户ID、API Key、小程序的AppId、secret和商户证书。</p>
+						<span class="btn btn-primary mc-btn-big mt-10" data-toggle="modal" data-target="#setPayModal"><i class="fa fa-credit-card-alt"></i> 修改配置</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="mt-40 p-30 text-center" id="manageUserBox" hidden>
+				<div class="box-content" hidden>
+					<h4>管理体验者</h4>
+					<p>如果想要其他人也能体验小程序，请添加体验者，你也可以解绑体验者！<br>若需要查看体验者列表，请移步至<a href="https://mp.weixin.qq.com/" target="_blank">微信公众平台</a>。</p>
+					<p class="pt-10">
+						<span class="btn btn-info mc-btn-big mr-10" data-toggle="modal" data-target="#addUserModal"><i class="fa fa-plus-circle"></i> 添加体验者</span>
+						<span class="btn btn-warning mc-btn-big" data-toggle="modal" data-target="#removeUserModal"><i class="fa fa-minus-circle"></i> 解绑体验者</span>
+					</p>
+				</div>
+				<div class="box-result" hidden>
+					<h4>管理体验者</h4>
+					<p>当前小程序已经上线，无需设置体验者！</p>
+				</div>
+			</div>
+
+			<div class="mt-40 p-30 text-center" id="viewBox" hidden>
+				<div>
+					<div class="box-content" hidden>
+						<h4>我的体验码</h4>
+						<p>您的代码已经提交，现在可以扫描二维码体验啦。</p>
+					</div>
+					<div class="box-result" hidden>
+						<h4>小程序二维码</h4>
+						<p class="color-green">当前小程序已经上线，微信扫一扫进入小程序。</p>
+					</div>
+				</div>
+				<div class="qrcode-box mt-20 mb-20">
+					<img class="border" style="max-width: 320px; border-radius:6px;" id="qrCodeImg" hidden/>
+					<span></span>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="errorContainer" hidden>
+			<h4>请求失败</h4>
+			<p>非常抱歉，请求数据出现了错误！</p>
+		</div>
+	</div>
+
+
+	<script type="text/html" id="auditResultTemplate">
+	{{if status == 0}}
+		<i class="fa fa-check-circle f50 color-green"></i>
+		<h4>审核成功</h4>
+		<p>恭喜，审核成功啦！接下来你可以去发布上线了。</p>
+	{{else if status == 1}}
+		<i class="fa fa-warning f50 color-orange"></i>
+		<h4>审核失败</h4>
+		<p>未通过具体原因请登录<a href="">微信公众平台</a>，如有问题请联系靠谱。</p>
+		<span class="btn btn-warning mc-btn-big mt-10" id="btnAuditAgain"><i class="fa fa-upload"></i> 再次提交审核</span>
+	{{else if status == 2}}
+		<i class="fa fa-warning f50 color-cyan"></i>
+		<h4>审核中</h4>
+		<p>微信公众平台审核过程可能需要1-5个工作日，请耐心等待~<br><small class="color-gray">如有问题，请联系我们 服务热线021-0000000。</small></p>
+	{{else}}
+		<i class="fa fa-info-circle f50 color-cyan"></i>
+		<h4>处理中</h4>
+		<p>当前状态可能正处于审核处理中，请耐心等待~<br><small class="color-gray">如有问题，请联系我们 服务热线021-0000000。</small></p>
+	{{/if}}
+	</script>
+
+	<script type="text/html" id="visibleResultTemplate">
+	{{if status == 0}}
+		<i class="fa fa-eye f50 color-green"></i>
+		<h4>当前小程序线上可见</h4>
+		<p>可见，表示任何微信用户都可以发现和使用小程序。</p>
+		<span class="btn btn-primary mc-btn-big mt-10 btn-visible-close"><i class="fa fa-eye"></i> 变更为不可见</span>
+	{{else}}
+		<i class="fa fa-eye-slash f50 color-dark-gray"></i>
+		<h4>当前小程序线上不可见</h4>
+		<p>不可见，表示任何微信用户都不能发现和使用小程序。</p>
+		<span class="btn btn-primary mc-btn-big mt-10 btn-visible-open"><i class="fa fa-eye"></i> 变更为可见</span>
+	{{/if}}
+	</script>
+
+	<!-- set pay Modal -->
+	<div class="modal fade" id="setPayModal" tabindex="-1" role="dialog" aria-labelledby="setPayModal">
+		<div class="modal-dialog modal-dialog-min" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title heka-hidden">配置支付信息</h4>
+					<h4 class="modal-title heka-show">配置小程序信息</h4>
+				</div>
+				<div class="modal-body">
+					<div class="heka-hidden">
+						<small>商户ID</small>
+						<input type="text" class="form-control form-input mt-10 mb-10" name="mch_id" data-not-null="1" placeholder="商户ID" />
+						<small>API Key</small>
+						<input type="text" class="form-control form-input mt-10 mb-10" name="mch_key" data-not-null="1" placeholder="API Key" />
+					</div>
+
+					<div class="heka-show">
+						<small>商户名称</small>
+						<input type="text" class="form-control form-input mt-10 mb-10" name="mchName" data-not-null="1" placeholder="商户名称" />
+						<small>商户ID</small>
+						<input type="text" class="form-control form-input mt-10 mb-10" name="mchId" data-not-null="1" placeholder="商户ID" />
+						<small>API Key</small>
+						<input type="text" class="form-control form-input mt-10 mb-10" name="mchKey" data-not-null="1" placeholder="API Key" />
+
+						<small>小程序AppId</small>
+						<input type="text" class="form-control form-input mt-10 mb-10" name="appId" data-not-null="1" placeholder="小程序AppId" />
+						<small>小程序secret</small>
+						<input type="text" class="form-control form-input mt-10 mb-10" name="appSecret" data-not-null="1" placeholder="小程序secret" />
+						<small>提现手续费
+							<a id="showToolTip" data-toggle="tooltip" data-placement="right" title="百分比是微信商户平台结算给商户时收取的手续费。">
+								<i class="glyphicon glyphicon-question-sign"></i>
+							</a>
+						</small>
+						<div class="input-group form-inline mt-10 mb-10" style="width: 150px;">
+					      <input type="text" class="form-control form-input" value="2" name="poundage" placeholder="提现手续费" >
+					      <div class="input-group-addon">%</div>
+					    </div>
+							
+						<!-- 上传证书-->
+						<small class="block">上传支付证书
+							<span style="margin-left: 5px;font-size: 70%;color: grey;">请上传含有apiclient_cert.p12文件的zip或tar文件。</span>
+							<!--<a id="showToolTip" data-toggle="tooltip" data-placement="right" title="请上传含有apiclient_cert.p12文件的zip或tar文件。">
+								<i class="glyphicon glyphicon-question-sign"></i>
+							</a>-->
+						</small>
+						<button id="uploadCertFile" style="width: 150px;" class="btn btn-default mt-10 mb-10">上传支付证书</button>
+						<input type="file" style="display: none!important;" name="file_data" id="fileUploadImage" size="1"/>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="btnSetPay"><i class="fa fa-shield"></i> 确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- add wx-user Modal -->
+	<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModal">
+		<div class="modal-dialog modal-dialog-min" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">添加体验者</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> 提示：绑定体验者成功后，体验者需要在微信端确认绑定邀请！</div>
+					<small>请输入体验者的微信号</small>
+					<input type="text" class="form-control form-input mt-10 mb-10" name="wechatid" data-not-null="1" placeholder="体验者微信号" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="btnAddUser"><i class="fa fa-user-plus"></i> 绑定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="removeUserModal" tabindex="-1" role="dialog" aria-labelledby="removeUserModal">
+		<div class="modal-dialog modal-dialog-min" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">解绑体验者</h4>
+				</div>
+				<div class="modal-body">
+					<small>请输入你要解绑体验者的微信号</small>
+					<input type="text" class="form-control form-input mt-10 mb-10" name="wechatid" data-not-null="1" placeholder="体验者微信号" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-warning" id="btnRemoveUser"><i class="fa fa-user-times"></i> 解绑</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: true,
+            files: [
+                '../../scripts/global/jquery.qrcode.min.js',
+                '../../scripts/local/store-setup.js'
+            ]
+        });
+	</script>
+</body>
+</html>

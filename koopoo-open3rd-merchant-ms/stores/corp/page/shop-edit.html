@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改小程序信息 - 靠谱</title>
+	<link href="../../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../styles/animate.min.css?v=3.1.0" rel="stylesheet">
+    <link href="../../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../../styles/common.css" rel="stylesheet">
+	<style>
+		.form-item { min-height:inherit; margin-bottom:15px;}
+		.form-group-article section { padding-top:0; background:none;}
+	</style>
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="mc-bg-white box-clear p-10 border view-data-container" id="viewContainer">
+		<div class="p-15 form-group-wrapper view-data-mode">
+			<div class="form-item">
+				<span class="form-item-title">小程序名称：</span>
+				<div class="form-item-content strong" data-bind="shop_name">-</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">模板：</span>
+				<div class="form-item-content">
+					<span data-bind="template_name">-</span>
+				</div>
+			</div>
+
+			<div class="form-item" hidden>
+				<span class="form-item-title">小程序类型：</span>
+				<div class="form-item-content">
+					<span data-bind="industry_name">-</span>
+				</div>
+			</div>
+
+			<div class="form-item" hidden>
+				<span class="form-item-title">主营商品：</span>
+				<div class="form-item-content">
+					<span data-bind="commodity_category_text">-</span>
+				</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">公司：</span>
+				<div class="form-item-content">
+					<span data-bind="company_name" data-default-value="无">-</span>
+				</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">联系电话：</span>
+				<div class="form-item-content">
+					<span data-bind="contact" data-default-value="无">-</span>
+				</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">联系地址：</span>
+				<div class="form-item-content">
+					<span data-bind="province_name"></span>
+					<span data-bind="city_name"></span>
+					<span data-bind="district_name"></span>
+					<span class="ml-10" data-bind="address">-</span>
+				</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">描述：</span>
+				<div class="form-item-content">
+					<span class="show-box" data-bind="description" data-default-value="无">-</span>
+				</div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">备注：</span>
+				<div class="form-item-content">
+					<span class="show-box" data-bind="remark" data-default-value="无">-</span>
+				</div>
+			</div>
+
+			<div class="shop-content-wrapper">
+				<hr>
+				<div class="form-item">
+					<span class="form-item-title">图文介绍：</span>
+					<div class="form-item-content shop-videotex-wrapper">
+						<table class="mc-list-table form-view-container max-w-1200">
+							<thead>
+							<tr>
+								<td width="60">类型</td>
+								<td>详细内容</td>
+							</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+						<span>无</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-item pt-10">
+				<hr>
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<button type="button" class="btn btn-default btn-big" id="btnEdit" disabled="disabled"><i class="fa fa-pencil"></i> 修改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 修改小程序资料 -->
+	<div class="mc-bg-white border p-15 box-clear" id="editContainer" hidden>
+		<input type="file" class="hide" id="fileUploadImage"/>
+
+		<div class="form-header box-clear mb-30 b-b">
+			<div class="mr-10 fl f16"><i class="fa fa-pencil-square"></i> 修改小程序资料</div>
+		</div>
+
+		<div class="form-group-wrapper">
+			<div class="form-item">
+				<span class="form-item-title">小程序名称：</span>
+				<div class="form-item-content">
+					<input type="text" class="form-control form-input" data-width="normal" data-bind="shop_name" name="shop_name" data-not-null="1" placeholder="小程序名称">
+				</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">模板：</span>
+				<div class="form-item-content form-item-text" data-bind="template_name"></div>
+			</div>
+
+			<div class="form-item" hidden>
+				<span class="form-item-title">小程序类型：</span>
+				<div class="form-item-content form-item-text">
+					<span data-bind="industry_name"></span>
+				</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">公司：</span>
+				<div class="form-item-content form-item-text" data-bind="company_name" data-default-value="无"></div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">联系电话：</span>
+				<div class="form-item-content">
+					<input type="text" class="form-control form-input" data-width="normal" data-bind="contact" name="contact" data-type="phone" placeholder="联系电话">
+					<span class="block f12 mt-5 color-light-gray"><i class="fa fa-info-circle color-cyan"></i> 请输入座机、400电话、手机等格式的号码。</span>
+				</div>
+			</div>
+
+			<div class="form-item pb-10">
+				<span class="form-item-title">联系地址：</span>
+				<div class="form-item-content form-item-text">
+					<span data-bind="province_name"></span>
+					<span data-bind="city_name"></span>
+					<span data-bind="district_name"></span>
+					<span class="ml-10" data-bind="address"></span>
+				</div>
+			</div>
+
+			<!--<div class="form-item pb-10">
+				<span class="form-item-title">描述：</span>
+				<div class="form-item-content">
+					<textarea class="form-control form-input max-w-1000" name="description" data-bind="description" data-width="max" placeholder="小程序的描述内容"></textarea>
+				</div>
+			</div>
+			<div class="form-item pb-10">
+				<span class="form-item-title">备注：</span>
+				<div class="form-item-content">
+					<textarea class="form-control form-input max-w-1000" name="remark" data-bind="remark" data-width="max" placeholder="备注信息"></textarea>
+				</div>
+			</div>-->
+		</div>
+
+		<div class="form-group-wrapper shop-content-wrapper">
+			<hr>
+			<div class="form-item">
+				<div class="form-item-title" id="editFormItemTitle"><h5 class="f16"><span class="f14 color-red">*</span> 图文介绍</h5></div>
+			</div>
+			<article class="form-group-article"></article>
+		</div>
+
+		<hr>
+		<div class="form-item">
+			<span class="form-item-title">&nbsp;</span>
+			<div class="form-item-content">
+				<button type="button" class="btn btn-primary btn-big mr-5" id="btnSave">保存</button>
+				<button type="button" class="btn btn-default btn-big" id="btnCancel">取消</button>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 内容模块 模板 - 2 -->
+	<script type="text/html" id="editContent_Template">
+		{{each result as item index}}
+		{{if index == 0}}
+		<section>
+			<input type="hidden" name="videotex_id" value="{{item.videotex_id}}"/>
+			<div class="form-item">
+				<span class="form-item-title">图片：</span>
+				<div class="form-item-content">
+					<input type="hidden" name="videotex_picture_src" data-not-null="1" value="{{item.videotex_picture_src}}"/>
+					<div class="form-image-wrapper fl">
+						<span class="image-contain" style="background-image:url({{item.videotex_picture_src_string || defaultImageUrl}});"></span>
+					</div>
+					<div class="mt-10 ml-10 fl">
+						<span class="btn btn-info btn-sm btn-file btn-file-single">上传图片</span>
+						<p class="mt-5 color-light-gray">
+							<small>仅支持jpg、gif、png，大小不超过1MB</small>
+							<small class="block">建议尺寸: 宽度不低于750px</small>
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		{{else if index == 1}}
+		<section>
+			<input type="hidden" name="videotex_id" value="{{item.videotex_id}}"/>
+			<div class="form-item">
+				<span class="form-item-title">标语：</span>
+				<div class="form-item-content">
+					<input class="form-control form-input max-w-1000" name="videotex_title" value="{{item.videotex_title}}" data-not-null="1" data-width="max" maxlength="200" placeholder="标语"/>
+				</div>
+			</div>
+		</section>
+		{{else}}
+		<section>
+			<input type="hidden" name="videotex_id" value="{{item.videotex_id}}"/>
+			<div class="form-item">
+				<span class="form-item-title">详细介绍：</span>
+				<div class="form-item-content">
+					<textarea class="form-control form-input max-w-1000" style="height:10em;" name="videotex_content" data-not-null="1" data-width="max" maxlength="12000" placeholder="内容">{{item.videotex_content}}</textarea>
+				</div>
+			</div>
+		</section>
+		{{/if}}{{/each}}
+	</script>
+
+	<!-- 查看 - 内容模块 模板 - 2 -->
+	<script type="text/html" id="viewContent_2_Template">
+		{{each result as item index}}<tr>
+			{{if item.videotex_title}}
+			<td class="color-light-gray">标语</td>
+			<td>{{item.videotex_title}}</td>
+			{{else if item.videotex_picture_src_string}}
+			<td class="color-light-gray">图片</td>
+			<td><a class="image-contain wh-40 block" href="{{item.videotex_picture_src_string || '#'}}" {{if item.videotex_picture_src_string}}target="_blank"{{/if}} style="background-image: url({{item.videotex_picture_src_string || defaultImageUrl}});"></a></td>
+			{{else}}
+			<td class="color-light-gray">详细介绍</td>
+			<td>{{item.videotex_content}}</td>
+			{{/if}}
+		</tr>{{/each}}
+		{{if !result.length}}<tr><td colspan="2">无</td></tr>{{/if}}
+	</script>
+
+
+	<script type="text/javascript" src="../../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: true,
+            files: [
+                '../js/shop-edit.js'
+            ]
+        });
+	</script>
+</body>
+</html>

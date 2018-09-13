@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>插入商品</title>
+    <link href="../../../../styles/common.css" rel="stylesheet">
+    <style>
+        body { padding:0!important;}
+
+
+        .list-wrapper {}
+        .list-wrapper li { width:100%; padding:5px 10px; box-sizing:border-box; border-bottom:1px solid rgba(0,0,0,0.1); cursor:pointer;}
+        .list-wrapper li:after { content:''; display:block; clear:both;}
+        li:nth-child(odd) {  background-color:#fafafa;}
+        li:hover { color:#333;}
+
+        .item-checkbox { width:22px; height:22px; margin-top:7px; border-radius:50%; border:2px solid #ddd; line-height:22px; display:block; text-align:center; float:left;}
+        .item-checkbox:before { content:'\2713'; color:white; display:none;}
+        .img-cover { width:40px; height:40px; margin:0 10px; background:#ddd no-repeat center center; background-size:cover; float:left;}
+        .item-content { width:calc(100% - 40px - 50px); float:left;}
+        .item-title { margin:10px 0; line-height:20px; font-size:14px; margin-right:5px;}
+        .color-red { color:red;}
+
+        li.active { background-color:#eaecee; font-weight:bold; color:black;}
+        li.active .item-checkbox { background-color:#1c84c6; border-color:#1c84c6;}
+        li.active .item-checkbox:before { content:'\2713'; color:white; display:block;}
+    </style>
+</head>
+<body>
+
+<div class="list-wrapper p-10">
+    <ul id="listUl"></ul>
+
+    <div id="pageNavWrapper"></div>
+</div>
+
+
+<!-- 文章列表模板 -->
+<script type="text/html" id="articleListTemplate">
+    {{each result as item}}<li data-id="{{item.content_id}}" data-img-src="{{item.thumbnail_src_string_small}}" data-price="{{item.price}}">
+        <span class="item-checkbox"></span>
+        <p class="img-cover" style="background-image: url({{item.thumbnail_src_string_small}});"></p>
+        <div class="item-content">
+            <span class="item-title block">{{item.title || item.name}}{{if item.price}}<span class="color-red"> ￥{{item.price}}</span>{{/if}}</span>
+        </div>
+    </li>{{/each}}
+    {{if !result.length}}<li><span class="text-center">暂无内容</span></li>{{/if}}
+</script>
+
+<!-- 待插入的内容-->
+<script type="text/html" id="checkedArticlesTemplate">
+    {{each result as item}}<p><br></p><p class="insert-shop" data-type="shop" data-id="{{item.id}}"><span style="width:40px; height:40px; display:block; float:left; background:url({{item.img_src}}) no-repeat center center;background-size:cover;"></span><span style="width:calc(100% - 50px);margin:10px 0 0 10px;display:block;float:left;">{{item.title}}{{if item.price}}<span style="color:red;margin-left:5px;">￥{{item.price}}</span>{{/if}}</span></p><p><br></p>{{/each}}
+</script>
+
+
+<script type="text/javascript" src="../../../base.js"></script>
+<script type="text/javascript" src="../internal.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var templateId = editor.options.templateId,
+            shopId = editor.options.shopId;
+
+        var url, templateHtmlId;
+        switch (templateId) {
+            case 11:
+                url = 'merchant/shops/'+ shopId +'/contents/list';
+                templateHtmlId = 'articleListTemplate';
+                break;
+            default:
+                url = 'merchant/shops/'+ shopId +'/products/list';
+                templateHtmlId = '';
+                break;
+        }
+
+        //列表数据加载器
+        new top.PagesLoader({
+            url: url,
+            autoLoad: true,
+            pageBarIdString: '#pageNavWrapper',
+            success: function (data) {
+                $('#listUl').html( template(templateHtmlId, data) );
+            }
+        });
+
+
+        $('ul').on('click', 'li', function () {
+            $(this).toggleClass('active');
+        });
+
+        dialog.onok = function (){
+            var data = { result: [] };
+            var html = '';
+            $('#listUl').children('.active').each(function () {
+                var price = $(this).data('price');
+                html += '<p><br></p><p class="insert-shop" data-type="shop" data-id="'+ $(this).data('id') +'">' +
+                    '<span style="width:40px;height:40px;display:block;float:left;background:url('+ $(this).data('img-src') +') no-repeat center center;background-size:cover;"></span>' +
+                    '<span style="width:calc(100% - 50px);margin-left:10px;font-size:13px;display:block;float:left;">'+ $(this).text().trim() +
+                    (price ? '<span style="color:red;margin-left:5px;">￥'+ price +'</span>{{/if}}</span>' : '') +
+                    '</p><p><br></p>'
+            });
+            editor.execCommand('inserthtml', html );
+            dialog.close();
+        };
+    });
+</script>
+
+</body>
+</html>

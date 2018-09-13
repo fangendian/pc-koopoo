@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>订单</title>
+	<link href="../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../styles/common.css" rel="stylesheet">
+	<link href="../../styles/animate.min.css" rel="stylesheet">
+
+</head>
+<style>
+	#no_bu_temp1{
+		display: none;
+	}
+</style>
+
+<body class="body-bg-gray p-10">
+	<div class="page-list-container">
+		<div class="search-wrapper mc-bg-white border">
+			<div class="p-15 box-clear">
+				<div class="ml-5 fl">
+					<div class="input-group search-bar box-clear fl" id="searchBar">
+						<i class="fa fa-search"></i>
+						<input type="text" name="keyword" class="form-control" placeholder="订单号查询">
+						<span class="search-btn-reset">
+							<i class="fa fa-remove"></i>
+						</span>
+						<span class="input-group-addon btn btn-default" id="btnSearch">搜索</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mc-bg-white mt-10 mb-10 border">
+			<!-- 新增内容 -->
+			<div class="clearfix" style="border-bottom: 1px solid #e5e5e5; margin-bottom:10px;"> 
+				<ul class="ml-20 fl nav nav-tabs form-header-tabs" id="editHeaderBar">
+					<!--<li class="active" aria-controls="categoriesBox"><a href="#">1.选择分类</a></li>-->
+					<li class="active order_common">
+						<a href="#">普通订单</a>
+					</li>
+					<li aria-controls="contentBox"id ="no_bu_temp1" class="order_tuan bu_temp1">
+						<a href="#">拼团订单</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- 新增结束 -->
+			<div class="page-main-wrapper">
+				<table class="mc-list-table main-list" id="categoriesTable" data-mode="edit">
+					<thead>
+						<tr>
+							<!--<td width="50">选择</td>-->
+							<td width="100">支付状态</td>
+							<td width="90" class="show_pintuan">拼团状态</td>
+							<td width="100">发货状态</td>
+							<td width="180">订单流水号</td>
+							<td width="90">订单价格</td>
+							<td>订单标题</td>
+							<td id="tdReceiver" hidden>收货人信息</td>
+							<td width="140">下单时间</td>
+							<td width="120">操作</td>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+				<div class="mc-list-tools box-clear pt-20 pb-20 pl-15 pr-15" id="listTools" hidden>
+					<div class="fr" id="pageNavWrapper"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 订单详情 -->
+	<div class="mc-bg-white border p-15 box-clear" id="editFormContainer" hidden>
+		<div class="form-header box-clear mb-20 b-b">
+			<div class="mr-10 f18" id="editTile">
+				<span data-mode="view">
+					<i class="fa fa-search"></i>
+					<span>查看订单</span>
+				</span>
+				<span data-mode="edit">
+					<i class="fa fa-pencil-square"></i>
+					<span>修改订单状态</span>
+				</span>
+			</div>
+		</div>
+
+		<div class="form-group-wrapper box-clear">
+			<div class="box-clear view-data-container" id="editBaseInfo">
+				<div class="form-item">
+					<span class="form-item-title">订单标题：</span>
+					<div class="form-item-content" data-bind="title"></div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">下单时间：</span>
+					<div class="form-item-content" data-bind="create_time"></div>
+				</div>
+				<hr>
+				<div class="form-item">
+					<span class="form-item-title">订单编号：</span>
+					<div class="form-item-content strong" data-bind="order_flow_id"></div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">支付状态：</span>
+					<div class="form-item-content" data-bind="#payHtml"></div>
+				</div>
+				<!-- <div class="form-item" hidden="!pintuan_status">
+						<span class="form-item-title">拼团状态：</span>
+						<div class="form-item-content" data-bind="pintuan_status"></div>
+				</div> -->
+				<div class="form-item">
+					<span class="form-item-title">发货状态：</span>
+					<div class="form-item-content" data-bind="#deliveryHtml"></div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">商品总价：</span>
+					<div class="form-item-content color-orange">￥
+						<span data-bind="total_price" data-default-value="0"></span>
+					</div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">运费：</span>
+					<div class="form-item-content color-orange">￥
+						<span data-bind="post_fee" data-default-value="0"></span>
+					</div>
+				</div>
+
+				<div class="form-item">
+					<span class="form-item-title">应付总金额：</span>
+					<div class="form-item-content color-red strong">￥
+						<span data-bind="sell_price" data-default-value="0"></span>
+					</div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">实付总金额：</span>
+					<div class="form-item-content strong" id="payAmountWrapper">
+						<div data-mode="1" class="color-red">￥
+							<span data-bind="pay_amount" data-default-value="0"></span>
+						</div>
+						<div data-mode="2" class="color-dark-gray" hidden>未支付</div>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item mb-0">
+					<div class="form-item-title">
+						<h4>客户信息</h4>
+					</div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">收货地址：</span>
+					<div class="form-item-content">
+						<span data-bind="receiver_address" data-default-value="无"></span>
+					</div>
+				</div>
+
+
+				<div class="form-item">
+					<span class="form-item-title">备注：</span>
+					<div class="form-item-content" data-bind="remark" data-default-value="-"></div>
+				</div>
+
+
+				<hr>
+				<div class="form-item mb-0">
+					<div class="form-item-title">
+						<h4>订单内容</h4>
+					</div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">商品列表：</span>
+					<div class="form-item-content">
+						<table class="mc-list-table form-view-container max-w-1000" id="viewContentTable">
+							<thead>
+								<tr>
+									<td width="40">No.</td>
+									<td width="80">图片</td>
+									<td>商品名称</td>
+									<td width="100">规格</td>
+									<td width="80">价格</td>
+									<td width="80">数量</td>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="edit-tools-wrapper">
+				<hr>
+				<div class="form-item mb-0">
+					<div class="form-item-title">
+						<h4 class="mt-0 pb-5 f16">更改状态</h4>
+					</div>
+				</div>
+				<div class="form-item mb-15">
+					<span class="form-item-title">更改订单：</span>
+					<div class="form-item-content" id="statusTools">
+						<!-- <button class="btn btn-big btn-primary btn-edit mr-10" data-status="2"><i class="fa fa-truck"></i> 现在发货</button> -->
+						<button class="btn btn-big btn-primary btn-edit mr-10">
+							<i class="fa fa-truck"></i> 编辑发货信息</button>
+						<button class="btn btn-big btn-danger btn-edit" data-status="4"><i class="fa fa-ticket"></i> 退款退货</button>
+					</div>
+					<div class="col-sm-5 col-md-3 form-col wl" style="margin:20px 0 20px 30px;">
+						<select name="" id="wl_comp" class="form-control">
+						</select>
+						<input type="text" class="form-control wl_number" placeholder="输入快递单号" style="margin-top:20px;">
+						<div class="form-item-content" style="margin-top:20px;">
+							<button type="button" class="btn btn-big btn-default end_ti">提交物流信息</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<hr>
+			<div class="form-item mt-30 mb-15">
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<button type="button" class="btn btn-big btn-default" id="btnEditFormCancel">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- 列表模板 -->
+	<script type="text/html" id="listTemplate">
+		{{each result as item}}
+		<tr data-id="{{item.order_id}}">
+			<!--<td><input type="checkbox"></td>-->
+			<td>
+				<span>{{#item.orderStatus.payHtml}}</span>
+			</td>
+			{{if item.pintuan_show}}
+			<td>
+					<span>{{#item.pintuan_status_name.pintuanHtml}}</span>
+			</td>{{/if}}
+			<td>
+				<span>{{#item.orderStatus.deliveryHtml}}</span>
+			</td>
+			
+			<td>
+				<span class="text-cover">{{item.order_flow_id}}</span>
+			</td>
+			<td>
+				<span class="text-cover color-red strong">￥{{item.sell_price}}</span>
+			</td>
+			<td>
+				<span class="text-cover strong">{{item.title}}</span>
+			</td>
+			{{if isReceiver}}
+			<td>
+				<span class="color-gray text-cover">{{item.receiver_address || '无'}}</span>
+			</td>{{/if}}
+			<td>
+				<span class="color-gray text-cover">{{item.create_time}}</span>
+			</td>
+			<td>
+				<span class="mc-btn-text btn-view mr-10" data-mode="view">查看</span>
+				{{if item.orderStatus.canChange&&item.pintuan_show==0||item.orderStatus.canChange&&item.pintuan_show==1&&item.pintuan_status_code==3}}
+				<span class="mc-btn-text btn-edit" data-mode="edit">更改状态</span>{{/if}}
+			</td>
+		</tr>{{/each}} {{if !result.length}}
+		<tr>
+			<td colspan="{{isReceiver ? 7 : 6}}" class="td-none text-center">暂无内容</td>
+		</tr>{{/if}}
+	</script>
+
+	<!-- 查看商品列表模板 -->
+	<script type="text/html" id="viewContentTemplate">
+		{{each result as item index}}
+		<tr>
+			<td>
+				<span class="color-gray">{{index+1}}</span>
+			</td>
+			<td>
+				<a class="image-contain wh-40 block" href="{{item.cover_src_string || '#'}}" {{if item.cover_src_string_small}}target="_blank"
+				  {{/if}} style="background-image: url({{item.cover_src_string_small || defaultImageUrl}});"></a>
+			</td>
+			<td>{{item.name}}</td>
+			<td>{{if item.specification_name}}
+				<span class="text-cover">{{item.specification_name}}</span>{{else}}
+				<span>统一规格</span>{{/if}}</td>
+			<td>
+				<span class="text-cover color-orange strong">￥{{item.price}}</span>
+			</td>
+			<td>
+				<span>&times; {{item.quantity}}</span>
+			</td>
+		</tr>{{/each}} {{if !result.length}}
+		<tr>
+			<td colspan="6">暂无商品!</td>
+		</tr>{{/if}}
+	</script>
+
+
+	<script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+		loadJs({
+			fileUploadJs: false,
+			files: [
+				'../../scripts/global/app.dict.js',
+				'../../scripts/local/store-order.js'
+			]
+		});
+	</script>
+</body>
+
+</html>

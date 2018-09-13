@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用手册 - 靠谱商户后台</title>
+    <link href="../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../scripts/bootstrap/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="../../styles/common.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(230, 230, 230); font-size:14px;
+        }
+
+        .main-container {
+            margin: 0 auto;
+        }
+
+        .part-wrapper {
+            margin: 15px 0;
+            padding: 100px 99px;
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+        /*.part-wrapper img { max-width:100%;}*/
+
+        .nav > li { position:relative; z-index:0; line-height:36px;}
+        .nav > li a { display:block; color:#434343;}
+        .nav > li a:hover { color:black; text-decoration:none;}
+        .nav > li:before { content:''; width:100%; height:0; position:absolute; left:0; top:49%; z-index:-1; border-top:2px dotted #888;}
+        .nav strong, .nav .fr { display:inline-block; background-color:white;}
+        .nav strong { padding-right:5px;}
+        .nav .fr { padding-left:5px;}
+
+        img { max-width:100%;}
+    </style>
+</head>
+<body>
+<div class="main-container max-w-800">
+    <span id="part-1"></span>
+    <div class="part-wrapper">
+        <h1 class="mt-0" style="text-align:center">
+            <span>靠谱商户后台使用手册</span>
+        </h1>
+        <p class="mt-40" style="margin-left:252px;text-align:right;text-indent:28px">
+            <span>2017</span><span>年<span>8</span>月<span>4</span>日</span>
+            <span class="block">靠谱团队</span>
+        </p>
+        <p>
+            <span style="font-size:13px;">&nbsp;</span>
+        </p>
+        <p>
+            <span style="font-size: 13px;">注意：因为软件版本更新迭代，实际页面可能会跟手册上截图有些许差异</span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <ul class="nav">
+            <li>
+                <strong><a href="#part-1">靠谱商户端后台使用手册</a></strong><span class="fr">1</span>
+            </li>
+            <li>
+                <strong><a href="#part-2">发布规格</a></strong><span class="fr">2</span>
+            </li>
+            <li>
+                <strong><a href="#part-4">发布分类</a></strong><span class="fr">4</span>
+            </li>
+            <li>
+                <strong><a href="#part-6">发布商品</a></strong><span class="fr">6</span>
+            </li>
+            <li>
+                <strong><a href="#part-13">发布主题</a></strong><span class="fr">13</span>
+            </li>
+        </ul>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span style="font-size:16px;"><br/> </span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+    </div>
+
+    <span id="part-2"></span>
+    <div class="part-wrapper">
+        <h2 class="mt-0">
+            <span>发布规格</span>
+        </h2>
+        <p>
+            <strong><span style="font-size:16px;">说明：</span></strong><span>规格，即<span>SKU</span>，是描述商品的重要属性，比如颜色、尺码，使用规格，可以设置同一个商品，不同属性的价格、库存，方便用户挑选。</span>
+        </p>
+        <p>
+            <span>注意：有些模板没有“规格”项目，请忽略本章节；如果模板有“规格”项目，<span style="color:red">发布商品前，请先发布规格</span></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <strong><span style="font-size:19px;">操作步骤：</span></strong>
+        </p>
+        <p>
+            <span>&nbsp;&nbsp;&nbsp; 1.</span><span style="">进入“规格”操作面板，点击“添加”或者“修改”按钮</span>
+        </p>
+        <p>
+            <span><img src="../../images/fqa/product/1.1.jpg"/></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>2.</span><span>添加规格名称及规格内容</span>
+        </p>
+        <p>
+            <span><img src="../../images/fqa/product/1.2.jpg"/></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>3.</span><span>使用规格</span>
+        </p>
+        <p>
+            <span>规格是在发布商品的时候使用，请参考手册“发布商品”章节</span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span style="font-size:16px;"><br/> </span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+    </div>
+
+    <span id="part-4"></span>
+    <div class="part-wrapper">
+        <h2 class="mt-0">
+            <span>发布分类</span>
+        </h2>
+        <p>
+            <strong><span style="font-size:16px;">说明：</span></strong>
+            <span>商品分类，即商品类别，比如衣服、帽子、鞋子等，具体请根据具体业务自行设置。</span>
+        </p>
+        <p>
+            <span>注意：有些模板没有“分类”项目，请忽略本章节；如果模板有“分类”项目，<span style="color:red">发布商品前，请先发布分类</span></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <strong><span style="font-size:19px;">操作步骤：</span></strong>
+        </p>
+        <p>
+            <span>1.</span><span>进入“分类”操作面板，点击“添加”或者“修改”按钮</span>
+        </p>
+        <p>
+        <span><img src="../../images/fqa/product/4.1.jpg"/></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>2.</span><span>填写分类信息</span>
+        </p>
+        <p>
+        <span><img src="../../images/fqa/product/4.2.jpg"/></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>3.</span><span>使用分类</span>
+        </p>
+        <p>
+            <span>分类是在发布商品的时候使用，请参考手册“发布商品”章节</span>
+        </p>
+    </div>
+
+    <span id="part-6"></span>
+    <div class="part-wrapper">
+        <h2 class="mt-0">
+            <span>发布商品</span>
+        </h2>
+        <p>
+            <strong><span style="font-size:16px;">说明：</span></strong>
+            <span>发布商品前，<span style="color: red">请先发布规格</span>，具体请参考本手册“发布规格”章节；</span>
+        </p>
+        <p>
+            <span>如果模板没有规格，则不需要发布</span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <strong><span style="font-size:19px;">操作步骤：</span></strong>
+        </p>
+        <p>
+            <span>1.</span><span>进入“商品”操作面板，点击“添加”或者“修改”按钮</span>
+        </p>
+        <p>
+        <span><img src="../../images/fqa/product/6.1.jpg"/></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>2.</span><span>选择分类</span>
+        </p>
+        <p>
+        <span><img src="../../images/fqa/product/6.2.jpg"/></span>
+        </p>
+        <p>
+            <span>分类请参考“发布分类”章节；</span>
+        </p>
+        <p>
+            <span>有些模板没有分类，会直接跳过这一步，进入“基本信息”页面</span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>3.</span><span>填写商品基本信息</span>
+        </p>
+        <p>
+        <span><img src="../../images/fqa/product/6.3.1.jpg"/></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>3.</span><span>设置库存</span><span>/</span><span>规格</span>
+        </p>
+        <p>
+            <span>库存</span><span>/</span><span>规格有“统一规格”和“多规格”两种模式。</span>
+        </p>
+        <p>
+            <span>“统一规格”，则该商品价格只有一个；</span>
+        </p>
+        <p>
+            <span>“多规格”，则商品的价格和库存跟商品规格挂钩，一个商品有多个价格</span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>设置统一规格：</span>
+        </p>
+        <p>
+        <span><img src="../../images/fqa/product/6.3.2.jpg"/></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>设置“多规格”：</span>
+        </p>
+        <p>
+        <span><img src="../../images/fqa/product/6.3.3.jpg"/></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>4.</span><span>邮费及商品状态设置</span>
+        </p>
+        <p>
+        <span><img src="../../images/fqa/product/6.4.jpg"/></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>5.</span><span>发布商品详情</span>
+        </p>
+        <p>
+            <span>考虑到一般商品详情图片介绍的形式比较多，为了方便商户发布信息，我们采用快速插入图片的方式添加商品详情信息</span>
+        </p>
+        <p>
+        <span><img src="../../images/fqa/product/6.5.jpg"/></span>
+        </p>
+    </div>
+
+    <span id="part-13"></span>
+    <div class="part-wrapper">
+        <h2>
+            <span>发布主题</span>
+        </h2>
+        <p>
+            <strong><span style="font-size:16px;">说明：</span></strong>
+            <span>主题是某些有共性的商品的集合，商户可以根据自己的需求，将不同的商品归结到同一个主题下面。</span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <strong><span style="font-size:19px;">操作步骤：</span></strong>
+        </p>
+        <p>
+            <span>1.</span><span>进入“主题”操作面板，点击“添加”或者“修改”按钮</span>
+        </p>
+        <p>
+    <span><img src="../../images/fqa/product/13.1.jpg"/></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>2. </span><span>修改主题信息</span>
+        </p>
+        <p>
+    <span><img src="../../images/fqa/product/13.2.jpg"/></span>
+        </p>
+        <p>
+            <span>&nbsp;</span>
+        </p>
+        <p>
+            <span>3. </span><span>关联主题商品</span>
+        </p>
+        <p>
+    <span><img src="../../images/fqa/product/13.3.1.jpg"/></span>
+        </p>
+        <p>
+    <span><img src="../../images/fqa/product/13.3.2.jpg"/></span>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

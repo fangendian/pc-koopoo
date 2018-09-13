@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小程序升级 - 靠谱</title>
+	<link href="../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../styles/animate.min.css?v=3.1.0" rel="stylesheet">
+    <link href="../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../styles/common.css" rel="stylesheet">
+	<style>
+		.form-item { min-height:inherit; margin-bottom:15px;}
+	</style>
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="mc-bg-white box-clear border" id="viewContainer">
+		<!--<div class="pl-20 pt-15 pb-15 b-b f16">首页广告图集</div>-->
+		<div class="p-25">
+
+			<div class="alert alert-info f16" role="alert"><i class="fa fa-info-circle"></i> 有新版本可以更新啦！</div>
+			<div class="color-gray f12">新版本是指，小程序端的应用版本升级，您需要点击升级，然后即可提交上线啦。后续我们将持续迭代功能，提升用户体验。</div>
+			<div>
+				<hr>
+				<button type="button" class="btn btn-primary btn-big" id="btnUpdate" disabled="disabled"><i class="fa fa-cloud-upload"></i> 立即升级</button>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: true
+        });
+	</script>
+	<script type="text/javascript">
+		shopBase.getShopInfo(function (shopInfoData) {
+		    if(shopInfoData.update_status === 1 && shopInfoData.is_wx_online) {
+                $('#btnUpdate').on('click', function () {
+                    ajax.putAjaxData({
+                        url: 'merchant/shops/'+ shopInfoData.shop_id +'/weixin/wxaapp/updated',
+                        success: function () {
+                            top.nav.gotoAndClickItem({ id: '5-2' });
+                        }
+                    })
+                }).removeAttr('disabled');
+            }
+        });
+
+	</script>
+</body>
+</html>

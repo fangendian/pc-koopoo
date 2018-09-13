@@ -1,0 +1,89 @@
+/* reset */
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+table{border-collapse:collapse;border-spacing:0;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+[hidefocus],summary{outline:0;}
+li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;font-family: '微软雅黑';font-weight: normal !important;}
+sup,sub{font-size:83%;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+a,button{cursor:pointer;}
+h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;color:#333;outline:0;}
+body{background:#fff;font-family: '微软雅黑','Courier New', Courier, monospace;}
+a,a:hover{color:#333;}
+.white{
+    background-color: #fff;
+}
+.navbar-default {
+	opacity: 0.77;
+	background: #000000;
+	border: none;
+}
+.containers{
+    max-width: 1180px;
+    margin: 0 auto;
+} 
+.navbar {
+	padding: 16px 0 10px 0;
+}
+.navbar-nav .first{
+    margin-left: 334px;
+}
+.navbar-brands img {
+    display: inline-block;
+    margin-top: -3px;
+}
+.collapse{
+    height:90px;
+}
+.collapse li a{
+    display: block;
+    font-size: 13px;
+}
+.nav>li>a{
+    padding: 0 43px;
+}
+
+#ul li a {
+	color: #fff;
+	opacity: 0.7;
+	margin-bottom: 8px;
+	display: inline-block;
+}
+.information p {
+	font-size: 13px;
+	color: #fff;
+	letter-spacing: 0;
+	margin-bottom: 5px;
+}
+.information span {
+	font-size: 9px;
+	color: #FFFFFF;
+	letter-spacing: 0;
+	line-height: 16px;
+	display: block;
+}
+.information ul {
+	margin-top: 18px;
+}
+.information ul li {
+	opacity: 0.67;
+	font-family: PingFangSC-Regular;
+	font-size: 8px;
+	color: #FFFFFF;
+	letter-spacing: 0;
+}
+.information ul .li-left {
+	float: left;
+}
+.information ul .li-right {
+	float: right;
+}

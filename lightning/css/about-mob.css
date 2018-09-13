@@ -1,0 +1,244 @@
+html,body {
+	font-family: "微软雅黑";
+	font-size: 100px;
+	background: #f8f8f8;
+}
+/*我们的使命*/
+.mission {
+	width: 100%;
+	height: auto;
+	margin: 0.5rem 0;
+}
+.mission-img {
+	width: 100%;
+	float: left;
+	z-index: 10;
+}
+.mission-img img {
+	width: 100%;
+}
+.ourmission {
+	width: 80%;
+	height: 200px;
+	background: #fff;
+	margin: -100px 0 0.4rem 10%;
+	padding: 0.15rem 0.1rem 0 0.1rem;
+	z-index: 100;
+	float: left;
+}
+.ourmission p {
+	font-size: 16px;
+	color: #000;
+	letter-spacing: 0;
+	display: block;
+	margin-bottom: 0.1rem;
+}
+.ourmission span {
+	font-size: 10px;
+	color: #000;
+	letter-spacing: 0;
+	text-align: justify;
+	display: block;
+}
+/*我们的价值*/
+.value {
+	width: 100%;
+	height: auto;
+	padding: 0 5%;
+	position: relative;
+}
+.center {
+	width: 0.8rem;
+	height: 0.8rem;
+	background: #f8f8f8;
+	text-align: center;
+	border-radius: 50%;
+	position: absolute;
+	top: 0.77rem;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	z-index: 10;
+}
+.center p {
+	font-size: 0.12rem;
+	margin-top: 0.26rem;
+}
+.center p span {
+	font-size: 0.08rem;
+}
+.val-title p {
+	font-size: 0.22rem;
+	color: #000;
+	letter-spacing: 0;
+	margin-bottom: 0.1rem;
+}
+.val-title .line {
+	width: 0.42rem;
+	border-bottom: 0.02rem solid #000;
+	margin-bottom: 0.5rem;
+}
+.top-nav,.bottom-nav {
+	height: 2.5rem;
+	margin-bottom: 0.2rem;
+	padding: 0;
+	font-size: 0;
+}
+.top-nav .box,.bottom-nav .box {
+	width: 44%;
+	height: 2.4rem;
+	background: #fff;
+	position: relative;
+}
+.video {
+	float: left;
+}
+.tool {
+	float: right;
+}
+.video-detail,.tool-detail {
+	text-align: center;
+}
+.tool-detail {
+	margin-top: 0.4rem;
+}
+.video-detail img,.tool-detail img {
+	width: 1.2rem;
+	height: 1.2rem;
+	display: block;
+	margin: 0 auto;
+}
+.video-detail .title,.tool-detail .title {
+	font-size: 0.14rem;
+	color: #4A4E55;
+	letter-spacing: 0;
+	text-align: center;
+}
+.video-detail .detail,.tool-detail .detail {
+	font-size: 0.11rem;
+	color: #9B9C9F;
+	letter-spacing: 0;
+	line-height: 0.16rem;
+	text-align: center;
+}
+.clearfix {
+	content: '';
+	display: block;
+	clear: both;
+}
+.video>p {
+	width: 0;
+	height: 0;
+	text-align: center;
+	border-top: 0.2rem solid #829EED;
+	border-left: 0.2rem solid #829EED;
+	border-right: 0.2rem solid transparent;
+	border-bottom: 0.2rem solid transparent;
+	position: relative;
+}
+.video>p>span {
+	width: 0.24rem;
+	font-size: 0.1rem;
+	color: #FFFFFF;
+	letter-spacing: 0;
+	text-align: center;
+	display: block;
+	position: absolute;
+	top: -0.13rem;
+	left: -0.2rem;
+	transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);		
+	-webkit-transform: rotate(-45deg);	
+	-o-transform: rotate(-45deg);		
+	-moz-transform: rotate(-45deg);	
+	
+}
+.tool>p {
+	width: 0;
+	height: 0;
+	text-align: center;
+	border-top: 0.2rem solid #829EED;
+	border-left: 0.2rem solid transparent;
+	border-right: 0.2rem solid #829EED;
+	border-bottom: 0.2rem solid transparent;
+	position: relative;
+	float: right;
+}
+.tool>p>span {
+	width: 0.24rem;
+	font-size: 10px;
+	color: #FFFFFF;
+	letter-spacing: 0;
+	text-align: center;
+	display: block;
+	position: absolute;
+	top: -0.14rem;
+	left: -0.06rem;
+	transform: rotate(45deg);
+	-ms-transform: rotate(45deg);		
+	-webkit-transform: rotate(45deg);	
+	-o-transform: rotate(45deg);		
+	-moz-transform: rotate(45deg);
+}
+/*我们的历程*/
+.financing {
+	width: 100%;
+	padding: 0 5%;
+	margin-bottom: 0.5rem;
+}
+.financ-detail ul {
+	width: 100%;
+}
+.financ-detail ul li {
+	width: 100%;
+	height: 60px;
+	background: #fff;
+	margin-bottom: 0.15rem;
+}
+.financ-left {
+	width: 60px;
+	height: 60px;
+	text-align: center;
+	float: left;
+	padding-top: 0.05rem;
+	background: -moz-linear-gradient(top, #FFD200 0%, #FFD200 100%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFD200), color-stop(100%,#FFD200)); 
+	background: -webkit-linear-gradient(top, #FFD200 0%,#FFD200 100%); 
+	background: -o-linear-gradient(top, #FFD200 0%,#FFD200 100%); 
+	background: -ms-linear-gradient(top, #FFD200 0%,#FFD200 100%); 
+	background: linear-gradient(to bottom, #FFD200 0%,#FFD200 100%); 
+}
+.financ-left p {
+	font-size: 0.1rem;
+	color: #000000;
+	text-align: center;
+	margin-bottom: 0.02rem;
+}
+.financ-left span {
+	font-size: 0.2rem;
+	color: #000000;
+	letter-spacing: 0;
+	text-align: center;
+	display: block;
+}
+.financ-right {
+	height: 0.6rem;
+	width: 76%;
+	float: left;
+	margin-left: 5px;
+}
+.financ-right p {
+	font-size: 10px;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+/*底部*/
+footer {
+	width: 100%;
+	height: 0.8rem;
+	background-image: url(../../img/foot.png);
+	background-size: 100% 100%;
+	padding: 0.13rem 0.16rem 0 0.16rem;
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>文章 - 主题信息</title>
+	<link href="../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../scripts/select2/css/select2.min.css" rel="stylesheet">
+	<link href="../../styles/common.css" rel="stylesheet">
+	<link href="../../styles/animate.min.css" rel="stylesheet">
+	<style>
+		.theme-search-products { display:block;}
+		.pr-themes-left, .theme-search-products { width:calc(50% - 80px);}
+		.pr-themes-tools { width:160px; padding:20px; text-align:center;}
+		.pr-themes-tools .btn { width:100px;}
+		.pr-themes-right { width:calc(50% - 80px);}
+		select[multiple] { height:240px;}
+		.pr-themes-left select[multiple] { height:208px; border-top:0;}
+		select[multiple] option[disabled] { color:#ccc;}
+		#searchBarOfAllProducts { width:calc(100% + 1px); padding-right:0;}
+		#searchBarOfAllProducts > input { padding-left:30px; border-radius:0!important;}
+		#searchBarOfAllProducts > .btn { border-radius:0!important;}
+		#searchBarOfAllProducts i.fa-search { top:9px;}
+	</style>
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="page-list-container">
+		<div class="search-wrapper mc-bg-white border">
+			<div class="p-15 box-clear">
+				<div class="fl">
+					<button class="btn btn-sm btn-primary mr-5" id="btnShowAddBox"><i class="fa fa-plus-circle"></i> 添加</button>
+				</div>
+				<div class="ml-5 fl">
+					<div class="input-group search-bar box-clear fl" id="searchBar">
+						<i class="fa fa-search"></i>
+						<input type="text" name="keyword" class="form-control" placeholder="名称查询">
+						<span class="search-btn-reset"><i class="fa fa-remove"></i></span>
+						<span class="input-group-addon btn btn-default" id="btnSearch">搜索</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mc-bg-white mt-10 mb-10 border">
+			<div class="page-main-wrapper">
+				<table class="mc-list-table main-list main-images-list" id="listTable" data-mode="edit">
+					<thead>
+					<tr>
+						<td width="50">选择</td>
+						<td width="60">状态</td>
+						<td width="80">封面</td>
+						<td class="per-25">主题名</td>
+						<td>描述</td>
+						<td width="160">操作</td>
+					</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+
+				<div class="mc-list-tools box-clear pt-20 pb-20 pl-15 pr-15" id="listTools" hidden>
+					<div class="list-tools-left fl">
+						<div class="mc-table-checkbox-bar mr-10 fl">
+							<label><input type="checkbox" id="checkedAll"> 全选</label>
+						</div>
+						<button class="btn btn-sm btn-warning mr-5" id="btnListRemove" disabled="disabled"><i class="fa fa-trash"></i> 禁用</button>
+					</div>
+
+					<div class="fr" id="pageNavWrapper"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<input type="file" id="fileUploadImage" class="hide"/>
+
+	<!-- 新增、修改 -->
+	<div class="mc-bg-white border p-15 box-clear" id="editFormContainer" hidden>
+		<form>
+			<div class="form-header box-clear mb-30 b-b" id="editTile">
+				<div class="mr-10 fl f16" data-mode="new"><i class="fa fa-plus-square"></i> 新增专题</div>
+				<div class="mr-10 fl f16" data-mode="edit"><i class="fa fa-pencil-square"></i> 修改专题</div>
+			</div>
+
+			<div class="form-group-wrapper">
+				<div class="box-clear">
+					<div class="form-item pb-10">
+						<span class="form-item-title"><span class="color-red">*</span> 封面：</span>
+						<div class="form-item-content">
+							<input type="hidden" name="cover_src" data-bind="cover_src" data-not-null="1"/>
+							<div class="form-image-wrapper fl">
+								<span class="image-contain" data-bind="cover_src_string" data-bind-type="bg-img" style="background-image:url(../../images/upload-default-img.png);"></span>
+							</div>
+							<div class="mt-15 ml-15 color-light-gray fl">
+								<span class="btn btn-info btn-sm btn-file">上传图片</span>
+								<p class="mt-5">
+									<small>仅支持jpg、gif、png，大小不超过1MB</small>
+									<small class="block">建议尺寸: <span class="color-orange">340 &times; 340px</span></small>
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title"><span class="color-red">*</span> 专题名：</span>
+						<div class="form-item-content">
+							<input type="text" class="form-control form-input" data-width="normal" name="title" data-bind="title" data-not-null="1">
+						</div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">顺序：</span>
+						<div class="form-item-content">
+							<input type="number" class="form-control form-input" data-width="normal" name="order_number" data-bind="order_number" data-type="number" data-limit="0" data-limit-type="number" placeholder="显示的顺序">
+						</div>
+					</div>
+
+					<div class="form-item" id="isDeleteDWrapper" hidden>
+						<span class="form-item-title">是否禁用：</span>
+						<div class="form-item-content">
+							<input type="checkbox" name="is_deleted" data-size="small" data-on-color="warning" data-on-text="是" data-off-text="否" />
+						</div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title"><span class="color-red">*</span> 描述：</span>
+						<div class="form-item-content">
+							<textarea class="form-control max-w-800 h-em-6" name="text" data-bind="text" data-not-null="1"></textarea>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item mt-30 mb-15">
+					<span class="form-item-title">&nbsp;</span>
+					<div class="form-item-content">
+						<button class="btn btn-sm btn-primary btn-big mr-5" id="btnEditFormSubmit" type="button" op-btn="default">保存</button>
+						<button class="btn btn-sm btn-default btn-big" id="btnEditFormCancel" type="button" data-dismiss="modal">取消</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- 查看 -->
+	<div class="mc-bg-white border p-15 box-clear view-data-container" id="viewFormContainer" hidden>
+		<form>
+			<div class="form-header box-clear mb-30 b-b">
+				<div class="mr-10 fl f16"><i class="fa fa-search-plus"></i> 查看专题</div>
+			</div>
+			<div class="form-group-wrapper view-data-mode">
+				<div class="box-clear">
+					<div class="form-item pb-10">
+						<span class="form-item-title">封面：</span>
+						<div class="form-item-content">
+							<div class="form-image-wrapper fl">
+								<span class="image-contain" data-bind="cover_src_string" data-bind-type="bg-img" style="background-image:url(../../images/upload-default-img.png);"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">专题名：</span>
+						<div class="form-item-content" data-bind="title"></div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">顺序：</span>
+						<div class="form-item-content" data-bind="order_number" data-default-value="-"></div>
+					</div>
+					<div class="form-item">
+						<span class="form-item-title">是否禁用：</span>
+						<div class="form-item-content" data-bind="is_deleted_text" data-default-value="-"></div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">描述：</span>
+						<div class="form-item-content" data-bind="text" data-default-value="-"></div>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item mt-30 mb-15">
+					<span class="form-item-title">&nbsp;</span>
+					<div class="form-item-content">
+						<button class="btn btn-sm btn-default btn-big" id="btnViewFormClose" type="button" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- 关联商品 -->
+	<div class="mc-bg-white border p-15 box-clear" id="editPrFormContainer" hidden>
+		<div class="form-header box-clear mb-30 b-b">
+			<div class="mr-10 fl f16" data-mode="new"><i class="fa fa-pencil-square"></i> 关联商品</div>
+		</div>
+		<div class="form-group-wrapper">
+			<div class="box-clear view-data-container">
+				<div class="form-item">
+					<span class="form-item-title">主题名称：</span>
+					<div class="form-item-content" data-bind="product_theme_name"></div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">状态：</span>
+					<div class="form-item-content" data-bind="product_theme_status_text"></div>
+				</div>
+			</div>
+
+			<hr>
+			<div class="form-item mb-0">
+				<div class="form-item-title"><h4 class="f16">选择关联商品</h4></div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">关联商品：</span>
+				<div class="form-item-content max-w-1200 box-clear">
+					<div class="pr-themes-left pt-5 fl">
+						<small>所有商品：</small>
+						<div class="mt-10">
+							<div class="input-group search-bar box-clear fl" id="searchBarOfAllProducts">
+								<i class="fa fa-search"></i>
+								<input type="text" name="keyword" class="form-control pl-30" placeholder="名称查询">
+								<span class="search-btn-reset"><i class="fa fa-remove"></i></span>
+								<span class="input-group-addon btn btn-default" id="btnSearchOfAllProducts">搜索</span>
+							</div>
+							<select name="theme_name" class="form-control mt-10" multiple="multiple"></select>
+						</div>
+					</div>
+					<div class="pr-themes-tools mt-20 pt-5 fl">
+						<div><button data-mode="addSome" class="btn btn-info btn-sm" disabled="disabled">选中关联 <i class="fa fa-angle-right"></i></button></div>
+						<div class="mt-5"><button data-mode="addAll" class="btn btn-default btn-sm">全部关联 <i class="fa fa-angle-double-right"></i> </button></div>
+						<hr>
+						<div><button data-mode="removeSome" class="btn btn-warning btn-sm" disabled="disabled"><i class="fa fa-angle-left"></i> 取消关联</button></div>
+						<div class="mt-5"><button data-mode="removeAll" class="btn btn-default btn-sm"><i class="fa fa-angle-double-left"></i> 全部取消</button></div>
+					</div>
+					<div class="pr-themes-right pt-5 fr">
+						<small>已关联的商品：</small>
+						<select name="theme_name_pr" class="form-control mt-10" multiple="multiple"></select>
+					</div>
+
+					<span class="clear"></span>
+					<p class="f12 mt-10 color-gray block"><i class="fa fa-info-circle"></i> 提示：请在左侧选择商品，然后点击“选中关联”按钮，保存就能关联至主题啦。（‘双击’商品名称可以添加或取消关联）</p>
+				</div>
+			</div>
+
+			<hr>
+			<div class="form-item mt-30 mb-15">
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<button class="btn btn-sm btn-primary btn-big mr-5" id="btnPrEditFormSubmit" type="button" op-btn="default">保存</button>
+					<button class="btn btn-sm btn-default btn-big" id="btnPrEditFormCancel" type="button" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 列表模板 -->
+	<script type="text/html" id="listTemplate">
+		{{each result as item}}<tr data-id="{{item.content_theme_id}}">
+			<td><input type="checkbox"></td>
+			<td>{{if item.is_deleted}}<span class="color-dark-gray">已禁用</span>
+				{{else}}<span class="color-gray">否</span>{{/if}}
+			</td>
+			<td><a class="image-contain wh-40 block" href="{{item.cover_src_string || '#'}}" {{if item.cover_src_string}}target="_blank"{{/if}} style="background-image: url({{item.cover_src_string || defaultImageUrl}});"></a></td>
+			<td><span class="text-cover strong">{{item.title}}</span></td>
+			<td><span class="text-cover color-gray">{{item.text}}</span></td>
+			<td>
+				<span class="mc-btn-text mr-15" data-mode="edit">修改</span>
+				<span class="mc-btn-text mr-15 color-oran" data-mode="qr">关联文章</span>
+				<span class="mc-btn-text" data-mode="view">查看</span>
+			</td>
+		</tr>{{/each}}
+		{{if !result.length}}<tr><td class="td-none text-center" colspan="8">暂无内容</td></tr>{{/if}}
+	</script>
+
+
+
+	<script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+			fileUploadJs: true,
+            files: [
+				'../../scripts/local/store-article-theme.js'
+            ]
+        });
+	</script>
+</body>
+</html>

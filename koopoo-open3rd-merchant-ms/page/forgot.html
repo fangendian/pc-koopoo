@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>靠谱 - 找回密码</title>
+    <meta name="keywords" content="靠谱小程序-微信第三方平台管理系统">
+    <meta name="description" content="靠谱小程序-微信第三方平台管理系统，基于Bootstrap3最新版本开发的扁平化系统，使用了Html5+CSS3等现代技术">
+    <link href="../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../scripts/bootstrap/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="../scripts/fontawesome/css/font-awesome.min.css?v=4.6.3" rel="stylesheet">
+    <link href="../styles/animate.min.css?v=3.1.0" rel="stylesheet">
+    <link href="../scripts/gritter/css/jquery.gritter.min.css?v=1.7.4" rel="stylesheet">
+    <link href="../styles/common.css" rel="stylesheet">
+
+    <link href="../styles/common-shop.css" rel="stylesheet">
+    <style>
+        .page-container { width:700px;}
+        .form-wrapper { width:560px; margin-left:auto; margin-right:auto;}
+        .form-item-title { font-size:14px;}
+
+        input:-webkit-autofill,input:focus:-webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset;}
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="page-container text-center">
+        <div class="header-left">
+            <div class="logo fl"><h4><img src="../../img/logo-sig.png"> <strong>靠谱小程序</strong></h4></div>
+            <div class="header-title ml-10 pl-10 f16 b-l fl">找回密码</div>
+        </div>
+        <div class="header-right fr">
+            <a id="btnLogin" href="login.html">« 返回登录</a>
+        </div>
+    </div>
+</div>
+
+<div class="page-container">
+    <input type="password" style="position:absolute; top:-9999px"/>
+    <div class="form-wrapper form-first-wrapper pt-20 pb-20 mt-40" id="mainForm">
+        <div class="form-item">
+            <span class="form-item-title"><strong>手机号</strong></span>
+            <div class="form-item-content">
+                <input type="text" class="form-control form-input" value="" data-width="normal" name="mobile_no" data-type="phone" data-not-null="1" data-tip="请输入正确的手机号码" autocomplete="off" placeholder="手机号码，今后用于登录">
+            </div>
+        </div>
+
+        <div class="form-item">
+            <span class="form-item-title"><strong>验证码</strong></span>
+            <div class="form-item-content">
+                <input type="text" class="form-control form-input fl" style="width:213px;" name="random_code" data-not-null="1" autocomplete="off" placeholder="短信验证码">
+                <button type="button" class="btn btn-info btn-sm fl" style="margin-left:8px; width:80px; height:32px;" id="btnPhoneCode">获取验证码</button>
+            </div>
+        </div>
+
+        <div class="form-item">
+            <span class="form-item-title"><strong>新密码</strong></span>
+            <div class="form-item-content">
+                <input type="password" class="form-control form-input mb-5" value="" data-width="normal" name="user_pwd" autocomplete="off" data-not-null="1" placeholder="新登录密码">
+            </div>
+        </div>
+
+        <div class="form-item">
+            <span class="form-item-title">&nbsp;</span>
+            <div class="form-item-content"><button class="btn btn-danger" data-width="normal" id="btnSubmit">确定修改</button> </div>
+        </div>
+    </div>
+
+    <div class="box-clear" id="pageInfo" hidden>
+        <div class="min-height mt-20 pt-40 text-center">
+            <i class="fa fa-info-circle f50 color-cyan"></i>
+            <h4 class="mt-5 mb-5">不能继续</h4>
+            <p>抱歉，您的浏览器版本可能过低，建议使用新版的浏览器</p>
+        </div>
+    </div>
+
+    <div class="mt-15 p-15 page-footer b-t text-center">&copy; 2018 靠谱小程序 版权所有</div>
+    <p class="text-center" style="color:#ccc;">为了您更好的体验，建议使用新版本的Chrome、Edge、火狐，IE10+或Webkit内核浏览器!</p>
+</div>
+
+
+<script type="text/javascript" src="../scripts/files-ver-controller.js"></script>
+<script type="text/javascript">
+    loadJs({
+        files: [
+            '../scripts/local/forgot.js'
+        ]});
+</script>
+</body>
+
+</html>

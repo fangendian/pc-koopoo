@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>概况 - 靠谱小程序</title>
+	<link href="../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../scripts/gritter/css/jquery.gritter.min.css" rel="stylesheet">
+    <link href="../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../styles/common.css" rel="stylesheet">
+    <link href="../styles/main.css" rel="stylesheet">
+</head>
+<body>
+	<div class="page-left">
+		<div class="header-logo text-center">
+			<p class="logo-img img-circle" id="logoImg" style="background-image:url('../../img/logo-sig.png')"></p>
+		</div>
+
+		<nav class="main-nav" id="nav">
+			<div class="main-nav-container" id="navWrapper">
+				<div class="main-nav-content"></div>
+			</div>
+		</nav>
+
+		<div class="main-user text-center" id="btnMainUser">
+			<p class="main-user-title"><i class="fa fa-user-circle"></i> <span data-bind="user_name">昵称</span></p>
+			<div class="main-user-box" id="mainUserBox" hidden>
+				<div>
+					<p data-bind="user_name">昵称</p>
+				</div>
+				<a class="user-item" href="javascript:void(0);" id="btnEditPwd">修改密码</a>
+				<a class="user-item" href="javascript:void(0);" id="logout">退出</a>
+			</div>
+		</div>
+	</div>
+
+    <div class="main-container">
+		<div class="caption" id="navLocation">
+			<span>概况</span>
+		</div>
+		<div class="content-wrapper">
+			<iframe frameborder="no" scrolling="no" src="" class="body-bg-gray" id="mainIFrame"></iframe>
+		</div>
+    </div>
+
+	<div class="page-right" hidden>
+		<p class="page-right-caption pl-10 b-b"><i class="fa fa-question-circle-o f16"></i> 帮助和服务</p>
+
+		<div class="right-box p-10">
+			<p class="right-title mt-5">帮助中心</p>
+			<div class="right-content mt-10 p-5 pb-0">
+				<h6>靠谱小程序微商城是什么？</h6>
+				<p class="mt-5 color-gray">全行业的在线销售解决方案，解决在线卖货，互联网营销，会员管理的解决方案</p>
+				<div class="right-content mt-15 pt-15 b-t link-group">
+					<a href="javascript:void(0);">如何发布门店商品？</a>
+					<a href="javascript:void(0);">你告诉我什么？</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="right-box b-t mt-15 p-10">
+			<p class="right-title mt-10">售后服务</p>
+			<div class="right-content link-group mt-5 pl-10">
+				<a href="javascript:void(0);">如何发布门店商品？</a>
+				<a href="javascript:void(0);">你告诉我什么？</a>
+			</div>
+		</div>
+
+
+		<div class="b-t mt-15 p-10" id="shopInfoBox">
+			<p class="right-title mt-10">店铺信息</p>
+			<div class="mt-10 pl-10">
+				<p><span data-bind="shop_name"></span> </p>
+				<p>
+					有效期至:
+					<span data-bind="expired_time"></span>
+					<span class="mc-bg-orange" id="expiredText" data-bind="expired_status_text" hidden></span>
+				</p>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/html" id="navTemplate">
+		{{each listData as item index}}
+		<div class="nav-item">
+			<p class="nav-title {{item.active ? 'active' : ''}} {{item.className}}" data-title="{{item.name}}" data-id="{{item.id}}" {{if item.href}}data-href="{{item.href}}"{{/if}}>
+				<span class="fa {{item.iconClass || 'fa-navicon'}}"></span><span class="nav-label">{{item.name}}</span>
+			</p>
+			{{if item.children}}<ul>
+				{{each item.children as childItem}}
+					<li class=" {{childItem.active ? 'active' : ''}} {{childItem.className}}" data-title="{{childItem.name}}" data-id="{{childItem.id}}" {{if childItem.href}}data-href="{{childItem.href}}"{{/if}}>
+					<span class="nav-label">{{childItem.name}}</span>
+				</li>{{/each}}
+			</ul>{{/if}}
+		</div>
+		{{/each}}
+	</script>
+
+	<!-- 修改密码操作模态框 -->
+	<div class="modal fade" id="editPwdModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" style="margin-top:20vh;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="main-edit-pwd-modal-label">
+						<span class="glyphicon glyphicon-cog"></span> 修改密码
+					</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label class="control-label">原密码</label>
+						<div class="margin-bottom-p5">
+							<input class="form-control" name="user_pwd" type="password" data-not-null="1" data-limit="6~20" placeholder="原密码" form-flag="1"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">新密码</label>
+						<div class="margin-bottom-p5">
+							<input class="form-control" name="new_pwd" type="password" data-not-null="1" data-limit="6~20" placeholder="新密码" form-flag="1"/>
+						</div>
+					</div>
+					<p class="clear"></p>
+				</div>
+
+				<!--  模态框的尾部-->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-default" data-dismiss="modal">取消</button>
+					<button id="btnSavePwd" type="button" class="btn btn-sm btn-primary" op-btn="default">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../scripts/jquery.min.js"></script>
+	<script type="text/javascript" src="../scripts/bootstrap/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="../../js/env.config.js"></script>
+	<script type="text/javascript" src="../scripts/global/app.common.js"></script>
+	<script type="text/javascript" src="../scripts/global/iscroll.min.js"></script>
+
+	<script type="text/javascript" src="../scripts/local/common-shop.js"></script>
+	<script type="text/javascript" src="../scripts/local/main.js"></script>
+</body>
+</html>

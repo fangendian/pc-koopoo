@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人设置 - 靠谱</title>
+    <meta name="keywords" content="靠谱-微信第三方平台管理系统">
+    <meta name="description" content="靠谱-微信第三方平台管理系统，基于Bootstrap3最新版本开发的扁平化系统，使用了Html5+CSS3等现代技术">
+    <link href="../../../img/logo-sig.png" rel="shortcut icon">
+
+    <link href="../../scripts/bootstrap/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="../../scripts/fontawesome/css/font-awesome.min.css?v=4.6.3" rel="stylesheet">
+    <link href="../../styles/animate.min.css?v=3.1.0" rel="stylesheet">
+    <link href="../../scripts/gritter/css/jquery.gritter.min.css?v=1.7.4" rel="stylesheet">
+    <link href="../../styles/common.css" rel="stylesheet">
+    <link href="../../styles/common-shop.css" rel="stylesheet">
+    <style>
+        .form-sex-content { padding-top:10px;}
+        .form-sex-content input { margin-top:2px; margin-right:2px; float:left;}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="page-container">
+            <div class="header-left fl">
+                <div class="logo fl"><h4><img src="../../../img/logo-sig.png"> <strong>靠谱</strong></h4></div>
+                <div class="header-title ml-10 pl-10 f16 b-l fl">个人设置</div>
+            </div>
+            <div class="header-right fr">
+                <span data-bind="mobile_no"></span>
+                <a class="ml-5 mr-5" href="main.html">小程序列表</a>
+                <span class="mc-btn-text ml-5" id="btnLogout"><i class="glyphicon glyphicon-log-out"></i> 退出</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-container pt-30">
+        <div class="main-container box-clear p-15 pt-30 border">
+            <div class="form-item">
+                <span class="form-item-title">账号：</span>
+                <div class="form-item-content" style="line-height:36px;">
+                    <span class="f14" data-bind="mobile_no"></span>
+                    <span class="mc-btn-text ml-10" id="btnEditPwd">修改密码</span>
+                </div>
+            </div>
+            <div class="form-item">
+                <span class="form-item-title">昵称：</span>
+                <div class="form-item-content">
+                    <input type="text" class="form-control form-input" data-width="normal" name="nickname" data-bind="nickname" data-not-null="1" placeholder="请输入个人昵称">
+                </div>
+            </div>
+            <div class="form-item">
+                <span class="form-item-title">头像：</span>
+                <div class="form-item-content form-item-text">
+                    <p class="form-item-avatar image-cover" style="background-image:url(../../images/user_avatar_default.jpg);"></p>
+                    <span class="mc-btn-text ml-10" hidden>修改</span>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <span class="form-item-title">性别：</span>
+                <div class="form-item-content form-sex-content">
+                    <label><input type="radio" name="sex" value="1"> 男</label>
+                    <label class="ml-5 mr-5"><input type="radio" name="sex" value="2"> 女</label>
+                    <label><input type="radio" checked="checked" name="sex" value="3"> 保密</label>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <span class="form-item-title">个人说明：</span>
+                <div class="form-item-content">
+                    <textarea class="form-control form-input" style="width:80%;" placeholder="简单说两句吧~"></textarea>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <span class="form-item-title">&nbsp;</span>
+                <div class="form-item-content"><button class="mc-btn mc-btn-blue mc-btn-big" id="btnCreate" disabled="disabled">保存</button> </div>
+            </div>
+        </div>
+
+        <div class="p-15 page-footer text-center">&copy; 2018 靠谱 版权所有</div>
+    </div>
+
+
+    <!-- 修改密码操作模态框 -->
+    <div class="modal fade" id="editPwdModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" style="margin-top:20vh;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="main-edit-pwd-modal-label">
+                        <span class="glyphicon glyphicon-cog"></span> 修改密码
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">原密码</label>
+                        <div class="margin-bottom-p5">
+                            <input class="form-control" name="user_pwd" type="password" data-not-null="1" data-limit="6~20" placeholder="原密码"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">新密码</label>
+                        <div class="margin-bottom-p5">
+                            <input class="form-control" name="new_pwd" type="password" data-not-null="1" data-limit="6~20" placeholder="新密码"/>
+                        </div>
+                    </div>
+                    <p class="clear"></p>
+                </div>
+
+                <!--  模态框的尾部-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="btnSavePwd">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+    <script type="text/javascript">
+        loadJs();
+    </script>
+    <script type="text/javascript">
+        shopBase.getUserInfo(function (data) {
+            shopBase.setDataBinds(data);
+            $('#btnLogout').on('click', function () {
+                shopBase.logout();
+            });
+
+            //弹出修改密码
+            $('#btnEditPwd').bind('click',function(){
+                $('#editPwdModal').modal('show').find('input').val('');
+            });
+
+            //修改密码
+            $('#btnSavePwd').bind('click',function(){
+                var target = $('#editPwdModal').find('.modal-body');
+                var data = shopBase.getAndVerificationData(target, true);
+                if(!data) return;
+
+                if(data.user_pwd == data.new_pwd){
+                    shopBase.showTip('新旧密码不能相同', true);
+                    return;
+                }
+                ajax.putAjaxData({
+                    url: 'merchant/merchants/password',
+                    data: data,
+                    success: function(){
+                        app.alert({
+                            content: '<div class="pt-5 pb-15">修改成功，请重新登录！</div>',
+                            otherButtons: ['重新登录'],
+                            otherButtonStyles: ['btn-danger'],
+                            callback: function(){
+                                top.location.href = config.getFullPath('page/login.html');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

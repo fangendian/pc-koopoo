@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>示例页面</title>
+	<link href="../../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../../styles/common.css" rel="stylesheet">
+</head>
+<body class="body-bg-gray p-10">
+
+	<div id="gritter-notice-wrapper" class="center-center">
+		<div class="gritter-item-wrapper box-clear gritter-info">
+			<div class="gritter-close"></div>
+			<div class="gritter-icon"><i class="fa fa-info-circle f40"></i></div>
+			<div class="gritter-content"><span class="gritter-title">系统提示</span><p class="gritter-text">样式调试示例</p></div>
+		</div>
+
+		<div class="gritter-item-wrapper box-clear gritter-error">
+			<div class="gritter-close"></div>
+			<div class="gritter-icon"><i class="fa fa-times-circle f40"></i></div>
+			<div class="gritter-content"><span class="gritter-title">错误提示</span><p class="gritter-text">样式调试示例</p></div>
+		</div>
+
+		<div class="gritter-item-wrapper box-clear gritter-success">
+			<div class="gritter-close"></div>
+			<div class="gritter-icon"><i class="fa fa-check-circle f40"></i></div>
+			<div class="gritter-content"><span class="gritter-title">成功提示</span><p class="gritter-text">样式调试示例</p></div>
+		</div>
+
+		<div class="gritter-item-wrapper box-clear gritter-warning">
+			<div class="gritter-close"></div>
+			<div class="gritter-icon"><i class="fa fa-warning f40"></i></div>
+			<div class="gritter-content"><span class="gritter-title">警告提示</span><p class="gritter-text">样式调试示例</p></div>
+		</div>
+
+		<div class="gritter-item-wrapper box-clear gritter-light">
+			<div class="gritter-close"></div>
+			<div class="gritter-icon"><i class="fa fa-info-circle f40"></i></div>
+			<div class="gritter-content"><span class="gritter-title">普通提示</span><p class="gritter-text">样式调试示例</p></div>
+		</div>
+	</div>
+
+	<div class="page-list-container">
+		<div class="search-wrapper mc-bg-white border">
+			<div class="p-15 box-clear">
+				<div class="fl">
+					<button class="btn btn-sm btn-primary mr-5" id="btnShowAddBox"><i class="fa fa-plus-circle"></i> 添加</button>
+					<button class="btn btn-sm btn-info mr-5" id="btnShowAddBox-2"><i class="fa fa-plus-circle"></i> 添加 2</button>
+				</div>
+				<div class="ml-5 fl">
+					<span class="mr-5 fl">
+						<span class="btn btn-sm btn-default mr-5" id="btnFilter"><i class="fa fa-filter"></i> 筛选</span>
+					</span>
+					<div class="input-group search-bar box-clear fl">
+						<i class="fa fa-search"></i>
+						<input type="text" class="form-control" id="exampleInputAmount" placeholder="关键字查询">
+						<span class="input-group-addon btn btn-default">搜索</span>
+					</div>
+				</div>
+			</div>
+			<form class="form-horizontal" id="formBox" op-role="form" hidden>
+				<div class="form-group-box pt-15">
+					<div class="row form-group-container">
+						<div class="col-xs-6 col-sm-6 col-md-4">
+							<label class="control-label search-title">手机号</label>
+							<div class="filter-content">
+								<input type="text" name="nickname" class="form-control" style="width: 100%;">
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-4">
+							<label class="control-label search-title">省份/市</label>
+							<div class="filter-content">
+								<select name="sex" class="form-control" style="width: 100%;">
+									<option>请选择</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-4">
+							<label class="control-label search-title">国家</label>
+							<div class="filter-content">
+								<select name="sex" class="form-control" style="width: 100%;">
+									<option>请选择</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-4">
+							<label class="control-label search-title">客户来源</label>
+							<div class="filter-content">
+								<input class="laydate-icon" style="width: 100%;" name="create_time_begin" readonly/>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-4">
+							<label class="control-label search-title">客户身份</label>
+							<div class="filter-content">
+								<input class="laydate-icon" style="width: 100%;" name="create_time_end" readonly/>
+							</div>
+						</div>
+					</div>
+
+					<div class="filter-btn-bar">
+						<button class="btn btn-sm btn-primary mr-5" id="SearchCustomForm-queryBtn" type="button" op-btn="default">
+							<i class="glyphicon glyphicon-search"></i> 筛选
+						</button>
+						<button class="btn btn-sm btn-default" id="SearchCustomForm-resetBtn" type="button">
+							<i class="glyphicon glyphicon-refresh"></i> 重置
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="mc-bg-white mt-10 border">
+			<div class="pt-10 pb-10 pl-15 pr-15 b-b">
+				标题名称
+			</div>
+			<div class="page-main-wrapper p-15">
+				<table class="mc-list-table" id="table" data-mode="edit">
+					<thead>
+					<tr>
+						<td width="50">排序</td>
+						<td width="80">图片</td>
+						<td>名称</td>
+						<td width="100">操作</td>
+					</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>3</td>
+							<td><div class="image-contain" style="background-image: url(../../../images/upload-default-img.png);"></div></td>
+							<td><span class="text-cover">表格宽度过窄时，出现省略号</span></td>
+							<td><span class="mc-btn-text btn-view">查看详细</span> </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="mc-bg-white mt-10 mb-10 border">
+			<div class="page-main-wrapper p-15">
+				<table class="mc-list-table" id="table-2" data-mode="edit">
+					<thead>
+					<tr>
+						<td width="30"><input type="checkbox" data-checkbox-type="all"></td>
+						<td width="120">姓名</td>
+						<td width="120">手机号码</td>
+						<td>微信昵称</td>
+						<td width="60">购买次</td>
+						<td>来源</td>
+						<td width="80">客户身份</td>
+						<td width="100">操作</td>
+					</tr>
+					</thead>
+					<tbody>
+					<tr data-id="1">
+						<td><input type="checkbox"></td>
+
+						<td><span class="text-cover">很长的名字奥维OVJ哈嘿黑</span></td>
+						<td><span class="text-cover">13052197516</span></td>
+						<td><span class="text-cover">开大浪7</span></td>
+						<td><span class="text-cover">3</span></td>
+						<td><span class="text-cover">小程序微商城</span></td>
+						<td><span class="text-cover">VIP</span></td>
+
+						<td><span class="mc-btn-text btn-view">查看详细</span> </td>
+					</tr>
+					<tr data-id="2">
+						<td><input type="checkbox"></td>
+
+						<td><span class="text-cover">哒哒</span></td>
+						<td><span class="text-cover">13002100210</span></td>
+						<td><span class="text-cover">下个雨季</span></td>
+						<td><span class="text-cover">2</span></td>
+						<td><span class="text-cover">小程序微商城</span></td>
+						<td><span class="text-cover">VIP</span></td>
+
+						<td><span class="mc-btn-text btn-view">查看详细</span> </td>
+					</tr>
+					<tr data-id="3">
+						<td><input type="checkbox"></td>
+
+						<td><span class="text-cover">哒哒</span></td>
+						<td><span class="text-cover">13002100210</span></td>
+						<td><span class="text-cover">下个雨季</span></td>
+						<td><span class="text-cover">2</span></td>
+						<td><span class="text-cover">小程序微商城</span></td>
+						<td><span class="text-cover">VIP</span></td>
+
+						<td><span class="mc-btn-text btn-view">查看详细</span> </td>
+					</tr>
+					</tbody>
+				</table>
+
+				<div class="box-clear pt-20">
+					<div class="fl">
+						<button class="btn btn-sm btn-danger mr-5" id="btnListRemove">删除</button>
+						<button class="btn btn-sm btn-default" id="btnListDisabled">禁用</button>
+					</div>
+
+					<div class="page-nav fr">
+						<span class="nav-btn-prev disabled">上一页</span>
+						<p class="nav-numbers">
+							<span class="active">1</span><span>2</span><span>3</span><span>4</span>
+						</p>
+						<span class="nav-btn-prev">下一页</span>
+						<div class="inline ml-5">共<strong>120</strong>条信息</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- 新增操作 有TABS -->
+	<div class="mc-bg-white border p-15 box-clear" id="newFormContainer" hidden>
+		<div class="form-header box-clear mb-20 b-b">
+			<div class="mr-10 fl f18"><i class="fa fa-plus-square"></i> 新增商品</div>
+			<ul class="ml-20 fl nav nav-tabs form-header-tabs">
+				<li class="active">
+					<a data-toggle="tab" href="#formGroupItem-base">基本信息</a>
+				</li>
+				<li>
+					<a data-toggle="tab" href="#formGroupItem-content">商品内容</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="tab-content">
+			<div class="tab-pane form-group-wrapper active" role="tabpanel" id="formGroupItem-base">
+				<div class="row box-clear">
+					<div class="col-xs-7 col-sm-6 col-md-5 fl">
+						<div class="form-item">
+							<span class="form-item-title">商品名称：</span>
+							<div class="form-item-content">
+								<input type="text" class="form-control form-input" data-width="normal" name="shop_name" data-not-null="1" placeholder="商品名称">
+							</div>
+						</div>
+
+						<div class="form-item">
+							<span class="form-item-title">禁用：</span>
+							<div class="form-item-content form-item-checkbox">
+								<label><input type="radio" name="disabled" checked="checked"> 是</label>
+								<label><input type="radio" name="disabled"> 否</label>
+							</div>
+						</div>
+
+						<div class="form-item">
+							<span class="form-item-title">总库存：</span>
+							<div class="form-item-content">
+								<input type="number" class="form-control form-input" min="0" data-width="normal" placeholder="总库存">
+							</div>
+						</div>
+
+						<div class="form-item">
+							<span class="form-item-title">时间控件：</span>
+							<div class="form-item-content">
+								<input type="text" class="laydate-icon" data-width="normal" name="" placeholder="" readonly/>
+							</div>
+						</div>
+
+						<div class="form-item">
+							<span class="form-item-title">剩余库存：</span>
+							<div class="form-item-content">
+								<input type="number" class="form-control form-input" min="0" data-width="normal" placeholder="剩余库存">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-5 col-sm-6 col-md-7  fl">
+						<span class="form-item-title">封面：</span>
+						<div class="form-item-content">
+							<input type="hidden" name="commodity_cover_src" form-flag="1" />
+							<div class="form-image-wrapper">
+								<span class="image-contain" style="background-image:url(../../../images/upload-default-img.png);"></span>
+							</div>
+							<div class="mt-15 color-light-gray">
+								<span class="btn btn-info btn-sm btn-file">
+									<input type="file" name="file-commodity_cover_src" data-value="?type=1" size="1"/>
+									上传图片
+								</span>
+								<p class="mt-5">
+									<small>仅支持jpg、gif、png</small>
+									<small>大小不超过1MB</small>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item">
+					<span class="form-item-title">商品图集：</span>
+					<div class="form-item-content">
+						<ul class="form-img-list m-0 box-clear" id="formImgList">
+							<li>
+								<p style="background-image:url(../../../images/upload-default-img.png);" class="image-contain"></p>
+								<i class="fa fa-remove"></i>
+							</li>
+							<li>
+								<p style="background-image:url(../../../images/upload-default-img.png);" class="image-contain"></p>
+								<i class="fa fa-remove"></i>
+							</li>
+						</ul>
+
+						<input type="hidden" name="commodity_cover_src" form-flag="1" />
+						<img name="img-commodity_cover_src" src="../../../images/upload-default-img.png" class="img-thumbnail" style="display:none;"/>
+						<div class="mt-15 color-light-gray">
+							<span class="btn btn-info btn-sm btn-file">
+								<input type="file" name="file-commodity_cover_src" data-value="?type=1" size="1"/>
+								上传图片
+							</span>
+							<p class="mt-5">
+								<small>仅支持jpg、gif、png</small>
+								<small>大小不超过1MB</small>
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item">
+					<span class="form-item-title">描述：</span>
+					<div class="form-item-content">
+						<textarea class="form-control form-input" name="description" data-width="max" placeholder="描述内容"></textarea>
+					</div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">备注：</span>
+					<div class="form-item-content">
+						<textarea class="form-control form-input" name="remark" data-width="max" placeholder="备注信息"></textarea>
+					</div>
+				</div>
+
+				<hr>
+			</div>
+
+			<div class="tab-pane form-group-wrapper" role="tabpanel" id="formGroupItem-content">
+				<article class="form-group-article" id="contentListWrapper">
+					<section class="row">
+						<div class="col-sm-7 col-md-7 form-col">
+							<div class="form-item">
+								<span class="form-item-title">标题：</span>
+								<div class="form-item-content">
+									<input class="form-control form-input" name="" data-width="max" placeholder="标题"/>
+									<div class="mt-5 color-light-gray"><small><i class="fa fa-info-circle"></i> 标题在小程序内“加粗高亮显示”</small></div>
+								</div>
+							</div>
+
+							<div class="form-item">
+								<span class="form-item-title">文字内容：</span>
+								<div class="form-item-content">
+									<textarea class="form-control form-input" name="" data-width="max" placeholder="内容"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-5 col-md-5 form-col form-col-min">
+							<div class="form-item mb-0">
+								<span class="form-item-title">图片：</span>
+								<div class="form-item-content">
+									<input type="hidden" name="commodity_cover_src" form-flag="1" />
+									<div class="form-image-wrapper">
+										<span class="image-contain" style="background-image:url(../../../images/upload-default-img.png);"></span>
+									</div>
+									<div class="mt-15">
+										<span class="btn btn-info btn-sm btn-file">
+											<input type="file" name="file-commodity_cover_src" data-value="?type=1" size="1"/>上传图片
+										</span>
+										<p class="mt-5 color-light-gray">
+											<small>仅支持jpg、gif、png</small>
+											<small>大小不超过1MB</small>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-item form-col">
+							<span class="form-item-title">&nbsp;</span>
+							<div class="form-item-content">
+								<span class="btn mc-btn-blue-line btn-sm btn-add-content"><i class="fa fa-plus-circle"></i> 增加内容</span>
+								<span class="btn btn-default btn-sm btn-remove-content"><i class="fa fa-times-circle"></i> 移除内容</span>
+							</div>
+						</div>
+					</section>
+				</article>
+
+			</div>
+
+			<div class="form-group-wrapper">
+				<div class="form-item mt-30 mb-15">
+					<span class="form-item-title">&nbsp;</span>
+					<div class="form-item-content">
+						<button class="btn btn-sm btn-primary btn-big mr-5" id="btnNewFormSubmit" type="button" op-btn="default">保存</button>
+						<button class="btn btn-sm btn-default btn-big" id="btnNewFormCancel" type="button" data-dismiss="modal">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 查看详细 有TABS -->
+	<div class="mc-bg-white border p-15 box-clear view-data-container" id="viewFormContainer-tabs" hidden>
+		<div class="form-header box-clear mb-20 b-b">
+			<div class="mr-10 fl f18"><i class="fa fa-search-plus"></i> 查看商品</div>
+			<ul class="ml-20 fl nav nav-tabs form-header-tabs">
+			<li class="active"><a data-toggle="tab" href="#formGroupItem-base-view">基本信息</a></li>
+			<li><a data-toggle="tab" href="#formGroupItem-content-view">商品内容</a></li>
+		</ul>
+		</div>
+
+		<div class="tab-content">
+			<div class="tab-pane form-group-wrapper active" role="tabpanel" id="formGroupItem-base-view">
+				<div class="form-item">
+					<span class="form-item-title">商品封面：</span>
+					<div class="form-item-content">
+						<div class="form-image-wrapper">
+							<span class="image-contain" style="background-image:url(../../../images/upload-default-img.png);"></span>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item">
+					<span class="form-item-title">商品名称：</span>
+					<div class="form-item-content">
+						商品名称
+					</div>
+				</div>
+
+				<div class="form-item">
+					<span class="form-item-title">禁用：</span>
+					<div class="form-item-content form-item-checkbox">
+						否
+					</div>
+				</div>
+
+				<div class="form-item">
+					<span class="form-item-title">总库存：</span>
+					<div class="form-item-content">
+						100
+					</div>
+				</div>
+
+				<div class="form-item">
+					<span class="form-item-title">剩余库存：</span>
+					<div class="form-item-content">
+						88
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item">
+					<span class="form-item-title">商品图集：</span>
+					<div class="form-item-content">
+						<ul class="form-img-list m-0 box-clear" id="formImgList-view">
+							<li>
+								<p style="background-image:url(../../../images/upload-default-img.png);" class="image-contain"></p>
+							</li>
+							<li>
+								<p style="background-image:url(../../../images/upload-default-img.png);" class="image-contain"></p>
+							</li>
+						</ul>
+
+						<img name="img-commodity_cover_src" src="../../../images/upload-default-img.png" class="img-thumbnail" style="display:none;"/>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item">
+					<span class="form-item-title">描述：</span>
+					<div class="form-item-content">
+						这里是描述内容，这里是描述内容这里是描述内容。
+					</div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">备注：</span>
+					<div class="form-item-content">
+						暂无备注信息
+					</div>
+				</div>
+
+				<hr>
+			</div>
+
+			<div class="tab-pane form-group-wrapper" role="tabpanel" id="formGroupItem-content-view">
+				<article class="form-group-article" id="contentListWrapper-view">
+					<section class="row">
+						<div class="col-sm-7 col-md-7 form-col">
+							<div class="form-item">
+								<span class="form-item-title">标题：</span>
+								<div class="form-item-content">
+									<div>标题</div>
+									<div class="mt-5 color-light-gray"><small><i class="fa fa-info-circle"></i> 标题在小程序内“加粗高亮显示”</small></div>
+								</div>
+							</div>
+
+							<div class="form-item">
+								<span class="form-item-title">文字内容：</span>
+								<div class="form-item-content">
+									这里是文字内容这里是文字内容这里是文字内容，这里是文字内容这里是文字内容。这里是文字内容这里是文字内容，这里是文字内容，这里是文字内容。这里是文字内容。
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-5 col-md-5 form-col form-col-min">
+							<div class="form-item mb-0">
+								<span class="form-item-title">图片：</span>
+								<div class="form-item-content">
+									<div class="form-image-wrapper">
+										<span class="image-contain" style="background-image:url(../../../images/upload-default-img.png);"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</article>
+
+			</div>
+
+			<div class="form-group-wrapper">
+				<div class="form-item mt-30 mb-15">
+					<span class="form-item-title">&nbsp;</span>
+					<div class="form-item-content">
+						<button class="btn btn-sm btn-default btn-big" id="btnViewFormClose-tabs" type="button">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 新增操作 -->
+	<div class="mc-bg-white border p-15 box-clear" id="newFormContainer-2" hidden>
+		<div class="form-header box-clear mb-30 b-b">
+			<div class="mr-10 fl f18"><i class="fa fa-plus-square"></i> 新增分类</div>
+		</div>
+
+		<div class="tab-pane form-group-wrapper">
+			<div class="row box-clear">
+				<div class="col-xs-7 col-sm-6 col-md-5 fl">
+					<div class="form-item">
+						<span class="form-item-title">分类名称：</span>
+						<div class="form-item-content">
+							<input type="text" class="form-control form-input" data-width="normal" name="shop_name" data-not-null="1" placeholder="分类名称">
+						</div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">禁用：</span>
+						<div class="form-item-content">
+							<select class="form-control" data-width="normal">
+								<option>禁用</option>
+								<option>上线</option>
+								<option>待上线</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">开始时间：</span>
+						<div class="form-item-content">
+							<input type="text" class="laydate-icon" data-width="normal" name="" placeholder="开始时间" readonly/>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">结束时间：</span>
+						<div class="form-item-content">
+							<input type="text" class="laydate-icon" data-width="normal" name="" placeholder="结束时间" readonly/>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-5 col-sm-6 col-md-7 fl">
+					<span class="form-item-title">封面：</span>
+					<div class="form-item-content">
+						<input type="hidden" name="commodity_cover_src" form-flag="1" />
+						<div class="form-image-wrapper">
+							<span class="image-contain" style="background-image:url(../../../images/upload-default-img.png);"></span>
+						</div>
+						<div class="mt-15 color-light-gray">
+								<span class="btn btn-info btn-sm btn-file">
+									<input type="file" name="file-commodity_cover_src" data-value="?type=1" size="1"/>
+									上传图片
+								</span>
+							<p class="mt-5">
+								<small>仅支持jpg、gif、png</small>
+								<small>大小不超过1MB</small>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<hr>
+			<div class="form-item">
+				<span class="form-item-title">描述：</span>
+				<div class="form-item-content">
+					<textarea class="form-control form-input" name="description"data-width="max" placeholder="描述内容"></textarea>
+				</div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">备注：</span>
+				<div class="form-item-content">
+					<textarea class="form-control form-input" name="remark" data-width="max" placeholder="备注信息"></textarea>
+				</div>
+			</div>
+
+			<hr>
+			<div class="form-item mt-30 mb-15">
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<button class="btn btn-sm btn-primary btn-big mr-5" id="btnNewFormSubmit-2" type="button" op-btn="default">保存</button>
+					<button class="btn btn-sm btn-default btn-big" id="btnNewFormCancel-2" type="button" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 查看详细 -->
+	<div class="mc-bg-white border p-15 box-clear view-data-container" id="viewFormContainer" hidden>
+		<div class="form-header box-clear mb-30 b-b">
+			<div class="mr-10 fl f18"><i class="fa fa-search-plus"></i> 查看分类</div>
+		</div>
+
+		<div class="tab-pane form-group-wrapper">
+			<div class="form-item">
+				<span class="form-item-title">分类封面：</span>
+				<div class="form-item-content">
+					<div class="form-image-wrapper">
+						<span class="image-contain" style="background-image:url(../../../images/upload-default-img.png);"></span>
+					</div>
+				</div>
+			</div>
+
+			<hr>
+			<div class="form-item">
+				<span class="form-item-title">分类名称：</span>
+				<div class="form-item-content">
+					分类名称
+				</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">禁用：</span>
+				<div class="form-item-content">
+					待上线
+				</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">开始时间：</span>
+				<div class="form-item-content">
+					2017年6月1日
+				</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">结束时间：</span>
+				<div class="form-item-content">
+					2017年12月12日
+				</div>
+			</div>
+
+			<hr>
+			<div class="form-item">
+				<span class="form-item-title">描述：</span>
+				<div class="form-item-content">
+					将于7月31日上映的电影《闺蜜》日期曝光主题曲MV，这首由女主角陈意涵携两名“闺蜜”薛凯琪、杨子姗一起演绎的《一起老去》讲述了姐妹之间无法割舍的绵绵情意，让不少观众“听到泪奔”，而首次开嗓的陈意涵更是受到一致赞扬，称其甜糯的独特声线相当暖心。
+				</div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">备注：</span>
+				<div class="form-item-content">
+					暂无备注
+				</div>
+			</div>
+
+			<hr>
+			<div class="form-item mt-30 mb-15">
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<button class="btn btn-sm btn-default btn-big" id="btnViewFormClose" type="button">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 内容模块 模板 -->
+	<script type="text/html" id="newContentTemplate">
+		<section class="row" style="display:none;">
+			<div class="col-sm-7 col-md-7 form-col">
+				<div class="form-item">
+					<span class="form-item-title">标题：</span>
+					<div class="form-item-content">
+						<input class="form-control form-input" name="" data-width="max" placeholder="标题"/>
+						<div class="mt-5 color-light-gray"><small><i class="fa fa-info-circle"></i> 标题在小程序内“加粗高亮显示”</small></div>
+					</div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">文字内容：</span>
+					<div class="form-item-content">
+						<textarea class="form-control form-input" name="" data-width="max" placeholder="内容"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-5 col-md-5 form-col form-col-min">
+				<div class="form-item mb-0">
+					<span class="form-item-title">图片：</span>
+					<div class="form-item-content">
+						<input type="hidden" name="commodity_cover_src" form-flag="1" />
+						<div class="form-image-wrapper">
+							<span class="image-contain" style="background-image:url(../../../images/upload-default-img.png);"></span>
+						</div>
+						<div class="mt-15">
+							<span class="btn btn-info btn-sm btn-file">
+								<input type="file" name="file-commodity_cover_src" data-value="?type=1" size="1"/>上传图片
+							</span>
+							<p class="mt-5 color-light-gray">
+								<small>仅支持jpg、gif、png</small>
+								<small>大小不超过1MB</small>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-item form-col">
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<span class="btn mc-btn-blue-line btn-sm btn-add-content"><i class="fa fa-plus-circle"></i> 增加内容</span>
+					<span class="btn btn-default btn-sm btn-remove-content"><i class="fa fa-minus-circle"></i> 移除内容</span>
+				</div>
+			</div>
+		</section>
+	</script>
+
+
+	<script type="text/javascript" src="../../../scripts/jquery.min.js"></script>
+	<!--<script type="text/javascript" src="../../../scripts/gritter/js/jquery.gritter.js"></script>-->
+	<script type="text/javascript">
+		$.include('scripts/global/app.loader-js.js');
+	</script>
+	<script type="text/javascript">
+		/* 添加 */
+		$('#btnShowAddBox').on('click', function () {
+			$('#newFormContainer').show().siblings('.page-list-container').hide();
+		});
+		$('#btnNewFormCancel').on('click', function () {
+			$('#newFormContainer').hide().siblings('.page-list-container').show();
+		});
+
+
+		/* 添加 2 */
+		$('#btnShowAddBox-2').on('click', function () {
+			$('#newFormContainer-2').show().siblings('.page-list-container').hide();
+		});
+		$('#btnNewFormCancel-2').on('click', function () {
+			$('#newFormContainer-2').hide().siblings('.page-list-container').show();
+		});
+
+
+		/* 筛选 */
+		$('#btnFilter').on('click', function () {
+			$('#formBox').slideToggle();
+		});
+
+
+		/*
+		* 表格
+		* */
+		$('.mc-list-table[data-mode=edit]>tbody').on('change', ':checkbox', function () { //单选
+			var checked = $(this)[0].checked;
+			var $tr = $(this).getParentByTagName('tr');
+			if(checked) {
+				$tr.addClass('active');
+			} else {
+				$tr.removeClass('active');
+				$tr.parent().siblings('thead').find(':checkbox')[0].checked = false;
+			}
+		})
+		.siblings('thead').on('change', ':checkbox', function () { //全选
+			var checked = !$(this)[0].checked;
+			var $tbody = $(this).getParentByTagName('thead').siblings('tbody');
+			if(checked) {
+				$tbody.children().removeClass('active').each(function () {
+					$(this).children(':first').find(':checkbox')[0].checked = false;
+				});
+			} else {
+				$tbody.children().addClass('active').each(function () {
+					$(this).children(':first').find(':checkbox')[0].checked = true;
+				});
+			}
+		});
+
+
+		//查看详细
+		$('#table').on('click', '.btn-view', function () {
+			$('#viewFormContainer').show().siblings('.page-list-container').hide();
+		});
+		$('#btnViewFormClose').on('click', function () {
+			$('#viewFormContainer').hide().siblings('.page-list-container').show();
+		});
+
+		//查看详细 有TABS
+		$('#table-2').on('click', '.btn-view', function () {
+			$('#viewFormContainer-tabs').show().siblings('.page-list-container').hide();
+		});
+		$('#btnViewFormClose-tabs').on('click', function () {
+			$('#viewFormContainer-tabs').hide().siblings('.page-list-container').show();
+		});
+
+
+		// 批量移除
+		$('#btnListRemove').on('click', function () {
+			var idList = [];
+			$('#table-2>tbody').children('.active').each(function () { //循环遍历TR
+				var checked = $(this).children(':first').find(':checkbox')[0].checked;
+				var id = $(this).data('id');
+				if(checked) {
+					idList.push(id);
+					$(this).parent().siblings('thead').find(':checkbox')[0].checked = false;
+					$(this).remove();
+				}
+			});
+			if(!idList.length) return;
+
+			console.log('删除了一些', idList);
+		});
+
+		// 批量禁用
+		$('#btnListDisabled').on('click', function () {
+			var idList = [];
+			$('#table-2>tbody').children('.active').each(function () {
+				var checked = $(this).children(':first').find(':checkbox')[0].checked;
+				var id = $(this).data('id');
+				if(checked) {
+					idList.push(id);
+				}
+			});
+			if(!idList.length) return;
+
+			console.log('禁用了一些', idList);
+		});
+
+
+		/* 图集, 单张移除 */
+		$('#formImgList').on('click', '.fa-remove', function () {
+			var $ul = $(this).getParentByTagName('ul');
+			$(this).parent().remove();
+			if(!$ul.children('li').length) {
+				$ul.siblings('.img-thumbnail').show();
+			}
+		});
+
+
+		/* 内容块 */
+		$('#contentListWrapper').on('click', '.btn-add-content', function () {
+			$(template('newContentTemplate', {})).insertAfter($(this).getParentByTagName('section')).slideToggle();
+		}).on('click', '.btn-remove-content', function () {
+			var $section = $(this).getParentByTagName('section');
+			if($section.siblings('section').length) {
+				$section.slideToggle(function () {
+					$(this).remove()
+				});
+			} else {
+				app.show({
+					type: 2,
+					content: '至少要有一个内容块!'
+				});
+			}
+		});
+	</script>
+</body>
+</html>

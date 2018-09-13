@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页Banner - 靠谱</title>
+	<link href="../../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../styles/animate.min.css?v=3.1.0" rel="stylesheet">
+    <link href="../../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../../styles/common.css" rel="stylesheet">
+	<style>
+		.form-item { min-height:inherit; margin-bottom:15px;}
+	</style>
+</head>
+<body class="body-bg-gray p-10">
+
+	<div id="viewContainer">
+		<div class="mc-bg-white box-clear border view-data-container">
+			<div class="pl-20 pt-15 pb-15 b-b">首页广告Banner图集</div>
+			<div class="p-25 form-group-wrapper view-data-mode">
+
+				<div class="shop-photos-wrapper mt-10">
+					<div class="shop-images-wrapper">
+						<ul class="photos-ul form-img-list m-0 box-clear">-</ul>
+					</div>
+				</div>
+
+				<div>
+					<hr>
+					<button type="button" class="btn btn-primary btn-big" id="btnEdit" disabled="disabled"><i class="fa fa-pencil"></i> 修改</button>
+					<p class="color-light-gray f12 mt-5"><i class="fa fa-info-circle"></i> 图片展示在小程序首页，您只需要上传1张。</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="mc-bg-white mt-10 p-25 box-clear border banner-default-wrapper" hidden>
+			<div>Banner示例展示</div>
+			<div class="color-gray f12 mb-15">图集将在小程序首页焦点图区域展示:</div>
+			<p><img id="bannerDefault" src=""/> </p>
+		</div>
+	</div>
+
+
+	<!-- 修改小程序资料 -->
+	<div class="mc-bg-white border p-15 box-clear" id="editContainer" hidden>
+		<input type="file" class="hide" id="fileUploadImage"/>
+
+		<div class="form-header box-clear mb-30 b-b">
+			<div class="mr-10 fl f16"><i class="fa fa-pencil-square"></i> 修改首页广告图</div>
+		</div>
+
+		<div class="form-group-wrapper shop-photos-wrapper">
+			<div class="form-item">
+				<span class="form-item-title">首页广告图：</span>
+				<div class="form-item-content">
+					<ul class="form-img-list m-0 box-clear" id="formImgList"></ul>
+
+					<img src="../../../images/upload-default-img.png" class="img-thumbnail mb-15"/>
+					<div class="color-light-gray">
+						<span class="btn btn-info btn-sm btn-file"><input type="file" id="fileImages" data-count="1"/>上传图片</span>
+						<p class="mt-5">
+							<small>仅支持jpg、gif、png，大小不超过<span data-bind="fileSize"></span></small>
+							<small class="block">建议尺寸 <span class="color-orange" data-bind="#size"></span></small>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr>
+		<div class="form-item">
+			<span class="form-item-title">&nbsp;</span>
+			<div class="form-item-content">
+				<button type="button" class="btn btn-primary btn-big mr-5" id="btnSave">保存</button>
+				<button type="button" class="btn btn-default btn-big" id="btnCancel">取消</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- 图集模板 -->
+	<script type="text/html" id="photosTemplate">
+		{{each result as item}}<li>
+			<input type="hidden" name="file_resource_name" value="{{item.file_resource_name}}"/>
+			<input type="hidden" name="file_resource_name_string" value="{{item.file_resource_name_string}}"/>
+			<input type="hidden" name="file_resource_id" value="{{item.file_resource_id}}"/>
+			<p class="image-contain" style="background-image:url({{item.file_resource_name_string || defaultImageUrl}});"></p>
+			<i class="fa fa-remove"></i>
+		</li>{{/each}}
+	</script>
+
+	<!-- 查看 - 图集模板 -->
+	<script type="text/html" id="viewPhotosTemplate">
+		{{each result as item}}<li>
+			<p class="image-contain" style="background-image:url({{item.file_resource_name_string || defaultImageUrl}});"></p>
+		</li>{{/each}}
+	</script>
+
+
+	<script type="text/javascript" src="../../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: true,
+            files: [
+                '../js/store-banner.js'
+            ]
+        });
+	</script>
+</body>
+</html>

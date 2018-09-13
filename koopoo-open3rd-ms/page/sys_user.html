@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>后台用户信息</title>
+	<script src="../scripts/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$.include('../scripts/global/app.loader-css.js?v='+new Date().format('yyyyMMddHHmm'));
+	</script>
+</head>
+<body>
+	<div id="MainPart" win-flag="1">
+		<form class="form-horizontal form-search-wrapper" id="SearchCustomForm" op-role="form">
+			<div class="form-group-sm">
+				<div class="row form-group-content" id="formGroupContent">
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+						<label class="control-label search-label">管理用户名称</label>
+						<div class="search-control">
+							<input class="form-control" style="width: 100%;" name="user_name" form-flag="1">
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+						<label class="control-label search-label">角色</label>
+						<div class="search-control">
+							<select class="form-control" style="width: 100%;" name="role_id" form-flag="1" op-role="s2-1-0">
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+						<label class="control-label search-label">创建时间(始)</label>
+						<div class="search-control">
+							<input class="laydate-icon" style="width: 100%;" id="SearchCustomForm-create_time_begin" name="create_time_begin"
+								   form-flag="1" readonly/>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+						<label class="control-label search-label">创建时间(终)</label>
+						<div class="search-control">
+							<input class="laydate-icon" style="width: 100%;" id="SearchCustomForm-create_time_end" name="create_time_end"
+								   form-flag="1" readonly/>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="search-btn-pack">
+					<button class="btn btn-sm btn-info" id="SearchCustomForm-queryBtn" type="button" op-btn="default">
+						<i class="glyphicon glyphicon-search"></i>查询
+					</button>
+					<button class="btn btn-sm btn-warning" id="SearchCustomForm-resetBtn" type="button">
+						<i class="glyphicon glyphicon-refresh"></i>重置
+					</button>
+				</div>
+			</div>
+		</form>
+
+		<div class="page-main-wrapper" id="pageMainWrapper">
+			<table id="GridCustomTable"></table>
+			<div id="GridCustomPager"></div>
+		</div>
+
+	</div><!-- /#MainPart -->
+
+	<!-- 信息新增操作模态框 -->
+	<div id="AddCustomPart" win-flag="1">
+		<div class="col-md-12">
+			<div class="part-header">
+				<h4><i class="glyphicon glyphicon-cog"></i>新增代理商</h4>
+			</div>
+			<form class="form-add" id="AddCustomForm" op-role="form">
+
+				<div class="form-group form-group-sm">
+					<div class="row">
+						<div class="col-md-3">
+							<label>管理用户名称</label>
+							<input class="form-control" name="user_name" type="text" form-flag="1"/>
+						</div>
+						<div class="col-md-3">
+							<label>管理用户密码</label>
+							<input class="form-control" name="user_pwd" type="password" form-flag="1"/>
+						</div>
+						<div class="col-md-3">
+							<label>是否激活</label>
+							<select name="status" class="form-control" style="width: 100%;" form-flag="1" op-role="s2-1-0">
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group form-group-sm">
+					<div class="row">
+						<div class="col-md-12">
+							<label>备注</label>
+							<textarea class="form-control" name="remark" rows="3" form-flag="1" ></textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="part-footer">
+					<button class="btn btn-sm btn-primary" id="AddCustomForm-saveBtn" op-btn="default" type="button">保存</button>
+					<button class="btn btn-sm btn-default" id="AddCustomForm-cancelBtn" data-dismiss="modal" type="button" >取消</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- 信息编辑操作模态框 -->
+	<div id="EditCustomPart" win-flag="1">
+		<div class="col-md-12">
+			<div class="part-header">
+				<h4><i class="glyphicon glyphicon-cog"></i>编辑</h4>
+			</div>
+			<form id="EditCustomForm" class="form-edit" op-role="form">
+				<input name="user_id" type="hidden" form-flag="1"/>
+				<div class="form-group form-group-sm">
+					<div class="row">
+						<div class="col-md-3">
+							<label>管理用户名称</label>
+							<input class="form-control" name="user_name" type="text" form-flag="1"/>
+						</div>
+						<div class="col-md-3">
+							<label>管理用户密码</label>
+							<input class="form-control" name="user_pwd" type="password" form-flag="1" value=""/>
+						</div>
+						<div class="col-md-3">
+							<label>角色</label>
+							<select name="role_id" class="form-control" style="width: 100%;" op-role="s2-1-0" disabled>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<label>是否激活</label>
+							<select name="status" class="form-control" style="width: 100%;" form-flag="1" op-role="s2-1-0">
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group form-group-sm">
+					<div class="row">
+						<div class="col-md-3">
+							<label>创建时间</label>
+							<input class="form-control" name="create_time" type="text" form-flag="1" readonly/>
+						</div>
+						<div class="col-md-3">
+							<label>修改时间</label>
+							<input class="form-control" name="modify_time" type="text" form-flag="1" readonly/>
+						</div>
+					</div>
+				</div>
+				<div class="form-group form-group-sm">
+					<div class="row">
+						<div class="col-md-12">
+							<label>备注</label>
+							<textarea class="form-control" name="remark" rows="3" form-flag="1" ></textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="part-footer">
+					<button class="btn btn-sm btn-primary" id="EditCustomForm-saveBtn" type="button" op-btn="default">保存</button>
+					<button class="btn btn-sm btn-default" id="EditCustomForm-cancelBtn" data-dismiss="modal" type="button">取消</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- 信息详情(通用) -->
+	<div id="GlobalDetailPart" win-flag="1">
+		<div class="col-md-12">
+		<div class="part-header">
+			<h4><i class="glyphicon glyphicon-cog"></i>查看行记录</h4>
+		</div>
+		<form class="form-detail" id="GlobalDetailForm" op-role="form">
+			<div class="part-body">
+			</div>
+
+			<div class="part-footer">
+				<button class="btn btn-sm btn-default" id="GlobalDetailForm-cancelBtn" data-dismiss="modal" type="button">关闭</button>
+			</div>
+		</form>
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	var jsfiles = [
+		'../scripts/local/sys_user.js?v=1'
+	];
+	$.include('../scripts/global/app.loader-js.js?v='+new Date().format('yyyyMMddHHmm'));
+</script>

@@ -1,0 +1,163 @@
+@charset "utf-8";
+body {
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #676a6c;
+    overflow-x: hidden
+}
+
+body, html {
+    height: 100%;
+}
+
+a {
+    cursor: pointer
+}
+
+a:focus, a:hover {
+    text-decoration: none
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #AAA;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+.gray-bg {
+    background-color: #f3f3f4
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #AAA;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+.loginscreen.middle-box {
+    width: 300px;
+}
+
+.middle-box {
+    max-width: 400px;
+    z-index: 100;
+    margin: 0 auto;
+    padding-top: 40px
+}
+
+.middle-box h1 {
+    /*font-size: 170px*/
+}
+
+.wrapper .middle-box {
+    margin-top: 140px
+}
+
+.form-signin {
+    margin-top: 15px;
+}
+.form-signin input[name="random_code"] {
+    width:78%;
+    display:inline-block;
+}
+.form-signin img[id="image_code"] {
+    height:32px;width:20%;display:inline-block;cursor:pointer;margin-top:-3px;
+}
+
+.full-width {
+    width: 100% !important
+}
+
+.text-muted {
+    color: #888
+}
+
+h3 {
+    font-size: 16px;
+    margin-top: 5px;
+    font-weight: 600
+}
+
+a:focus {
+    outline: 0
+}
+
+.form-control, .form-control:focus, .has-error .form-control:focus, .has-success .form-control:focus, .has-warning .form-control:focus,
+.navbar-collapse, .navbar-form, .navbar-form-custom .form-control:focus, .navbar-form-custom .form-control:hover,
+.open .btn.dropdown-toggle, .panel, .popover, .progress, .progress-bar {
+    box-shadow: none
+}
+
+.form-control, .single-line {
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    padding: 6px 12px;
+    -webkit-transition: border-color .15s ease-in-out 0s, box-shadow .15s ease-in-out 0s;
+    transition: border-color .15s ease-in-out 0s, box-shadow .15s ease-in-out 0s;
+    width: 100%;
+    font-size: 14px
+}
+
+.form-control:focus, .single-line:focus {
+    border-color: #1ab394 !important
+}
+
+.logo-name {
+    color: #e6e6e6;
+    font-size: 120px;
+    font-weight: 800;
+    letter-spacing: -10px;
+    background: url("../../img/logo-sig.png") no-repeat center;
+    margin-bottom: 0
+}
+
+.btn-primary {
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #FFF
+}
+
+.btn-primary.active, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open .dropdown-toggle.btn-primary {
+    background-color: #18a689;
+    border-color: #18a689;
+    color: #FFF
+}
+
+.btn-primary.active, .btn-primary:active, .open .dropdown-toggle.btn-primary {
+    background-image: none
+}
+
+.btn-primary.active[disabled], .btn-primary.disabled, .btn-primary.disabled.active, .btn-primary.disabled:active, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled], .btn-primary[disabled]:active, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary.active, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+    background-color: #1dc5a3;
+    border-color: #1dc5a3
+}
+
+.m-b {
+    margin-bottom: 15px;
+}
+
+.no-padding {
+    padding: 0 !important
+}
+

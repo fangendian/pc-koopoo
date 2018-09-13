@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>概况 - 靠谱</title>
+	<link href="../../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../../styles/common.css" rel="stylesheet">
+    <link href="../../../styles/main.css" rel="stylesheet">
+	<style>
+		.page-left { background-color:#34495e;}
+		.nav-item { border-bottom: 1px solid rgba(0,0,0,0.14); border-top: 1px solid rgba(255,255,255,0.07);}
+		.nav-title { color:rgba(255,255,255,0.75); font-weight:400;}
+		.nav-item li {}
+		.nav-title[data-href]:hover, .nav-item li[data-href]:hover { background-color:rgba(0,0,0,0.08); color:rgba(255, 255, 255,0.85);}
+		.nav-item > .nav-title.active, .nav-item li.active { background-color:rgba(0, 0, 0,0.35)!important; color:white!important; font-weight:400;}
+		.nav-item li.active.point-red:after { background-color:white;}
+	</style>
+</head>
+<body>
+	<div class="page-left">
+		<div class="header-logo text-center">
+			<p class="logo-img img-circle" id="logoImg" style="background-image:url('../../../../img/logo-sig.png')"></p>
+		</div>
+
+		<nav class="main-nav custom-scroll-bar" id="nav">
+			<div class="main-nav-container" id="navWrapper">
+				<div class="main-nav-content"></div>
+			</div>
+		</nav>
+
+		<div class="main-user text-center" id="btnMainUser">
+			<p class="main-user-title"><i class="fa fa-user-circle"></i> <span data-bind="nickname">昵称</span></p>
+			<div class="main-user-box" id="mainUserBox" hidden>
+				<div>
+					<p class="strong" data-bind="nickname">昵称</p>
+					<p data-bind="mobile_no">-</p>
+				</div>
+				<a class="user-item user-item-first" href="../../../page/user/main.html">切换小程序</a>
+				<a class="user-item" href="../../../page/user/profiles.html">帐号设置</a>
+				<a class="user-item" href="javascript:void(0);" id="logout">退出</a>
+			</div>
+		</div>
+	</div>
+
+    <div class="main-container">
+		<div class="caption">
+			<span>
+				<small class="pl-5 pr-5 mr-5 caption-shop-name" data-bind="template_name"></small>
+				<small data-bind="shop_name"></small>
+			</span>
+			<p class="inline" id="navLocation"><span>靠谱</span></p>
+			<div class="btn-show-page-right fr" id="btnShowPageRight"><i class="fa fa-angle-double-left"></i> 展开右侧</div>
+		</div>
+		<div class="content-wrapper">
+			<iframe frameborder="no" src="" class="body-bg-gray" id="mainIFrame"></iframe>
+		</div>
+    </div>
+
+	<div class="page-right custom-scroll-bar" id="pageRight"></div>
+
+
+	<script type="text/html" id="navTemplate">
+		{{each listData as item index}}
+		<div class="nav-item">
+			<p class="nav-title {{item.active ? 'active' : ''}} {{item.className}}" data-title="{{item.name}}" data-id="{{item.id}}" {{if item.href}}data-href="{{item.href}}"{{/if}}>
+				<span class="fa {{item.iconClass || 'fa-navicon'}}"></span><span class="nav-label">{{item.name}}</span>
+				{{if item.children}}<i class="fa fa-angle-down"></i>{{/if}}
+			</p>
+			{{if item.children}}<ul>
+				{{each item.children as childItem}}
+					<li class=" {{childItem.active ? 'active' : ''}} {{childItem.className}}" data-title="{{childItem.name}}" data-id="{{childItem.id}}" {{if childItem.href}}data-href="{{childItem.href}}"{{/if}}>
+					<span class="nav-label">{{childItem.name}}</span>
+				</li>{{/each}}
+			</ul>{{/if}}
+		</div>
+		{{/each}}
+	</script>
+
+	<script type="text/javascript" src="../../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            files: [
+                '../../../scripts/global/iscroll.min.js',
+                '../../../scripts/local/store-main.js',
+                '../js/main.js'
+            ]});
+	</script>
+</body>
+</html>

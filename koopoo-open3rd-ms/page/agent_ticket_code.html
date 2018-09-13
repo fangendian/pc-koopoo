@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>管理店铺</title>
+	<link href="../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../scripts/gritter/css/jquery.gritter.min.css" rel="stylesheet">
+    <link href="../styles/common_new.css" rel="stylesheet">
+	<link href="../styles/animate.min.css" rel="stylesheet">
+</head>
+<body class="body-bg-gray p-10">
+
+<div class="page-list-container">
+	<div class="search-wrapper mc-bg-white border">
+		<div class="p-15 box-clear">
+			<div class="fl">
+				<button class="btn btn-sm btn-primary mr-5" id="btnShowAddBox"><i class="fa fa-plus-circle"></i> 添加</button>
+			</div>
+			<div class="ml-5 fl">
+				<div class="input-group search-bar box-clear fl" id="searchBar">
+					<i class="fa fa-search"></i>
+					<input type="text" name="keyword" class="form-control" placeholder="票券码查询">
+					<span class="search-btn-reset"><i class="fa fa-remove"></i></span>
+					<span class="input-group-addon btn btn-default" id="btnSearch">搜索</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mc-bg-white mt-10 mb-10 border">
+		<div class="page-main-wrapper p-15">
+			<table class="mc-list-table" id="categoriesTable" data-mode="edit">
+				<thead>
+				<tr>
+					<td width="30"><input type="checkbox" data-checkbox-type="all"></td>
+					<td width="60">代理商标识</td>
+					<td width="100">票券码</td>
+					<td width="100">已使用</td>
+					<td width="100">已删除</td>
+					<td width="100">使用时间</td>
+					<td width="100">生成时间</td>
+					<td width="50">操作</td>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+
+			<div class="box-clear pt-20">
+				<div class="fl">
+					<!--<button class="btn btn-sm btn-danger mr-5" id="btnListRemove" disabled="disabled">批量删除</button>-->
+				</div>
+
+				<div class="fr" id="pageNavWrapper"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 查看详细 -->
+<div class="mc-bg-white border p-15 box-clear view-data-container" id="viewFormContainer" hidden>
+	<div class="form-header box-clear mb-20 b-b">
+		<div class="mr-10 fl f18"><i class="fa fa-search-plus"></i> 查看</div>
+	</div>
+
+	<div class="form-group-wrapper form-view-base">
+		<div class="form-item">
+			<span class="form-item-title">代理商标识：</span>
+			<div class="form-item-content" data-bind="ticket_code_id"></div>
+		</div>
+		<div class="form-item">
+			<span class="form-item-title">票券码：</span>
+			<div class="form-item-content" data-bind="ticket_code"></div>
+		</div>
+		<div class="form-item">
+			<span class="form-item-title">已使用：</span>
+			<div class="form-item-content" data-bind="is_used"></div>
+		</div>
+		<div class="form-item">
+			<span class="form-item-title">已删除：</span>
+			<div class="form-item-content" data-bind="is_deleted"></div>
+		</div>
+		<div class="form-item">
+			<span class="form-item-title">使用时间：</span>
+			<div class="form-item-content" data-bind="use_time"></div>
+		</div>
+		<div class="form-item">
+			<span class="form-item-title">生成时间：</span>
+			<div class="form-item-content" data-bind="create_time"></div>
+		</div>
+
+	</div>
+
+	<div class="form-group-wrapper">
+		<div class="form-item mt-30 mb-15">
+			<span class="form-item-title">&nbsp;</span>
+			<div class="form-item-content">
+				<button class="btn btn-sm btn-default btn-big" id="btnViewFormClose" type="button">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 列表模板 -->
+<script type="text/html" id="listTemplate">
+	{{each result as item}}<tr data-id="{{item.ticket_code_id}}">
+		<td><input type="checkbox"></td>
+		<td><span class="text-cover">{{item.sys_user_id}}</span></td>
+		<td><span class="text-cover color-light-gray">{{item.ticket_code}}</span></td>
+		<td><span class="text-cover">{{item.is_used}}</span></td>
+		<td><span class="text-cover">{{item.is_deleted}}</span></td>
+		<td><span class="text-cover">{{item.use_time}}</span></td>
+		<td><span class="text-cover">{{item.create_time}}</span></td>
+		<td><span class="mc-btn-text btn-view">查看</span></td>
+	</tr>{{/each}}
+	{{if !result.length}}<tr><td colspan="8" class="text-center">暂无内容</td></tr>{{/if}}
+</script>
+
+<script type="text/javascript" src="../scripts/jquery.min.js"></script>
+<script type="text/javascript" src="../scripts/bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="../scripts/jqueryfileupload/js/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../scripts/jqueryfileupload/js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="../scripts/jqueryfileupload/js/jquery.fileupload-process.js"></script>
+
+<script type="text/javascript" src="../scripts/global/jquery.form.min.js"></script>
+<script type="text/javascript" src="../../js/env.config.js"></script>
+<script type="text/javascript" src="../scripts/global/app.common.js"></script>
+
+<script type="text/javascript" src="../scripts/local/common-shop.js"></script>
+<script type="text/javascript" src="../scripts/local/agent_ticket_code.js"></script>
+</body>
+</html>
+

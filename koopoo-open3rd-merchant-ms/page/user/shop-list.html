@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择小程序 - 靠谱</title>
+    <meta name="keywords" content="靠谱-微信第三方平台管理系统">
+    <meta name="description" content="靠谱-微信第三方平台管理系统，基于Bootstrap3最新版本开发的扁平化系统，使用了Html5+CSS3等现代技术">
+    <link href="../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../scripts/bootstrap/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="../../scripts/fontawesome/css/font-awesome.min.css?v=4.6.3" rel="stylesheet">
+    <link href="../../scripts/gritter/css/jquery.gritter.min.css?v=1.7.4" rel="stylesheet">
+    <link href="../../styles/common.css" rel="stylesheet">
+    <link href="../../styles/common-shop.css" rel="stylesheet">
+    <style>
+        .main-container { min-height:50vh; border:4px solid #f7f7f7;}
+        .main-header { background-color:#f7f7f7;}
+        .main-header a { font-size:12px;}
+        .shop-avatar { width:60px; height:60px; background:white no-repeat center center; background-size:cover;}
+        .shop-list-ul li { width:calc(100% / 3 - 20px); margin:5px 10px; padding:20px 10px 10px 20px; border-top:3px solid orangered; cursor:pointer; float:left;}
+        .shop-list-ul .f14 { color:#333;}
+        .shop-opera { display:none;}
+        .shop-type { padding:0 5px; border:1px solid orangered; color:orangered;}
+        .shop-list-ul li:hover { color:#555;}
+        .shop-list-ul li:hover .shop-opera { display:block;}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="page-container">
+            <div class="header-left fl">
+                <div class="logo fl"><h4><img src="../../../img/logo-sig.png"> <strong>靠谱</strong></h4></div>
+                <div class="header-title ml-10 pl-10 f16 b-l fl">选择小程序</div>
+            </div>
+            <div class="header-right fr">
+                <span data-bind="mobile_no"></span>
+                <span class="mc-btn-text ml-5" id="btnLogout"><i class="glyphicon glyphicon-log-out"></i> 退出</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="main-container mt-15">
+            <div class="main-header p-15 box-clear">
+                <p class="shop-avatar img-circle border fl" style="background-image:url(../../images/user_avatar_default.jpg);"></p>
+                <div class="pl-10 pt-5 fl">
+                    <b class="f14" data-bind="nickname"></b>
+                    <p class="mt-5">
+                        <span data-bind="mobile_no"></span>
+                        <a class="mc-btn-text ml-5" href="profiles.html">账户设置</a>
+                    </p>
+                </div>
+                <div class="mt-10 fr">
+                    <button class="mc-btn mc-btn-blue mc-btn-big" id="btnCreate" disabled="disabled">创建小程序</button>
+                </div>
+            </div>
+            <div class="mt-15 pl-5 pb-10 pr-5 box-clear">
+                <ul class="shop-list-ul color-gray box-clear" id="shopListUl"></ul>
+            </div>
+        </div>
+
+
+        <div class="p-15 page-footer text-center">&copy; 2018 靠谱 版权所有</div>
+    </div>
+
+
+    <script type="text/html" id="shopListTemplate">
+        {{each result as item}}<li class="border" data-id="{{item.shop_id}}" data-t-id="{{item.template_id}}" data-i-id="{{item.industry_id}}" data-a-id="{{item.authorizer_appid}}">
+            <p class="f14 shop-name">{{if item.is_deleted}}<span class="color-light-gray">[已禁用]</span>{{else if !item.template_id}}[未选模板]{{/if}} {{item.shop_name}}</p>
+            <p class="mt-10">主体信息：{{item.authorizer_text}}</p>
+            <p class="mt-5">有效期至：{{item.expired_date}}</p>
+            <div class="box-clear mt-10">
+                <p class="shop-opera fl">
+                    <span class="mc-btn-text btn-edit">设置</span>
+                    <span class="mc-btn-text btn-remove ml-15">删除</span>
+                </p>
+                <span class="shop-type fr">{{item.industry_text}}</span>
+            </div>
+        </li>{{/each}}
+        {{if !result.length}}<p class="content-none">还没有创建小程序~</p>{{/if}}
+    </script>
+
+
+
+    <script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+    <script type="text/javascript">
+        loadJs({
+            files: [
+                '../../scripts/local/shop-list.js'
+            ]});
+    </script>
+</body>
+
+</html>

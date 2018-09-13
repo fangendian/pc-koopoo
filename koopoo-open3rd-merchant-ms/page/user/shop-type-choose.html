@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建小程序 - 靠谱</title>
+    <meta name="keywords" content="靠谱-微信第三方平台管理系统">
+    <meta name="description" content="靠谱-微信第三方平台管理系统，基于Bootstrap3最新版本开发的扁平化系统，使用了Html5+CSS3等现代技术">
+    <link href="../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../scripts/bootstrap/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <!--<link href="scripts/fontawesome/css/font-awesome.min.css?v=4.6.3" rel="stylesheet">-->
+    <!--<link href="../styles/animate.min.css?v=3.1.0" rel="stylesheet">-->
+    <link href="../../scripts/gritter/css/jquery.gritter.min.css?v=1.7.4" rel="stylesheet">
+    <link href="../../styles/common.css" rel="stylesheet">
+    <link href="../../styles/common-shop.css" rel="stylesheet">
+    <style>
+        .shop-types-ul { width:calc(263px * 3); margin:0 auto;}
+        .shop-types-ul li { width:220px; height:300px; margin:20px 20px; text-align:center; float:left;}
+        .item-header { width:100%; height:120px; background-color:gray; font-size:18px; color:white; line-height:120px;}
+        .item-header.type-1 { background-color: #fe6156; background-image: linear-gradient(0deg,#f11b0b,#fe6156)}
+        .item-header.type-2 { background-color: #1b58e5; background-image: linear-gradient(0deg,#1b58e5,#0590fc)}
+        .item-header.type-3 { background-color: #d03b5c; background-image: linear-gradient(0deg,#d03b5c,#ff5f89)}
+        .item-header.type-4 { background-color: #630bf1; background-image: linear-gradient(0deg,#630bf1,#9756fe)}
+        .item-header.type-5 { background-color: #308600; background-image: linear-gradient(0deg,#308600,#4b0)}
+        .item-content { height:180px; border-top:none;}
+        .item-c-t { padding-top:20px; height:120px;}
+        .item-content a { font-size:12px;}
+        .item-content .mc-btn { padding:5px 30px;}
+
+        @media screen and (min-width:1340px){
+            .shop-types-ul { width:calc(263px * 5);}
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="page-container">
+            <div class="header-left fl">
+                <div class="logo fl"><h4><img src="../../../img/logo-sig.png"> <strong>靠谱</strong></h4></div>
+                <div class="header-title ml-10 pl-10 f16 b-l fl">创建小程序</div>
+            </div>
+            <div class="header-right fr">
+                <span data-bind="mobile_no"></span>
+                <a class="ml-5 mr-5" href="main.html">小程序列表</a>
+                <span class="mc-btn-text ml-5" id="btnLogout"><i class="glyphicon glyphicon-log-out"></i> 退出</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="main-container pt-10">
+            <h4 class="mt-30 mb-30 text-center">请选择需要创建的小程序类型</h4>
+        </div>
+    </div>
+
+    <div class="box-clear">
+        <ul class="shop-types-ul" id="shopTypes"></ul>
+    </div>
+
+    <div class="page-container">
+        <div class="p-15 page-footer text-center">&copy; 2018 靠谱 版权所有</div>
+    </div>
+
+
+    <script type="text/html" id="listTemplate">
+        {{each result as item index}}<li>
+            <div class="item-header type-{{index + 1}}">{{item.industry_name}}</div>
+            <div class="item-content border">
+                <p class="item-c-t p-15 text-left">{{item.description}}
+                    <a class="mc-btn-text" href="#">了解更多</a></p>
+                <p>{{if !item.is_deleted}}<span class="mc-btn mc-btn-light" data-type="{{item.industry_id}}">立即开店</span>
+                {{else}}<span class="mc-btn mc-btn-light disabled">即将开放</span>{{/if}}</p>
+            </div>
+        </li>{{/each}}
+    </script>
+
+    <script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+    <script type="text/javascript">
+        loadJs();
+    </script>
+    <script type="text/javascript">
+        shopBase.getUserInfo(function (data) {
+            shopBase.setDataBinds(data);
+            $('#btnLogout').on('click', function () {
+                shopBase.logout();
+            });
+
+            ajax.getAjaxData({
+                url: '/merchant/sysindustrys/list',
+                success: function (data) {
+                    $('#shopTypes').html(template('listTemplate', data));
+                }
+            })
+        });
+
+        $('#shopTypes').on('click', '.mc-btn-light', function () {
+            var type = $(this).data('type');
+            if(type) {
+                location.href = 'shop-create.html?I='+ $(this).data('type');
+            }
+        });
+    </script>
+</body>
+
+</html>

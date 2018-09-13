@@ -1,0 +1,242 @@
+html,body {
+	font-family: "微软雅黑";
+	font-size: 100px;
+	background: #F9FAF9;
+}
+/*轮播图*/
+.swiper-container {
+	width: 100%;
+	height: 2rem;
+	margin: 0.5rem 0;
+}
+.swiper-slide img {
+	width: 100%;
+	height: 100%;
+}
+
+
+/*靠谱闪店*/
+.saass {
+	width: 100%;
+	text-align: center;
+	padding: 0;
+}
+.top-header p {
+	font-size: 0.24rem;
+	margin: 0.15rem 0 0.3rem 0;
+}
+.saas {
+	width: 100%;
+}
+.saas .same {
+	width: 43%;
+	padding-top: 0.15rem;
+	margin-bottom: 0.35rem;
+	display: inline-block;
+}
+.same img {
+	width: 84px;
+	height: 84px;
+}
+.same div p {
+	color: #1692B2;
+	font-size: 0.12rem;
+	margin: 0.15rem 0;
+}
+.same div span  {
+	display: block;
+	font-size: 0.09rem;
+	line-height: 12px;
+}
+.name-top {
+	width: 0.42rem;
+	display: block;
+	margin: 0 auto;
+}
+
+/*使用次数*/
+.howmany {
+	width: 100%;
+	height: 1.2rem;
+	position: relative;
+	margin-bottom: 0.5rem;
+	z-index: 100;
+}
+.howmany>img {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -10;
+}
+.text-detail {
+	color: #fff;
+	text-align: center;
+	margin-top: 0.35rem;
+}
+.text-detail p {
+	font-size: 0.08rem;
+}
+.text-detail p img {
+	width: 7px;
+	height: 7px;
+	display: inline-block;
+	margin: -0.02rem 0.02rem 0 0.02rem;
+}
+.text-detail p span {
+	font-size: 0.3rem;
+}
+/*靠谱好物*/
+.koopoo-goods {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 0.54rem;
+}
+.koopoo-goods .goods {
+	font-size: 0.24rem;
+	margin: 0.15rem 0 0.06rem 0;
+	text-align: center;
+}
+.koopoo-goods .gobal {
+	font-size: 0.1rem;
+	display: block;
+	margin-bottom: 0.4rem;
+	text-align: center;
+}
+.goods-detail {
+	width: 100%;
+	position: relative;
+}
+.goods-detail>img {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -10;
+}
+.goods-detail .goods-box {
+	width: 33%;
+	display: inline-block;
+	margin: 0 5%;
+}
+.goods-box img {
+	width: 66px;
+	height: 66px;
+}
+.goods-box p {
+	font-size: 0.12rem;
+	color: #333333;
+	letter-spacing: 0;
+	text-align: center;
+}
+.goods-box span {
+	font-size: 0.09rem;
+	color: #4D4D4D;
+	letter-spacing: 0;
+	text-align: center;
+	display: block;
+}
+/*靠谱学院*/
+.koopoo-school {
+	width: 100%;
+	height: auto;
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+.koopoo-school .goods {
+	font-size: 0.24rem;
+	margin: 0.15rem 0 0.06rem 0;
+	display: block;
+	text-align: center;
+}
+.koopoo-school .gobal {
+	font-size: 0.1rem;
+	display: block;
+	margin-bottom: 0.4rem;
+	text-align: center;
+}
+.school-right {
+	width: 100%;
+	height: 2.3rem;
+	position: relative;
+}
+.school-right .slide {
+	width: 3.4rem;
+	height: 2.3rem;
+	margin: 0 auto;
+}
+.slide-inner {
+	width: 3.4rem;
+	height: 2.3rem;
+}
+.slide-inner .item-img img {
+	width: 100%;
+}
+.slide-inner .item-img {
+	display: none;
+}
+.slide-inner .show-school {
+	display: block;
+}
+.slide-indicators {
+	position: absolute;
+	bottom: -7%;
+	left: 40%;
+}
+.slide-indicators li {
+	width: 0.3rem;
+	height: 0.03rem;
+	background: #ECECEC;
+	margin-left: 0.1rem;
+	float: left;
+}
+.slide-indicators .cont-show {
+	background: #2ea7e0;
+}
+.school-left {
+	width: 2.6rem;
+	margin: 0.54rem auto 0;
+}
+.school-left>p {
+	font-size: 0.15rem;
+	color: #333;
+	letter-spacing: 0;
+	text-align: center;
+	line-height: 24px;
+	/*display: none;*/
+}
+.school-left>span {
+	font-size: 0.09rem;
+	color: #4D4D4D;
+	letter-spacing: 0;
+	line-height: 0.14rem;
+	display: block;
+	display: none;
+}
+.school-left a {
+	width: 100px;
+	font-size: 0.12rem;
+	color: #FFFFFF;
+	letter-spacing: 0;
+	background-image: linear-gradient(0deg, #2C85DD 0%, #68CEE7 100%);
+	padding: 0.05rem 0.15rem;
+	border-radius: 0.2rem;
+	display: block;
+	margin: 0.2rem auto 0;
+}
+.school-detail .school-left {
+	display: none;
+}
+.school-detail .show-school {
+	display: block;
+}
+/*页面底部*/
+footer {
+	width: 100%;
+	height: 0.8rem;
+	background-image: url(../img/foot.png);
+	background-size: 100% 100%;
+	padding: 0.13rem 0.16rem 0 0.16rem;
+}
+

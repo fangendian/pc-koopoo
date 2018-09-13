@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运送费 - 靠谱</title>
+	<link href="../../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../styles/animate.min.css?v=3.1.0" rel="stylesheet">
+    <link href="../../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../../styles/common.css" rel="stylesheet">
+	<link type="text/css" href="../css/common.css" rel="stylesheet"/>
+	<style>
+		input[disabled] { color:#333;}
+	</style>
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="mc-bg-white border p-15 box-clear view-data-container" id="viewContainer">
+
+		<div class="form-header box-clear mb-30 b-b">
+			<div class="mr-10 fl f16"><i class="fa fa-pencil-square"></i> 设置运费（配送费）</div>
+		</div>
+
+		<div class="form-group-wrapper view-data-mode">
+			<div class="form-item view-data-container">
+				<span class="form-item-title">小程序名称：</span>
+				<div class="form-item-content strong" data-bind="shop_name">-</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">起送金额：</span>
+				<div class="form-item-content color-red">
+					￥<span data-bind="munimum_delivery_price" data-default-value="0"></span>
+				</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">统一运费：</span>
+				<div class="form-item-content color-red">
+					￥<span data-bind="unified_delivery_fees" data-default-value="0"></span>
+				</div>
+			</div>
+
+			<div class="form-item">
+				<span class="form-item-title">超额免运费：</span>
+				<div class="form-item-content color-red">
+					￥<span data-bind="exceeds_price_free" data-default-value="0"></span>
+				</div>
+			</div>
+		</div>
+
+
+		<hr>
+		<div class="form-item">
+			<span class="form-item-title">&nbsp;</span>
+			<div class="form-item-content">
+				<button type="button" class="btn btn-default btn-big mr-5" id="btnEdit"><i class="fa fa-pencil"></i> 修改</button>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 修改运费 -->
+	<div class="mc-bg-white border p-15 box-clear" id="editContainer" hidden>
+		<div class="form-header box-clear mb-30 b-b">
+			<div class="mr-10 fl f16"><i class="fa fa-pencil-square"></i> 修改小程序资料</div>
+		</div>
+
+		<div class="form-group-wrapper">
+			<div class="form-item">
+				<span class="form-item-title"><span class="color-red">*</span> 起送金额：</span>
+				<div class="form-item-content">
+					<input type="text" class="form-control form-input" data-width="normal" data-bind="munimum_delivery_price" name="munimum_delivery_price" data-type="float" data-not-null="1" data-default-value="0" placeholder="小程序名称">
+				</div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title"><span class="color-red">*</span> 统一运费：</span>
+				<div class="form-item-content">
+					<input type="text" class="form-control form-input" data-width="normal" data-bind="unified_delivery_fees" name="unified_delivery_fees" data-type="float" data-not-null="1" data-default-value="0" placeholder="小程序名称">
+				</div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title"><span class="color-red">*</span> 超额免运费：</span>
+				<div class="form-item-content">
+					<input type="text" class="form-control form-input inline" data-width="normal" data-bind="exceeds_price_free" name="exceeds_price_free" data-type="float" data-not-null="1" data-default-value="0" placeholder="小程序名称">
+					<span class="inline ml-5 f12 color-light-gray"><i class="fa fa-info-circle"></i> 超过多少金额时免运费</span>
+				</div>
+			</div>
+		</div>
+
+		<hr>
+		<div class="form-item">
+			<span class="form-item-title">&nbsp;</span>
+			<div class="form-item-content">
+				<button type="button" class="btn btn-primary btn-big mr-5" id="btnSave">保存</button>
+				<button type="button" class="btn btn-default btn-big" id="btnCancel">取消</button>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="../../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: true,
+            files: [
+                '../js/shop-freight.js'
+            ]});
+	</script>
+</body>
+</html>

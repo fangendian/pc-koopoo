@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业位置 - 靠谱</title>
+	<link href="../../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../styles/animate.min.css?v=3.1.0" rel="stylesheet">
+    <link href="../../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../../styles/common.css" rel="stylesheet">
+	<style>
+		.form-item { min-height:inherit; margin-bottom:15px;}
+		.map-box { width:652px; height:422px; padding:10px;}
+		.map-box > div { width:630px; height:400px;}
+		.lo-wrapper input[data-width=normal] { width:160px;}
+	</style>
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="mc-bg-white box-clear p-10 border">
+		<div class="form-header box-clear mb-30 b-b">
+			<div class="mr-10 fl f16"><i class="fa fa-map-marker"></i> 企业地理位置</div>
+		</div>
+
+		<div class="p-15 form-group-wrapper">
+			<div class="view-data-container" id="viewContainer">
+				<div class="form-item">
+					<span class="form-item-title">企业地址：</span>
+					<div class="form-item-content" data-bind="address" data-default-value="无">无</div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">经纬度：</span>
+					<div class="form-item-content">
+						<span class="show-box" data-bind="longitude" data-default-value="0">0</span>,
+						<span class="show-box" data-bind="latitude" data-default-value="0">0</span>
+					</div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">交通方式：</span>
+					<div class="form-item-content">
+						<span class="show-box" data-bind="traffic_line" data-default-value="无">无</span>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item pt-10">
+					<span class="form-item-title">&nbsp;</span>
+					<div class="form-item-content">
+						<button type="button" class="btn btn-default btn-big" id="btnEdit" disabled="disabled"><i class="fa fa-pencil"></i> 修改</button>
+					</div>
+				</div>
+			</div>
+
+			<div id="editContainer" hidden>
+				<div class="form-group-wrapper">
+					<div class="form-item">
+						<span class="form-item-title">地图上的位置：</span>
+						<div class="form-item-content">
+							<div class="map-box border">
+								<div id="mapBox"></div>
+							</div>
+							<div class="f12 mt-10 mb-5 color-gray">
+								<i class="fa fa-info-circle"></i> 您可以在地图上定位、缩放、拖拽、点击等操作，从而获取地址和经纬度。
+							</div>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">企业地址：</span>
+						<div class="form-item-content">
+							<input type="text" class="form-control form-input inline" data-width="lg" data-bind="address" name="address" data-not-null="1" placeholder="详细地址">
+							<button class="btn btn-default btn-sm ml-5 inline" id="setAddress"><i class="fa fa-location-arrow"></i> 根据地址设置坐标</button>
+						</div>
+					</div>
+					<div class="form-item">
+						<span class="form-item-title">经纬度：</span>
+						<div class="form-item-content lo-wrapper">
+							<input type="text" class="form-control form-input inline" data-width="normal" data-bind="longitude" name="longitude"
+								   data-type="float" data-not-null="1" placeholder="经度"> ,
+							<input type="text" class="form-control form-input inline" data-width="normal" data-bind="latitude" name="latitude"
+								   data-type="float" data-not-null="1" placeholder="纬度">
+							<div class="f12 mt-5 pb-10 color-gray">
+								<i class="fa fa-info-circle"></i> 若手动输入，请使用火星坐标系(GCJ02)，如腾讯、高德、阿里云、搜搜地图
+							</div>
+						</div>
+					</div>
+					<div class="form-item">
+						<span class="form-item-title">交通方式：</span>
+						<div class="form-item-content">
+							<input type="text" class="form-control form-input inline" data-width="lg" data-bind="traffic_line" name="traffic_line" data-not-null="1" placeholder="交通路线">
+						</div>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item">
+					<span class="form-item-title">&nbsp;</span>
+					<div class="form-item-content">
+						<button type="button" class="btn btn-primary btn-big mr-5" id="btnSave">保存</button>
+						<button type="button" class="btn btn-default btn-big" id="btnCancel">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="../../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: false,
+            files: [
+                '../../../scripts/local/store-location.js'
+            ]
+        });
+	</script>
+</body>
+</html>

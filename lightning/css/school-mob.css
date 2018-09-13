@@ -1,0 +1,166 @@
+html,body {
+	font-family: "微软雅黑";
+	font-size: 100px;
+}
+.banner {
+	width: 100%;
+	height: 2rem;
+	margin: 0.5rem 0;
+}
+.banner img {
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+/*行业动态*/
+.felid {
+	width: 100%;
+	height: auto;
+}
+.fe-top {
+	width: 0.8rem;
+	height: 0.8rem;
+	background: #0e68aa;
+	margin-bottom: 0.15rem;
+}
+.fe-top p {
+	color: #fff;
+	font-size: 0.2rem;
+	text-align: center;
+	margin-top: 0.18rem;
+}
+.show-left {
+	width: 100%;
+	position: relative;
+}
+.show-left a img {
+	width: 100%;
+}
+.t-detali {
+	width: 50%;
+	height: 1.2rem;
+	background: rgba(36,117,175,0.8);
+	color: #fff;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+.t-detali p,.two-detail p,.two-details p {
+	font-size: 0.12rem;
+	margin: 0.1rem 0 0 0.1rem;
+}
+.t-detali span,.two-detail span,.two-details span {
+	font-size: 0.1rem;
+	display: block;
+	margin: 0.1rem 0 0 0.1rem;
+}
+.left-one,.right-top {
+	float: right;
+	padding-right: 0.1rem;
+}
+.show-right {
+	width: 100%;
+}
+.show-right ul li {
+	width: 100%;
+}
+.left-a a {
+	width: 50%;
+	float: left;
+}
+.left-a a img,.right-a a img {
+	width: 100%;
+}
+.two-detail {
+	width: 50%;
+	background: #fff;
+	float: left;
+}
+.right-a a {
+	width: 50%;
+	float: right;
+}
+.two-details {
+	width: 50%;
+	background: #fff;
+	float: left;
+}
+/*评测视频*/
+.test {
+	width: 100%;
+	height: auto;
+	padding-top: 0.5rem;
+}
+.video-sel,.video-box,.video-item {
+	width: 95%;
+	height: auto;
+	margin: 10px auto 15px;
+	text-align: center;
+	display: block;
+}
+.video-item a img {
+	width: 100%;
+	display: block;
+	float: left;
+}
+.video-title {
+	font-size: 0.12rem;
+	text-align: center;
+}
+/*靠谱新闻*/
+.koopoo-news {
+	width: 96%;
+	height: auto;
+	padding-top: 0.2rem;
+	margin: 0 0 0.5rem 2%;
+}
+.news {
+	width: 100%;
+	height: auto;
+	display: block;
+	margin-bottom: 0.15rem;
+}
+.news-two {
+	padding-left: 2%;
+}
+.news ul li {
+	width: 65%;
+	float: left;
+	text-overflow: ellipsis;
+}
+.news .li-img {
+	width: 30%;
+	margin-top: 0;
+}
+.news .li-margin {
+	margin-left: 5%;
+}
+.li-img a img {
+	width: 100%;
+	display: block;
+}
+.news ul li p {
+	width: 100%;
+	font-size: 12px;
+}
+.news ul li span {
+	font-size: 0.08rem;
+	width: 100%;
+	display: block;
+	overflow: hidden;
+	display: none;
+}
+.news-two .li-img,.news-two .li-padding {
+	float: right;
+}
+.news-two .li-padding {
+	margin-right: 5%;
+}
+/*底部*/
+footer {
+	width: 100%;
+	height: 0.8rem;
+	background-image: url(../../img/foot.png);
+	background-size: 100% 100%;
+	padding: 0.13rem 0.16rem 0 0.16rem;
+}

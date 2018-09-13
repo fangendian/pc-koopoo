@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>预约发型师</title>
+	<link href="../../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../../styles/common.css" rel="stylesheet">
+	<link href="../../../styles/animate.min.css" rel="stylesheet">
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="page-list-container">
+		<div class="search-wrapper mc-bg-white border">
+			<div class="p-15 box-clear">
+				<div class="ml-5 fl">
+					<div class="input-group search-bar box-clear fl" id="searchBar">
+						<i class="fa fa-search"></i>
+						<input type="text" name="keyword" class="form-control" placeholder="名称查询">
+						<span class="search-btn-reset"><i class="fa fa-remove"></i></span>
+						<span class="input-group-addon btn btn-default" id="btnSearch">搜索</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mc-bg-white mt-10 mb-10 border">
+			<div class="page-main-wrapper">
+				<table class="mc-list-table main-list" id="listTable" data-mode="edit">
+					<thead>
+					<tr>
+						<td width="90">状态</td>
+						<td width="80">封面</td>
+						<td width="100">价格</td>
+						<td class="per-15">标题</td>
+						<td>地址</td>
+						<td>预约时间</td>
+						<td width="120">操作</td>
+					</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+
+				<div class="mc-list-tools box-clear pt-20 pb-20 pl-15 pr-15" id="listTools" hidden>
+					<div class="fr" id="pageNavWrapper"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 修改 -->
+	<div class="mc-bg-white border p-15 box-clear" id="editFormContainer" hidden>
+		<div class="form-header box-clear mb-20 b-b">
+			<div class="mr-10 f18" id="editTile">
+				<span data-mode="new"><i class="fa fa-plus-square"></i> <span>查看预约信息</span></span>
+				<span data-mode="edit"><i class="fa fa-pencil-square"></i> <span>修改预约状态</span></span>
+			</div>
+		</div>
+
+		<div class="form-group-wrapper box-clear">
+			<div class="box-clear view-data-container" id="editBaseInfo">
+				<div class="form-item">
+					<span class="form-item-title">标题：</span>
+					<div class="form-item-content" data-bind="title"></div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">封面：</span>
+					<div class="form-item-content">
+						<div class="form-image-wrapper fl">
+							<span class="image-contain" data-bind="cover_src_string" data-bind-type="bg-img" style="background-image:url(../../../images/upload-default-img.png);"></span>
+						</div>
+					</div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">状态：</span>
+					<div class="form-item-content" data-bind="#status_text"></div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">预约时间：</span>
+					<div class="form-item-content" data-bind="booking_time"></div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">价格：</span>
+					<div class="form-item-content strong color-orange">￥<span data-bind="price" data-default-value="0"></span></div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">备注：</span>
+					<div class="form-item-content" data-bind="remark" data-default-value="-"></div>
+				</div>
+
+			</div>
+
+			<div class="edit-tools">
+				<hr>
+				<div class="form-item mb-0">
+					<div class="form-item-title"><h4 class="mt-0 pb-5 f16">更改状态</h4></div>
+				</div>
+				<div class="form-item mb-15">
+					<span class="form-item-title">执行操作：</span>
+					<div class="form-item-content" id="statusTools">
+						<div data-status="1">
+							<span class="btn btn-sm btn-success btn-edit mr-15" data-status="2"><i class="fa fa-check"></i> 预约成功</span>
+							<span class="btn btn-sm btn-danger btn-edit" data-status="3" data-toggle="modal" data-target="#changeStatusModal"><i class="fa fa-exclamation-triangle"></i> 预约失败</span>
+						</div>
+						<div data-status="2">
+							<span class="btn btn-sm btn-primary btn-edit mr-15" data-status="5"><i class="fa fa-handshake-o"></i> 完成预约</span>
+							<span class="btn btn-sm btn-warning btn-edit" data-status="4" data-toggle="modal" data-target="#changeStatusModal"><i class="fa fa-remove"></i> 取消预约</span>
+						</div>
+						<div data-status="-1">已终止</div>
+					</div>
+				</div>
+			</div>
+
+			<hr>
+			<div class="form-item mt-30 mb-15">
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<button type="button" class="btn btn-sm btn-default btn-big" id="btnEditFormCancel">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 填写备注 -->
+	<div class="modal fade" id="changeStatusModal" tabindex="-1" role="dialog" aria-labelledby="changeStatusModal">
+		<div class="modal-dialog modal-dialog-min" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">更改状态</h4>
+				</div>
+				<div class="modal-body">
+					<p id="changeStatusText"></p>
+					<small>请填写备注信息</small>
+					<textarea class="form-control mt-10 mb-10" name="remark" data-not-null="1" placeholder="备注内容"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="btnChangeStatus">保存更改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- 列表模板 -->
+	<script type="text/html" id="listTemplate">
+		{{each result as item}}<tr data-id="{{item.booking_id}}" data-f-id="{{item.booking_flow_id}}">
+			<td>{{#item.status_html}}</td>
+			<td><div class="image-contain wh-40" style="background-image: url({{item.img_src_string || default_img_src}});"></div></td>
+			<td><span class="text-cover strong color-orange">￥{{item.price || 0}}</span></td>
+			<td><span class="text-cover strong">{{item.title}}</span></td>
+			<td><span class="text-cover">{{item.address || '-'}}</span></td>
+			<td><span class="text-cover">{{item.booking_time}}</span></td>
+			<td>
+				<span class="mc-btn-text mr-15" data-mode="view">查看</span>
+				{{if item.booking_status < 3}}<span class="mc-btn-text" data-mode="edit">更改状态</span>{{/if}}
+			</td>
+		</tr>{{/each}}
+		{{if !result.length}}<tr><td class="td-none text-center" colspan="7">暂无内容</td></tr>{{/if}}
+	</script>
+
+
+	<script type="text/javascript" src="../../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: false,
+            files: [
+                '../js/bookings.js'
+            ]});
+	</script>
+</body>
+</html>

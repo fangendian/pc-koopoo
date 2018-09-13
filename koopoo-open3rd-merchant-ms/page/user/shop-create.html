@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建小程序 - 靠谱</title>
+    <meta name="keywords" content="靠谱-微信第三方平台管理系统">
+    <meta name="description" content="靠谱-微信第三方平台管理系统，基于Bootstrap3最新版本开发的扁平化系统，使用了Html5+CSS3等现代技术">
+    <link href="../../../img/logo-sig.png" rel="shortcut icon">
+
+    <link href="../../scripts/bootstrap/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="../../scripts/fontawesome/css/font-awesome.min.css?v=4.6.3" rel="stylesheet">
+    <link href="../../styles/animate.min.css?v=3.1.0" rel="stylesheet">
+    <link href="../../scripts/gritter/css/jquery.gritter.min.css?v=1.7.4" rel="stylesheet">
+    <link href="../../styles/common.css" rel="stylesheet">
+    <link href="../../styles/common-shop.css" rel="stylesheet">
+    <style>
+        .step-bar { text-align:center; line-height:36px;}
+        .step-bar p { width:calc(100% / 3 - 1px); background-color:#eee; float:left;}
+        .step-bar p:nth-of-type(2) { margin:0 1px;}
+        .step-bar p.active { background-color:orangered; color:white;}
+
+        .create-box {  width:660px; margin-left:auto; margin-right:auto;}
+        .create-box .form-item-title { width:120px;}
+        .item-select-wrapper>.select-item { width:calc((100% - 20px) / 3); margin-right:10px; float:left;}
+        .item-select-wrapper>.select-item:last-child { margin-right:0;}
+        .main-container label { font-weight:normal;}
+
+        .template-wrapper { text-align:center;}
+        .template-wrapper li { width:calc(100% / 3 - 30px); height:320px; margin:0 30px 30px 0; transition:300ms ease all; display:inline-block;}
+        .template-header { height:140px; position:relative; overflow:hidden;}
+        .template-img { width:100%; height:100%; background:#ddd no-repeat center; background-size:cover;}
+        .template-view { width:100%; height:100%; position:absolute; top:0; left:0; background-color:rgba(0,0,0,0.6); transition:300ms ease all; opacity:0; text-align:center; cursor:pointer;}
+        .template-view>span { margin-top:58px; font-size:18px; color:white; display:block; text-shadow:1px 1px 1px rgba(0,0,0,0.75);}
+        .template-wrapper li:hover .template-view { z-index:10; opacity:1;}
+        .template-content { height:calc(100% - 140px - 50px); color:#555;}
+
+        .template-tools { height:50px;}
+        .template-btn { width:200px; border-radius:30px; line-height:30px; border:1px solid #aaa; font-size:14px; display:inline-block; cursor:pointer;}
+
+        .template-wrapper li.active { border-color:#aaa; box-shadow:0 0 15px rgba(100,100,100, 0.3);}
+        .template-wrapper li.active .template-btn { background-color:orangered; color:white; border-color:orangered;}
+
+        .step-last-bottom .mc-btn { width:260px;}
+        a.mc-btn-green:hover { color:white; text-decoration:none;}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="page-container">
+            <div class="header-left fl">
+                <div class="logo fl"><h4><img src="../../../img/logo-sig.png"> <strong>靠谱</strong></h4></div>
+                <div class="header-title ml-10 pl-10 f16 b-l fl">创建小程序</div>
+            </div>
+            <div class="header-right fr">
+                <span data-bind="mobile_no"></span>
+                <a class="ml-5 mr-5" href="main.html">小程序列表</a>
+                <span class="mc-btn-text" id="btnLogout"><i class="glyphicon glyphicon-log-out"></i> 退出</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="step-bar mt-30 mb-20 box-clear" id="stepBar">
+            <p class="active">创建小程序</p>
+            <p>选择推荐模板</p>
+            <p>完成</p>
+        </div>
+
+        <div class="main-container box-clear p-15 pt-30 border" id="mainContainer">
+            <div class="main-box create-box" hidden data-step="1" id="createBox">
+                <div class="form-item">
+                    <span class="form-item-title"> 小程序名称：</span>
+                    <div class="form-item-content">
+                        <input type="text" class="form-control form-input" data-width="normal" name="shop_name" data-not-null="1" placeholder="请输入小程序名称">
+                    </div>
+                </div>
+                <div class="form-item" hidden>
+                    <span class="form-item-title"> 主营商品：</span>
+                    <div class="form-item-content item-select-wrapper">
+                        <div class="select-item"><select class="form-control" name="product_category"><option>请选择类目</option></select></div>
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <span class="form-item-title">联系地址：</span>
+                    <div class="form-item-content item-select-wrapper" id="locationWrapper">
+                        <div class="select-item"><select class="form-control" name="province_id" data-not-null="1"><option>选择省</option></select></div>
+                        <div class="select-item"><select class="form-control" name="city_id" data-not-null="1"><option>选择市</option></select></div>
+                        <div class="select-item"><select class="form-control" name="district_id" data-not-null="1"><option>选择地区</option></select></div>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <span class="form-item-title">&nbsp;</span>
+                    <div class="form-item-content">
+                        <input type="text" class="form-control form-input" name="address" data-not-null="1" placeholder="请填写具体地址">
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <span class="form-item-title"> 公司名称：</span>
+                    <div class="form-item-content">
+                        <input type="text" class="form-control form-input" data-width="normal" name="company_name" data-not-null="1" placeholder="请输入营业执照上的公司全名">
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <span class="form-item-title">&nbsp;</span>
+                    <div class="form-item-content">
+                        <label><input type="checkbox" name="checked_agree" data-not-null="1" data-give-up="1" id="checkboxAgree" class="fl" style="margin:2px 5px 0 0;"> 我已阅读并同意</label>
+                        <a href="#">担保交易服务协议</a>
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <span class="form-item-title">&nbsp;</span>
+                    <div class="form-item-content"><button class="mc-btn mc-btn-blue mc-btn-big" id="btnCreate">创建小程序</button> </div>
+                </div>
+            </div>
+
+            <div class="main-box ml-15 pl-15" hidden data-step="2">
+                <div class="text-center">
+                    <h4 class="f16">靠谱为你准备了多种行业模板，请根据实际情况任选一种</h4>
+                    <p class="mt-5">每个行业模板，都已经默认配置和启用了合适的功能。</p>
+                </div>
+                <div class="template-wrapper box-clear mt-25">
+                    <ul id="templateUl"></ul>
+                </div>
+                <div class="text-center mb-10 pt-25 b-t">
+                    <button class="mc-btn mc-btn-blue mc-btn-big" id="btnChoose" disabled="disabled">确定模板</button>
+                    <p class="mt-5 color-light-gray">温馨提示：确定选择模板后，将不能再次修改！</p>
+                </div>
+            </div>
+
+            <div class="main-box text-center" hidden data-step="3">
+                <div class="mt-20">
+                    <h4 class="color-green"><strong>恭喜，你的小程序已经创建成功！</strong></h4>
+                    <p class="mt-10">为了确保所有功能正常，授权小程序时请保持默认选择，请权限统一授权给靠谱</p>
+                </div>
+
+                <div class="step-last-bottom text-center m-30">
+                    <p>
+                        <a class="mc-btn mc-btn-green mc-btn-big disabled" href="#" target="_blank" id="btnSetup">我有小程序，立即设置</a>
+                    </p>
+                    <p class="mt-15">
+                        <button class="mc-btn mc-btn-blue mc-btn-big" id="btnDone">稍后再说，进入小程序后台</button>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="p-15 page-footer text-center">&copy; 2018 靠谱 版权所有</div>
+    </div>
+
+
+    <!-- 浏览图片 -->
+    <div class="template-slide-wrapper" id="slideWrapper" hidden>
+        <div class="template-slide-bg"></div>
+        <div id="templateCarousel" class="carousel slide template-slide">
+            <!-- Indicators -->
+            <ol class="carousel-indicators"></ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox"></div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#templateCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#templateCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+
+    <script type="text/html" id="indicatorsTemplate">
+        {{each images as item index}}<li class="{{if !index}}active{{/if}}" data-target="#templateCarousel" data-slide-to="{{index}}"></li>{{/each}}
+    </script>
+
+    <script type="text/html" id="innerTemplate">
+        {{each images as item index}}<div class="item {{if !index}}active{{/if}}" style="background-image:url({{templatePath}}{{item}});"></div>{{/each}}
+    </script>
+
+    <script type="text/html" id="templateTemplate">
+        {{each result as item}}{{if !item.is_deleted}}<li class="border {{__template_id == item.template_id ? 'selected' : ''}}" data-id="{{item.template_id}}">
+            <div class="template-header">
+                <p class="template-img" style="background-image:url({{item.cover_src_string}});"></p>
+                <p class="template-view"><span><i class="glyphicon glyphicon-zoom-in"></i> 点击预览</span></p>
+            </div>
+            <div class="template-content p-15">
+                <h4 class="mb-10 text-center f16">{{item.template_name}}</h4>
+                <p class="text-left">{{item.description}}</p>
+            </div>
+            <div class="template-tools text-center"><span class="template-btn">选择</span></div>
+        </li>{{/if}}{{/each}}
+        {{if !result.length}}<p class="content-none">暂无内容</p>{{/if}}
+    </script>
+
+    <script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+    <script type="text/javascript">
+        loadJs({
+            files: [
+                '../../scripts/local/shop-create.js'
+            ]});
+    </script>
+</body>
+
+</html>

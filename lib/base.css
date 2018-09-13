@@ -1,0 +1,87 @@
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu,div{margin:0;padding:0;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+table{border-collapse:collapse;border-spacing:0;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+[hidefocus],summary{outline:0;}
+li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;font-family: '微软雅黑';font-weight: normal !important;}
+sup,sub{font-size:83%;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+a,button{cursor:pointer;}
+h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;color:#333;outline:0;}
+body{background:#fff;font-family: '微软雅黑','Courier New', Courier, monospace;}
+.clearfix {
+	content: '';
+	clear: both;
+	display: block;
+	height: 0;
+}
+.navbar {
+	width: 100%;
+	height: 0.5rem;
+	background: rgba(0,0,0,0.77);
+	border-bottom: none;
+}
+.navbar-toggle:focus {
+	background: rgba(0,0,0,0.77);
+}
+.navbar-brands {
+	float: left;
+	margin: 0.14rem 0 0 0.12rem;
+}
+.navbar-brands img {
+	display: block;
+}
+.login {
+	font-size: 12px;
+	float: left;
+	margin-top: 0.2rem;
+	color: #fff;
+	margin-left: 10px;
+}
+.nav {
+	background: rgba(0,0,0,0.77);
+	padding-left: 0.25rem;
+	margin: 0;
+}
+#ul>li>a {
+	color: #ccc;
+	font-size: 0.14rem;
+}
+.information {
+	width: 100%;
+	height: 0.8rem;
+}
+.name {
+	font-size: 0.09rem;
+	color: #fff;
+	letter-spacing: 0;
+	line-height: 0.09rem;
+	margin-bottom: 0.1rem;
+}
+.information span {
+	font-size: 0.06rem;
+	color: #fff;
+	letter-spacing: 0;
+	line-height: 0.08rem;
+	display: block;
+	margin-bottom: 0.03rem;
+}
+.information ul li {
+	float: left;
+	font-size: 0.05rem;
+	color: #fff;
+	margin-top: 0.1rem;
+}
+.information ul .li-right a {
+	font-size: 0.05rem;
+	color: #fff;
+	letter-spacing: 0;
+	margin-left: 0.08rem;

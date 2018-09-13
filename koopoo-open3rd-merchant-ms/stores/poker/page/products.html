@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>规格</title>
+	<link href="../../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../../styles/common.css" rel="stylesheet">
+	<link href="../../../styles/animate.min.css" rel="stylesheet">
+	<style>
+		/* 选择规格值 */
+		.spec-values-ul {}
+		.spec-values-ul>li { padding:8px 12px; background-color:#f6f6f6; border-bottom:1px solid #eee; overflow:hidden; clear:both;}
+		.spec-values-ul>li:nth-child(odd) { background-color:#fbfbfb;}
+		.spec-values-ul>li:first-child { border-top:1px solid #eee;}
+		.spec-values-group-name { width:60px;}
+		.spec-values-ul label { margin-right:20px;}
+
+		.spec-values-table { width:100%; table-layout:fixed;}
+		.spec-values-table>thead { background-color:#eef0f0;}
+		.spec-values-table td { padding:6px 10px; border:1px solid #ddd; color:#333;}
+		.spec-values-table>tbody>tr { color:#333;}
+		.spec-values-table>tbody>tr:nth-child(even)>td { background-color:#fbfbfb;}
+
+		.form-group-article textarea { min-height:9em;}
+	</style>
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="page-list-container">
+		<div class="search-wrapper mc-bg-white border">
+			<div class="p-15 box-clear">
+				<div class="fl">
+					<button class="btn btn-sm btn-primary mr-5" id="btnShowAddBox"><i class="fa fa-plus-circle"></i> 添加</button>
+				</div>
+				<div class="ml-5 fl">
+					<div class="mr-5 fl" hidden>
+						<span class="btn btn-sm btn-default mr-5" id="btnFilter"><i class="fa fa-filter"></i> 筛选</span>
+					</div>
+					<div class="input-group search-bar box-clear fl" id="searchBar">
+						<i class="fa fa-search"></i>
+						<input type="text" name="keyword" class="form-control" placeholder="名称查询">
+						<span class="search-btn-reset"><i class="fa fa-remove"></i></span>
+						<span class="input-group-addon btn btn-default" id="btnSearch">搜索</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mc-bg-white mt-10 mb-10 border">
+			<div class="page-main-wrapper">
+				<table class="mc-list-table main-list main-images-list" id="listTable" data-mode="edit">
+					<thead>
+					<tr>
+						<td width="50">选择</td>
+						<td width="60">禁用</td>
+						<td width="60">上架</td>
+						<td width="80">封面</td>
+						<td width="80">库存</td>
+						<td width="80">价格</td>
+						<td>名称</td>
+						<td width="120">操作</td>
+					</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+
+				<div class="mc-list-tools box-clear pt-20 pb-20 pl-15 pr-15" id="listTools" hidden>
+					<div class="list-tools-left fl">
+						<div class="mc-table-checkbox-bar ml-5 mr-10 fl">
+							<label><input type="checkbox" id="checkedAll"> 全选</label>
+						</div>
+						<button class="btn btn-sm btn-primary mr-5" id="btnListOnline" disabled="disabled"><i class="fa fa-level-up"></i> 上架</button>
+						<button class="btn btn-sm btn-warning mr-5" id="btnListOffline" disabled="disabled"><i class="fa fa-level-down"></i> 下架</button>
+						<button class="btn btn-sm btn-danger mr-5" id="btnListRemove" disabled="disabled"><i class="fa fa-trash"></i> 删除</button>
+					</div>
+
+					<div class="fr" id="pageNavWrapper"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 新增、修改 -->
+	<div class="mc-bg-white border p-15 box-clear" id="formContainer" hidden>
+		<input type="file" class="hide" id="fileUploadImage" size="1"/>
+		<div class="form-header box-clear mb-20 pb-0 b-b">
+			<div class="mr-10 fl f18" id="editTile">
+				<span data-mode="new"><i class="fa fa-plus-square"></i> <span>新增商品</span></span>
+				<span data-mode="edit"><i class="fa fa-pencil-square"></i> <span>修改商品</span></span>
+			</div>
+			<ul class="ml-20 fl nav nav-tabs form-header-tabs" id="editHeaderBar">
+				<li class="active" aria-controls="categoriesBox"><a href="#">1.选择分类</a></li>
+				<li class="disabled" aria-controls="baseInfoBox"><a href="#">2.基本信息</a></li>
+				<li class="disabled" aria-controls="contentBox"><a href="#">3.商品内容</a></li>
+			</ul>
+			<div class="fr">
+				<button type="button" class="btn-sm mc-btn-text btn-cancel">&times; 关闭</button>
+			</div>
+		</div>
+
+		<div class="form-group-wrapper tab-content mt-10">
+			<!-- 商品分类 -->
+			<div class="group-category-wrapper tab-pane active" id="categoriesBox">
+				<div class="form-item mt-30 mb-15 pt-20 pb-30">
+					<span class="form-item-title">商品分类：</span>
+					<div class="form-item-content">
+						<ul class="mc-choose-wrapper" id="categoriesUl"></ul>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item mt-30 mb-15">
+					<span class="form-item-title">&nbsp;</span>
+					<div class="form-item-content">
+						<button type="button" class="btn btn-primary btn-big mr-5" id="btnNextToStep2" disabled="disabled">下一步</button>
+						<button type="button" class="btn btn-default btn-big btn-cancel mr-5">取消</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- 基本信息 -->
+			<div class="group-base-wrapper tab-pane" id="baseInfoBox">
+				<div class="form-item mb-0">
+					<div class="form-item-title"><h4 class="h4">基本信息</h4></div>
+				</div>
+				<div class="row" id="baseInfoWrapper">
+					<div class="col-sm-6 col-md-5 form-col">
+						<div class="form-item">
+							<span class="form-item-title"><span class="color-red">*</span> 商品分类：</span>
+							<div class="form-item-content">
+								<div class="mt-5" id="selectedCategory">请返回选择</div><input type="hidden" name="product_category_id"/>
+							</div>
+						</div>
+
+						<div class="form-item">
+							<span class="form-item-title"><span class="color-red">*</span> 商品名称：</span>
+							<div class="form-item-content">
+								<input type="text" class="form-control form-input" data-width="normal" name="name" data-bind="name" data-not-null="1" placeholder="商品名称">
+							</div>
+						</div>
+						<div class="form-item">
+							<span class="form-item-title">商品简述：</span>
+							<div class="form-item-content">
+								<input type="text" class="form-control form-input" data-width="normal" name="sub_name" data-bind="sub_name" placeholder="商品简述">
+								<span class="block f12 mt-5 color-light-gray"><i class="fa fa-info-circle color-cyan"></i> 简述用于商品列表展示的副标题，建议您填写！</span>
+							</div>
+						</div>
+
+						<div class="form-item from-is-checkbox">
+							<span class="form-item-title">是否禁用：</span>
+							<div class="form-item-content">
+								<input type="checkbox" name="is_deleted" data-size="small" data-on-color="danger" data-on-text="是" data-off-text="否" />
+							</div>
+						</div>
+
+						<div class="form-item">
+							<span class="form-item-title"><span class="color-red">*</span> 市场价：</span>
+							<div class="form-item-content">
+								<input type="text" class="form-control form-input" data-width="normal" name="market_price" data-bind="market_price" data-type="float" data-not-null="1" placeholder="">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6 col-md-7 form-col form-col-min">
+						<div class="form-item pb-10">
+							<span class="form-item-title"><span class="color-red">*</span> 封面：</span>
+							<div class="form-item-content">
+								<input type="hidden" name="cover_src" data-bind="cover_src" data-not-null="1"/>
+								<div class="form-image-wrapper fl">
+									<span class="image-contain" id="shopCoverImg" data-bind="cover_src_string" data-bind-type="bg-img" style="background-image:url(../../../images/upload-default-img.png);"></span>
+								</div>
+								<div class="mt-15 ml-15 color-light-gray fl">
+									<span class="btn btn-info btn-sm btn-file-single" id="btnCoverImg">上传封面</span>
+									<p class="mt-5">
+										<small>仅支持jpg、gif、png，大小不超过1MB</small>
+										<small class="block">建议尺寸: 750px &times; 500px</small>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="specificationsWrapper">
+					<hr>
+					<div class="form-item mb-0">
+						<div class="form-item-title"><h4 class="h4">库存/规格</h4></div>
+					</div>
+					<div class="form-item">
+						<span class="form-item-title"><span class="color-red">*</span> 规格设置：</span>
+						<div class="form-item-content form-item-checkbox">
+							<label><input type="radio" name="is_unified_spec" value="0"> 统一规格</label>
+							<label><input type="radio" name="is_unified_spec" value="1"> 多规格</label>
+						</div>
+					</div>
+
+					<div class="edit-spec-multiple-box" hidden>
+						<div class="form-item mb-0">
+							<span class="form-item-title">&nbsp;</span>
+							<div class="form-item-content">
+								<p class="pt-15 b-t max-w-1200 f12 color-gray"><span class="color-red">*</span> 多规格选择 (限3个)</p>
+								<ul class="mc-choose-wrapper mb-15" data-color="blue" id="specificationsUl"></ul>
+
+								<p class="pt-15 b-t max-w-1200 f12 color-gray"><span class="color-red">*</span> 选择规格值</p>
+								<ul class="spec-values-ul max-w-1200 pb-15 box-clear" id="specificationsValuesUl"></ul>
+
+								<p class="pt-15 pb-5 b-t max-w-1200 f12 color-gray"><span class="color-red">*</span> 价格与库存</p>
+								<table class="spec-values-table max-w-1200" id="specificationsValuesTable"></table>
+							</div>
+						</div>
+					</div>
+					<div class="edit-spec-single-box" hidden>
+						<div class="form-item">
+							<span class="form-item-title"><span class="color-red">*</span> 库存：</span>
+							<div class="form-item-content">
+								<input type="text" class="form-control form-input" data-width="normal" name="stock" data-bind="stock" data-type="number" data-not-null="1" placeholder="">
+							</div>
+						</div>
+
+						<div class="form-item mb-0">
+							<span class="form-item-title"><span class="color-red">*</span> 销售价：</span>
+							<div class="form-item-content">
+								<input type="text" class="form-control form-input" data-width="normal" name="price" data-bind="price" data-type="float" data-not-null="1" placeholder="">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item mb-0">
+					<div class="form-item-title"><h4 class="h4">商品信息</h4></div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">图集(多张)：</span>
+					<div class="form-item-content">
+						<ul class="form-img-list m-0 box-clear" id="formImgList"></ul>
+
+						<img src="../../../images/upload-default-img.png" class="img-thumbnail"/>
+						<div class="mt-15 color-light-gray">
+							<span class="btn btn-info btn-sm btn-file"><input type="file" id="fileImages" multiple/>上传图集</span>
+							<p class="mt-5">
+								<small>仅支持jpg、gif、png，大小不超过1MB</small>
+								<small class="block">建议尺寸 750px &times; 500px</small>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div id="shopInfoWrapper">
+					<div class="form-item from-is-checkbox mr-30">
+						<span class="form-item-title">是否上架：</span>
+						<div class="form-item-content">
+							<input type="checkbox" name="is_marketable" data-size="small" data-on-color="primary" data-on-text="是" data-off-text="否" />
+						</div>
+					</div>
+					<div class="form-item from-is-checkbox">
+						<span class="form-item-title">是否列出：</span>
+						<div class="form-item-content">
+							<input type="checkbox" name="is_list" data-size="small" data-on-color="primary" data-on-text="是" data-off-text="否" />
+						</div>
+					</div>
+				</div>
+
+				<div id="shopOtherWrapper">
+					<hr>
+					<div class="form-item mb-0">
+						<div class="form-item-title"><h4 class="h4">物流/其他</h4></div>
+					</div>
+					<div class="form-item from-is-checkbox mr-30">
+						<span class="form-item-title">统一邮费：</span>
+						<div class="form-item-content">
+							<input type="text" class="form-control form-input" data-width="normal" name="delivery_fees" data-bind="delivery_fees" data-type="float" placeholder="邮费">
+							<small class="color-light-gray"><i class="fa fa-info-circle"></i> 填0或者不填表示包邮</small>
+						</div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">备注：</span>
+						<div class="form-item-content">
+							<textarea class="form-control form-input" name="remark" data-bind="remark" data-width="max" placeholder="备注信息"></textarea>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+				<div class="form-item mt-30 mb-15">
+					<span class="form-item-title">&nbsp;</span>
+					<div class="form-item-content">
+						<button type="button" class="btn btn-primary btn-big mr-5" id="btnNextToStep3">下一步</button>
+						<button type="button" class="btn btn-default btn-big btn-cancel mr-5">取消</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- 商品内容 -->
+			<div class="group-content-wrapper tab-pane" id="contentBox">
+				<article class="form-group-article"></article>
+
+				<hr>
+				<div class="form-item mt-30 mb-15">
+					<span class="form-item-title">&nbsp;</span>
+					<div class="form-item-content">
+						<button type="button" class="btn btn-primary btn-big mr-5" id="btnFormSubmit">保存</button>
+						<button type="button" class="btn btn-default btn-big btn-cancel mr-5">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 查看详细 -->
+	<div class="mc-bg-white border p-15 box-clear view-data-container view-data-mode" id="viewFormContainer" hidden>
+		<div class="form-header box-clear mb-20 b-b">
+			<div class="mr-10 fl f18"><i class="fa fa-search-plus"></i> 查看商品</div>
+			<div class="fr">
+				<button type="button" class="btn-sm mc-btn-text btn-close">&times; 关闭</button>
+			</div>
+		</div>
+
+		<div class="form-group-wrapper mt-10">
+			<div class="form-item mb-0">
+				<div class="form-item-title"><h4 class="h4">基本信息</h4></div>
+			</div>
+			<div class="row" id="baseInfoWrapperView">
+				<div class="col-sm-6 col-md-5 form-col">
+					<div class="form-item">
+						<span class="form-item-title">商品分类：</span>
+						<div class="form-item-content" data-bind="product_category_name" id="viewCategoryName"></div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">商品名称：</span>
+						<div class="form-item-content" data-bind="name"></div>
+					</div>
+					<div class="form-item">
+						<span class="form-item-title">商品简述：</span>
+						<div class="form-item-content" data-bind="sub_name"></div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">是否禁用：</span>
+						<div class="form-item-content" data-bind="is_deleted_text"></div>
+					</div>
+
+					<div class="form-item">
+						<span class="form-item-title">市场价：</span>
+						<div class="form-item-content color-red">
+							￥<span data-bind="market_price"></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-7 form-col form-col-min">
+					<div class="form-item pb-10">
+						<span class="form-item-title">封面：</span>
+						<div class="form-item-content">
+							<div class="form-image-wrapper fl">
+								<span class="image-contain" data-bind="cover_src_string" data-bind-type="bg-img" style="background-image:url(../../../images/upload-default-img.png);"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="specificationsWrapperView">
+				<hr>
+				<div class="form-item mb-0">
+					<div class="form-item-title"><h4 class="h4">库存/规格</h4></div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">规格设置：</span>
+					<div class="form-item-content" data-bind="is_unified_spec_text"></div>
+				</div>
+
+				<div class="view-spec-multiple-box" hidden>
+					<div class="form-item">
+						<span class="form-item-title">&nbsp;</span>
+						<div class="form-item-content">
+							<p class="pt-15 b-t max-w-1200 f12 color-gray">价格与库存</p>
+							<table class="spec-values-table max-w-1200"></table>
+						</div>
+					</div>
+				</div>
+				<div class="view-spec-single-box" hidden>
+					<div class="form-item">
+						<span class="form-item-title">库存：</span>
+						<div class="form-item-content" data-bind="stock"></div>
+					</div>
+
+					<div class="form-item mb-0">
+						<span class="form-item-title">销售价：</span>
+						<div class="form-item-content color-red">
+							￥<span data-bind="price"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<hr>
+			<div class="form-item mb-0">
+				<div class="form-item-title"><h4 class="h4">商品信息</h4></div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">图集(多张)：</span>
+				<div class="form-item-content">
+					<ul class="form-img-list m-0 box-clear"></ul>
+					<div class="color-gray">未上传图集！</div>
+				</div>
+			</div>
+			<div id="shopInfoWrapperView">
+				<div class="form-item mr-30">
+					<span class="form-item-title">是否上架：</span>
+					<div class="form-item-content" data-bind="is_marketable_text"></div>
+				</div>
+				<div class="form-item">
+					<span class="form-item-title">是否列出：</span>
+					<div class="form-item-content" data-bind="is_list_text"></div>
+				</div>
+			</div>
+
+			<div>
+				<hr>
+				<div class="form-item mb-0">
+					<div class="form-item-title"><h4 class="h4">物流/其他</h4></div>
+				</div>
+				<div class="form-item mr-30">
+					<span class="form-item-title">统一邮费：</span>
+					<div class="form-item-content color-red">
+						￥<span data-bind="delivery_fees" data-default-value="0"></span>
+					</div>
+				</div>
+
+				<div class="form-item">
+					<span class="form-item-title">备注：</span>
+					<div class="form-item-content" data-bind="remark" data-default-value="-"></div>
+				</div>
+			</div>
+
+		</div>
+
+		<hr>
+		<div class="form-item mb-0">
+			<div class="form-item-title"><h4 class="h4">商品内容</h4></div>
+		</div>
+		<div class="form-item">
+			<span class="form-item-title">图文列表：</span>
+			<div class="form-item-content">
+				<table class="mc-list-table form-view-container max-w-1200" id="viewContentTable">
+					<thead>
+					<tr>
+						<td width="60">类型</td>
+						<td>详细内容</td>
+					</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+
+		<hr>
+		<div class="form-group-wrapper">
+			<div class="form-item mt-30 mb-15">
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<button class="btn btn-sm btn-default btn-big btn-close" type="button">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 列表模板 -->
+	<script type="text/html" id="listTemplate">
+		{{each result as item}}<tr data-id="{{item.product_id}}">
+			<td><input type="checkbox"></td>
+			<td>{{if item.is_deleted}}<span class="color-dark-gray">已禁用</span>{{else}}<span class="color-light-gray">否</span>{{/if}}</td>
+			<td>{{if !item.is_marketable}}<span class="color-dark-gray">已下架</span>{{else}}<span class="color-light-gray">是</span>{{/if}}</td>
+			<td><div class="image-contain wh-40" style="background-image: url({{item.cover_src_string || defaultImageUrl}});"></div></td>
+			<td><span class="text-cover color-gray strong">{{item.stock || 0}}</span></td>
+			<td><span class="color-orange strong">￥{{item.price}}</span></td>
+			<td><span class="text-cover strong">{{item.name}}</span></td>
+			<td><span class="mc-btn-text btn-edit mr-15">修改</span> <span class="mc-btn-text btn-view">查看</span></td>
+		</tr>{{/each}}
+		{{if !result.length}}<tr><td class="td-none text-center" colspan="8">暂无内容</td></tr>{{/if}}
+	</script>
+
+
+	<!-- 商品分类列表模板 -->
+	<script type="text/html" id="categoriesTemplate">
+		{{each result as item}}<li class="mc-choose-item mb-10" data-id="{{item.product_category_id}}">{{item.name}}</li>{{/each}}
+		{{if !result.length}}<span class="color-gray">请先添加分类！</span>{{/if}}
+	</script>
+
+
+	<!-- 规格列表模板 -->
+	<script type="text/html" id="specificationsTemplate">
+		{{each result as item}}<li class="mc-choose-item" data-id="{{item.specification.specification_id}}">{{item.specification.name}}</li>{{/each}}
+		{{if !result.length}}<small class="ml-5">还没有创建过任何规格哦！</small>{{/if}}
+	</script>
+
+
+	<!-- 规格值列表模板 -->
+	<script type="text/html" id="specificationsValuesTemplate">
+		{{each result as item}}<li data-id="{{item.specification.specification_id}}" data-name="{{item.specification.name}}">
+			<div class="spec-values-group-name mr-15 fl">{{item.specification.name}}</div>
+			<div class="fl">{{each item.specificationValues as valueItem}}
+				<label><input type="checkbox" {{if valueItem.checked}}checked="checked"{{/if}} data-id="{{valueItem.specification_value_id}}" data-s-id="{{valueItem.specification_id}}"> <span>{{valueItem.name}}</span></label>{{/each}}</div>
+		</li>{{/each}}
+	</script>
+
+
+	<!-- 规格值价格、库存表格模板 -->
+	<script type="text/html" id="specificationsStockTemplate">
+		{{if list.length}}<thead>
+		<tr>
+			{{each titles as name}}<td>{{name}}</td>{{/each}}
+			<td class="per-20">价格（￥）</td>
+			<td class="per-20">库存</td>
+		</tr>
+		</thead>
+		<tbody>
+		{{each list as item}}<tr>
+			{{each item.list as valueItem}}<td>{{valueItem.name}}</td>{{/each}}
+			<td>
+				<input type="hidden" name="specificationValue" value="{{item.specification_value}}" data-not-null="1"/>
+				<input type="hidden" name="weight" value="1" data-not-null="1" />
+				<input type="text" class="form-control form-input" data-width="max" value="{{item.price}}" name="price" data-not-null="1"/>
+			</td>
+			<td><input type="text" class="form-control form-input" data-width="max" value="{{item.stock}}" name="stock" data-type="number" data-not-null="1"/></td>
+		</tr>{{/each}}
+		</tbody>{{/if}}
+	</script>
+
+
+	<!-- 查看 - 规格值价格、库存表格模板 -->
+	<script type="text/html" id="viewSpecificationsStockTemplate">
+		{{if list.length}}<thead>
+		<tr>
+			{{each titles as name}}<td>{{name}}</td>{{/each}}
+			<td class="per-20">价格（￥）</td>
+			<td class="per-20">库存</td>
+		</tr>
+		</thead>
+		<tbody>
+		{{each list as item}}<tr>
+			{{each item.list as valueItem}}<td>{{valueItem.name}}</td>{{/each}}
+			<td>{{item.price}}</td>
+			<td>{{item.stock}}</td>
+		</tr>{{/each}}
+		</tbody>{{/if}}
+	</script>
+
+
+	<!-- 图集模板 -->
+	<script type="text/html" id="photosTemplate">
+		{{each result as item}}<li>
+			<input type="hidden" name="file_resource_name" value="{{item.file_resource_name}}"/>
+			<input type="hidden" name="file_resource_id" value="{{item.file_resource_id}}"/>
+			<p class="image-contain" style="background-image:url({{item.file_resource_name_string || defaultImageUrl}});"></p>
+			<i class="fa fa-remove"></i>
+		</li>{{/each}}
+	</script>
+
+	<!-- 查看 - 图集模板 -->
+	<script type="text/html" id="viewPhotosTemplate">
+		{{each result as item}}<li>
+			<p class="image-contain" style="background-image:url({{item.file_resource_name_string || defaultImageUrl}});"></p>
+		</li>{{/each}}
+	</script>
+
+	<!-- 内容模块 模板 - 2 -->
+	<script type="text/html" id="editContent_2_Template">
+		{{each result as item}}<section class="row" style="display:{{display || 'none'}};">
+			<div class="box-clear">
+				<input type="hidden" name="videotex_picture_src" value="{{item.videotex_picture_src}}"/>
+				<input type="hidden" name="videotex_id" value="{{item.videotex_id}}"/>
+				{{if item.videotex_title || item.type == 'title'}}<div class="form-item">
+					<span class="form-item-title">标题：</span>
+					<div class="form-item-content">
+						<input class="form-control form-input" name="videotex_title" value="{{item.videotex_title}}" data-width="max" maxlength="200" placeholder="标题"/>
+						<div class="mt-5 color-light-gray"><small>标题在小程序内“加粗高亮显示”</small></div>
+					</div>
+				</div>{{else if item.videotex_content || item.type == 'content'}}
+				<div class="form-item">
+					<span class="form-item-title">内容：</span>
+					<div class="form-item-content">
+						<textarea class="form-control form-input" name="videotex_content" data-width="max" maxlength="12000" placeholder="内容">{{item.videotex_content}}</textarea>
+					</div>
+				</div>{{else}}
+				<div class="form-item">
+					<span class="form-item-title">图片：</span>
+					<div class="form-item-content">
+						<div class="form-image-wrapper fl">
+							<span class="image-contain" style="background-image:url({{item.videotex_picture_src_string || defaultImageUrl}});"></span>
+						</div>
+						<div class="mt-10 ml-10 fl">
+							<span class="btn btn-info btn-sm btn-file btn-file-single">上传图片</span>
+							<p class="mt-5 color-light-gray">
+								<small>仅支持jpg、gif、png，大小不超过1MB</small>
+								<small class="block">建议尺寸: 宽度不低于750px</small>
+							</p>
+						</div>
+					</div>
+				</div>{{/if}}
+			</div>
+
+			<div class="form-item form-col">
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<span class="btn mc-btn-blue-line btn-sm btn-control" data-mode="image"><i class="fa fa-plus-circle"></i> 图片</span>
+					<span class="btn mc-btn-blue-line btn-sm btn-control" data-mode="title"><i class="fa fa-plus-circle"></i> 标题</span>
+					<span class="btn mc-btn-blue-line btn-sm btn-control" data-mode="content"><i class="fa fa-plus-circle"></i> 内容</span>
+					<span class="btn btn-default btn-sm ml-10 btn-control" data-mode="remove"><i class="fa fa-times-circle"></i> 移除</span>
+					<span class="btn btn-default btn-sm ml-10 btn-control" data-mode="move-up"><i class="fa fa-angle-double-up"></i> 上移</span>
+					<span class="btn btn-default btn-sm btn-control" data-mode="move-down"><i class="fa fa-angle-double-down"></i> 下移</span>
+				</div>
+			</div>
+		</section>{{/each}}
+		{{if !result.length}}<div class="content-none">暂无内容!</div> {{/if}}
+	</script>
+
+
+	<!-- 查看 - 内容模块 模板 -->
+	<script type="text/html" id="viewViewContentTemplate">
+		{{each result as item index}}<tr>
+		{{if item.videotex_title}}
+			<td class="color-light-gray">标题</td>
+			<td>{{item.videotex_title}}</td>
+		{{else if item.videotex_picture_src_string}}
+			<td class="color-light-gray">图片</td>
+			<td><a class="image-contain wh-40 block" href="{{item.videotex_picture_src_string || '#'}}" {{if item.videotex_picture_src_string}}target="_blank"{{/if}} style="background-image: url({{item.videotex_picture_src_string || defaultImageUrl}});"></a>
+			</td>
+		{{else}}
+			<td class="color-light-gray">内容</td>
+			<td>{{item.videotex_content}}</td>
+		{{/if}}
+		</tr>{{/each}}
+		{{if !result.length}}<tr><td class="td-none" colspan="2">暂无内容!</td></tr>{{/if}}
+	</script>
+
+
+	<script type="text/javascript" src="../../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: true,
+            files: [
+                '../js/products.js'
+            ]});
+	</script>
+</body>
+</html>

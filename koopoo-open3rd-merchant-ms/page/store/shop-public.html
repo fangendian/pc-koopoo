@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提交发布 - 靠谱</title>
+	<link href="../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../styles/animate.min.css?v=3.1.0" rel="stylesheet">
+    <link href="../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../styles/common.css" rel="stylesheet">
+	<style>
+		.mc-tabs-bar { width:40%;}
+		.mc-tabs-bar>p { width:calc(100% / 2 - 2px);}
+
+		.mc-btn-big { min-width:160px;}
+		.qrcode-box img { width:200px; height:200px; background-color:#eee;}
+
+	</style>
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="mc-bg-white box-clear p-10 border">
+		<div class="mc-tabs-bar pt-20 box-clear" id="headerBar">
+			<p class="disabled" data-bar="auditBox">提交审核</p>
+			<p class="disabled" data-bar="publicBox">发布上线</p>
+		</div>
+
+		<div class="min-height">
+			<div class="mt-40 p-30 text-center" id="bindWxBox" hidden>
+				<div class="box-content" hidden>
+					<i class="fa fa-info-circle f50 color-cyan"></i>
+					<h4>请先绑定小程序</h4>
+					<p>必须先绑定小程序后才能继续操作！</p>
+					<span class="btn btn-primary mc-btn-big mt-10" id="btnBindWx">去设置</span>
+				</div>
+			</div>
+
+			<div class="mt-40 p-30 text-center" id="auditBox" hidden>
+				<div class="box-before" hidden>
+					<i class="fa fa-info-circle f50 color-cyan"></i>
+					<h4>请绑定小程序</h4>
+					<p>必须先绑定小程序后才能继续操作！</p>
+				</div>
+				<div class="box-content" hidden>
+					<h4>可以提交审核啦</h4>
+					<p>在提交审核小程序之前，建议再仔细预览一遍小程序！</p>
+					<div class="mt-10">
+						<span class="btn btn-default mc-btn-big mr-5" data-toggle="modal" data-target="#wxQrCodeModal"><i class="fa fa-file-code-o"></i> 预览小程序</span>
+						<button class="btn btn-primary mc-btn-big" id="btnAudit"><i class="fa fa-upload"></i> 提交审核</button>
+					</div>
+				</div>
+				<div class="box-result" id="auditBoxResult" hidden>
+					<p>处理中...</p>
+				</div>
+			</div>
+
+			<div class="mt-40 p-30 text-center" id="publicBox" hidden>
+				<div class="box-before" hidden>
+					<i class="fa fa-info-circle f50 color-cyan"></i>
+					<h4>请先提交审核</h4>
+					<p>必须先提交审核并且通过后才能继续操作噢！</p>
+				</div>
+				<div class="box-content" hidden>
+					<h4>发布小程序</h4>
+					<p>发布小程序后，任何微信用户均不能发现和使用，还需要执行是否“可见”噢。</p>
+					<span class="btn btn-success mc-btn-big mt-10" id="btnPublic"><i class="fa fa-paper-plane-o"></i> 发布</span>
+				</div>
+				<div class="box-result" hidden>
+					<i class="fa fa-check-circle f50 color-green"></i>
+					<h4>小程序已发布成功</h4>
+					<p>点击“可见”按钮，会即刻执行显示小程序（任何微信用户都可以发现和使用）。</p>
+					<span class="btn btn-primary mc-btn-big mt-10" id="btnVisible"><i class="fa fa-eye"></i> 可见</span>
+				</div>
+				<div class="box-visible" id="visibleBoxResult" hidden>
+					<p>处理中...</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- wx qrCode Modal -->
+	<div class="modal fade" id="wxQrCodeModal" tabindex="-1" role="dialog" aria-labelledby="wxQrCodeModal">
+		<div class="modal-dialog modal-dialog-min" style="width:360px;" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">小程序二维码</h4>
+				</div>
+				<div class="modal-body pb-30 text-center">
+					<div class="qrcode-box p-15">
+						<img id="qrcodeImg" hidden/>
+						<span></span>
+					</div>
+					<span>微信扫一扫预览小程序</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/html" id="auditResultTemplate">
+	{{if status == 0}}
+		<i class="fa fa-check-circle f50 color-green"></i>
+		<h4>审核成功</h4>
+		<p>恭喜，审核成功啦！接下来你可以去发布上线了。</p>
+	{{else if status == 1}}
+		<i class="fa fa-warning f50 color-orange"></i>
+		<h4>审核失败</h4>
+		<p>{{#reason}}</p>
+		<p>您可以登录<a href="https://mp.weixin.qq.com" target="_blank">微信公众平台</a>，如有问题请联系靠谱。</p>
+		<span class="btn btn-warning mc-btn-big mt-10" id="btnAuditAgain"><i class="fa fa-upload"></i> 再次提交审核</span>
+	{{else if status == 2}}
+		<i class="fa fa-warning f50 color-cyan"></i>
+		<h4>审核中</h4>
+		<p>微信公众平台审核过程可能需要1-5个工作日，请耐心等待~<br><small class="color-gray">如有问题，请联系我们 服务热线021-0000000。</small></p>
+	{{else}}
+		<i class="fa fa-info-circle f50 color-cyan"></i>
+		<h4>处理中</h4>
+		<p>当前状态可能正处于审核处理中，请耐心等待~<br><small class="color-gray">如有问题，请联系我们 服务热线021-0000000。</small></p>
+	{{/if}}
+	</script>
+
+	<script type="text/html" id="visibleResultTemplate">
+	{{if status == 0}}
+		<i class="fa fa-eye f50 color-green"></i>
+		<h4>当前小程序线上可见</h4>
+		<p>可见，表示任何微信用户都可以发现和使用小程序。</p>
+		<span class="btn btn-primary mc-btn-big mt-10 btn-visible-close"><i class="fa fa-eye-slash"></i> 变更为不可见</span>
+	{{else}}
+		<i class="fa fa-eye-slash f50 color-dark-gray"></i>
+		<h4>当前小程序线上不可见</h4>
+		<p>不可见，表示任何微信用户都不能发现和使用小程序。</p>
+		<span class="btn btn-primary mc-btn-big mt-10 btn-visible-open"><i class="fa fa-eye"></i> 变更为可见</span>
+	{{/if}}
+	</script>
+
+
+	<script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: false,
+            files: [
+                '../../scripts/global/jquery.qrcode.min.js',
+                '../../scripts/local/store-public.js'
+            ]
+        });
+	</script>
+</body>
+</html>

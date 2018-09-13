@@ -1,0 +1,212 @@
+@charset "utf-8";
+* {	margin: 0px;padding: 0px;}
+html { height:100%; overflow-y:auto;}
+body { height:100%; overflow-x:hidden; padding: 0 10px;}
+
+/** 填充 **/
+.padding-left-p5 { padding-top: 5px;}
+.padding-left-p40 { padding-left: 40px;}
+
+/** 间隔 **/
+.margin-top-p5 { margin-top: 5px;}
+.margin-top-p10 { margin-top: 10px;}
+.margin-bottom-p5 { margin-bottom: 5px;}
+.margin-bottom-p10 { margin-bottom: 10px;}
+.margin-left-p12 { margin-left: 12px;}
+
+/** 加载提示框 **/
+.wait { 
+	display:none; min-width:150px; height:34px; margin:-15px 0 0 -90px; background-color:rgba(0,0,0,0.85);
+	position:fixed; left:50%; top:50%; z-index:100000;
+	padding:2px 15px; line-height:30px; text-align:center; border-radius:6px; color:white; font-size:14px;
+}
+.wait i { width:24px; height:24px; margin:3px 5px 0 0; background:url(../images/loading.gif); float:left;}
+.wait span { display:inline-block;}
+.wait-bg, .first-bg { display:none;position:fixed;width:100%;height:100%;background:#000;z-index:999;top:0;left:0;opacity:0.2;}
+
+/** 颜色样式 **/
+.dark { color: #333333 !important;}
+.white { color: #ffffff !important;}
+.red { color: #dd5a43 !important;}
+.red2 { color: #e08374 !important;}
+.light-red { color: #ff7777 !important;}
+.blue { color: #478fca !important;}
+.light-blue { color: #93cbf9 !important;}
+.green { color: #69aa46 !important;}
+.light-green { color: #b0d877 !important;}
+.orange { color: #ff892a !important;}
+.orange2 { color: #feb902 !important;}
+.light-orange { color: #fcac6f !important;}
+.purple { color: #a069c3 !important;}
+.pink { color: #c6699f !important;}
+.pink2 { color: #d6487e !important;}
+.brown { color: #a52a2a !important;}
+.grey { color: #777777 !important;}
+.light-grey { color: #bbbbbb !important;}
+
+#MainPart { margin-top: 10px;}
+
+/** 查询参数 **/
+form.form-search { }
+.search-label { padding-left: 0 !important;padding-right: 0 !important;}
+.search-control { padding-left: 8px;padding-right: 0 !important;margin-bottom: 5px;}
+.search-btn-pack { text-align: center !important;margin-bottom: 5px;}
+
+/** 窗口按钮 **/
+.row-ext { padding-bottom: 10px;}
+.part-footer { margin-bottom: 20px;}
+
+/** 新增 **/
+form.form-add { }
+
+/** 编辑 **/
+form.form-edit { }
+
+/** 详情 **/
+.form-detail { }
+.detail-title { text-align: right;width: 15%;font-weight:bold;}
+.detail-content { width: 35%;}
+
+/** modal弹窗 **/
+.form-modal { }
+
+/** echarts **/
+.echarts-container { border:1px solid #B7DAEF;}
+
+/** 图集 **/
+.img_item { width:150px; height:150px; position:relative; padding:0 10px 10px 0; float:left;}
+.img_item img { width:100%; height:100%;}
+.img_remove_tag { width:24px; height:24px; position:absolute; right:10px; top:0; z-index:10; background-color:red; 
+	color:white; font-size:24px; line-height:20px; text-align:center; cursor:pointer;}
+
+/** 进度 **/
+.progress-bar-span { color: #111;}
+
+/** 报表 **/
+.report-container { padding: 10px 5px 10px 5px;border: 2px solid #EEEEEE;}
+
+/** toastmessage **/
+.toast-item-image { top: 38px;}
+.toast-item p { margin-right: 30px;}
+
+/** jgrid **/
+.ui-jqgrid .ui-jqgrid-titlebar { min-height: 34px;padding: 6px 8px 2px 8px;}
+/*.table>tbody>tr.success>td, .table>tbody>tr.success>th, .table>tbody>tr>td.success, .table>tbody>tr>th.success, .table>tfoot>tr.success>td, .table>tfoot>tr.success>th, .table>tfoot>tr>td.success, .table>tfoot>tr>th.success, .table>thead>tr.success>td, .table>thead>tr.success>th, .table>thead>tr>td.success, .table>thead>tr>th.success {*/
+    /*background-color: #C0D8B6;*/
+/*}*/
+/*.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {*/
+    /*padding: 6px 8px;*/
+/*}*/
+.ui-jqgrid .ui-jqgrid-htable .ui-th-div { margin-top: 0px;}
+.ui-state-alt-row { background-color: #dff0d8;}
+.ui-jqgrid .ui-pg-button span { margin: 2px 2px 0px 2px;}
+.ui-jqgrid .ui-jqgrid-caption { color: #27275A;background: #EFF3F7;font-weight: bold;}
+.ui-jqgrid .ui-jqgrid-pager .navtable td, .ui-jqgrid .ui-jqgrid-toppager .navtable td {
+    padding: 0px 6px 0px 0px;
+}
+
+.state_one { background: #C1C1C1;}
+
+/** select2 **/
+.select2-container .select2-choice { height: 30px;line-height: 30px;}
+.select2-results .select2-highlighted .state_one { background: #3875d7;color: #fff;}
+
+/** multiselect **/
+.form-group-sm .multiselect-search { height: 34px;}
+
+/** addtabs **/
+.iframeClass { padding-bottom: 50px;}
+
+/** laydate **/
+.laydate-icon, .laydate-icon-default, .laydate-icon-danlan, .laydate-icon-dahong, .laydate-icon-molv {
+    height: 30px;line-height: 30px;padding-left: 5px;
+}
+.laydate_box,.laydate_box *{
+  -webkit-box-sizing: initial;
+     -moz-box-sizing: initial;
+          box-sizing: initial;
+}
+.laydate_box:before,.laydate_box *:before,
+.laydate_box:after,.laydate_box *:after{
+  -webkit-box-sizing: initial;
+     -moz-box-sizing: initial;
+          box-sizing: initial;
+}
+
+
+/** 所有的新增,编辑,查看记录的div都隐藏*/
+#AddCustomPart, #EditCustomPart, #GlobalDetailPart{
+    display: none;
+}
+
+
+
+/** 吴总hack*/
+body { padding:0;}
+#MainPart { margin-top:0;}
+
+.form-search-wrapper { min-height:111px; padding:0 10px 8px 10px;}
+.search-label { margin-bottom:0; padding-left:2px !important; padding-right:0 !important; font-size:12px;}
+.search-control { margin-bottom:2px; padding:0;}
+.search-btn-pack { margin-bottom:0; text-align:center !important;}
+.search-btn-pack button { padding-left:15px; padding-right:15px;}
+
+.form-group-content { margin-bottom:8px; margin-left:-8px; margin-right:-8px; padding-bottom:8px; border-bottom:1px solid #eee;}
+.form-group-content > div { padding-left:8px; padding-right:8px; display:none;}
+/* 控制搜索栏的内容数量 */
+.form-group-content.form-group-show-all > div { display:block;}
+@media (max-width: 768px) { /* xs */
+    .form-group-content > :nth-of-type(1),
+    .form-group-content > :nth-of-type(2) { display:block;}
+}
+@media (min-width: 768px) { /* sm */
+    .form-group-content > :nth-of-type(1),
+    .form-group-content > :nth-of-type(2),
+    .form-group-content > :nth-of-type(3) { display:block;}
+}
+@media (min-width: 992px) { /* md */
+    .form-group-content > :nth-of-type(1),
+    .form-group-content > :nth-of-type(2),
+    .form-group-content > :nth-of-type(3),
+    .form-group-content > :nth-of-type(4) { display:block;}
+}
+@media (min-width: 1200px) { /* lg */
+    .form-group-content > :nth-of-type(1),
+    .form-group-content > :nth-of-type(2),
+    .form-group-content > :nth-of-type(3),
+    .form-group-content > :nth-of-type(4),
+    .form-group-content > :nth-of-type(5),
+    .form-group-content > :nth-of-type(6) { display:block;}
+}
+.form-group-control-bar { display:inline-block; font-size:12px; cursor:pointer;}
+.form-group-control-bar.btn-mc-strong { font-weight:bold;}
+.form-group-control-bar i { margin:1px 0 0 2px; float:right;}
+
+
+.page-main-wrapper { height:calc(100vh - 121px); padding:0 10px;}
+.ui-jqgrid-view.table-responsive { overflow-x:hidden;}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    /*padding: 3px 5px;*/
+    /*如果jqgrid表格里面有多个status的列*/
+    /*padding: 4px 7px;*/
+    padding: 5px 7px;
+}
+
+.colorTag{
+    line-height: 1.4;
+    /*border: 1px solid transparent;*/
+    border: 0px solid transparent;
+    /*//如果jqgrid表格里面有多个status的列*!*/
+}
+
+.table>tbody>tr.active>td, .table>tbody>tr.active>th, .table>tfoot>tr.active>td, .table>tfoot.active>tr>th, .table>thead>tr.active>td, .table>thead>tr.active>th {
+    background-color: #dde5f2; color:#000;
+}
+.table>tbody>tr.success>td, .table>tbody>tr.success>th, .table>tbody>tr>td.success, .table>tbody>tr>th.success, .table>tfoot>tr.success>td, .table>tfoot>tr.success>th, .table>tfoot>tr>td.success, .table>tfoot>tr>th.success, .table>thead>tr.success>td, .table>thead>tr.success>th, .table>thead>tr>td.success, .table>thead>tr>th.success {
+    background-color: #b6d2ea; color:#000;
+}
+.ui-state-alt-row {
+    background-color: #eff3f9;
+}
+

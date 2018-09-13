@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>支付信息</title>
+	<link href="../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../styles/common.css" rel="stylesheet">
+	<link href="../../styles/animate.min.css" rel="stylesheet">
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="page-list-container">
+		<div class="search-wrapper mc-bg-white border">
+			<div class="p-15 box-clear">
+				<div class="ml-5 fl">
+					<div class="input-group search-bar box-clear fl" id="searchBar">
+						<i class="fa fa-search"></i>
+						<input type="text" name="keyword" class="form-control" placeholder="昵称查询">
+						<span class="search-btn-reset"><i class="fa fa-remove"></i></span>
+						<span class="input-group-addon btn btn-default" id="btnSearch">搜索</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="mc-bg-white mt-10 mb-10 border">
+			<div class="page-main-wrapper">
+				<table class="mc-list-table main-list main-images-list" id="categoriesTable" data-mode="edit">
+					<thead>
+					<tr>
+						<!--<td width="50">选择</td>-->
+						<td>昵称</td>
+						<td>头像</td>
+						<td>性别</td>
+						<td class="per-30">地区</td>
+						<td>注册时间</td>
+						<td width="100">操作</td>
+					</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+				<div class="mc-list-tools box-clear pt-20 pb-20 pl-15 pr-15" id="listTools" hidden>
+					<div class="fr" id="pageNavWrapper"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 查看详细 -->
+	<div class="mc-bg-white border p-15 box-clear view-data-container" id="viewFormContainer" hidden>
+		<div class="form-header box-clear mb-20 b-b">
+			<div class="mr-10 fl f18"><i class="fa fa-search-plus"></i> 查看会员</div>
+		</div>
+
+		<div class="form-group-wrapper view-data-mode form-view-base">
+			<div class="form-item">
+				<span class="form-item-title">头像：</span>
+				<div class="form-item-content">
+					<p class="image-contain wh-80" data-bind="avatar_url_string_small" data-bind-type="bg-img"></p>
+				</div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">昵称：</span>
+				<div class="form-item-content" data-bind="nickname" data-default-value="-"></div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">性别：</span>
+				<div class="form-item-content" data-bind="sex"></div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">地区：</span>
+				<div class="form-item-content" data-bind="area"></div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">小程序ID：</span>
+				<div class="form-item-content" data-bind="open_xcx_id"></div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">注册时间：</span>
+				<div class="form-item-content" data-bind="create_time"></div>
+			</div>
+
+		</div>
+
+		<div class="form-group-wrapper">
+			<div class="form-item mt-30 mb-15">
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<button class="btn btn-sm btn-default btn-big" id="btnViewFormClose" type="button">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 列表模板 -->
+	<script type="text/html" id="listTemplate">
+		{{each result as item}}<tr data-id="{{item.user_id}}">
+			<!--<td><input type="checkbox"></td>-->
+			<td><span class="text-cover strong">{{item.nickname}}</span></td>
+			<td><div class="image-contain wh-40" style="background-image: url({{item.avatar_url_string || default_img_src}});"></div></td>
+			<td><span class="text-cover">{{item.sex}}</span></td>
+			<td><span class="text-cover">{{item.area}}</span></td>
+			<td><span class="text-cover">{{item.create_time}}</span></td>
+			<td><span class="mc-btn-text btn-view">查看</span></td>
+		</tr>{{/each}}
+		{{if !result.length}}<tr><td colspan="6" class="td-none text-center">暂无内容</td></tr>{{/if}}
+	</script>
+
+	<script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: false,
+            files: [
+                '../../scripts/global/app.dict.js',
+                '../../scripts/local/store-user.js'
+            ]
+        });
+	</script>
+</body>
+</html>
+

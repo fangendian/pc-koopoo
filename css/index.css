@@ -1,0 +1,301 @@
+html,body {
+	background: #F9FAF9;
+}
+
+/**
+* 轮播图
+*
+*/
+.swiper-container{
+	width: 100%;
+	height: auto;
+	display: block;
+    margin-bottom: 114px;
+    position: relative;
+}
+.swiper-slide img{
+    width: 100%;
+}
+.swiper-pagination-bullets {
+	width: 100%;
+	height: 50px;
+	position: absolute;
+	bottom: 10px;
+    left: 0;
+}
+.swiper-pagination-bullet {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    background: #fff;
+    opacity: 0.2;
+    margin: 0 5px;
+}
+ 
+.swiper-pagination-bullet-active {
+    opacity: 0.85;
+}
+
+/* 靠谱闪店 */
+.top-header {
+    margin:0 auto;
+    text-align: center;
+}
+.top-header p {
+    font-size: 30px;
+	color: #000;
+	margin: 43px 0 100px 0;
+	letter-spacing: 0;
+	text-align: center;
+	cursor: pointer;
+	cursor: hand;
+}
+.saas {
+	max-width: 750px;
+	margin: 0 auto 2.5%;
+}
+.same {
+	max-width: 210px;
+	height: 300px;
+	margin: 30px 80px;
+	display: inline-block;
+}
+.same img {
+	display: block;
+	margin: 0 auto;
+}
+.onekey-text,.fich-text,.plug-text,.team-text {
+	text-align: center;
+}
+.onekey-text p,.fich-text p,.plug-text p,.team-text p {
+	font-size: 20px;
+	color: #1692B2;
+	margin: 38px 0 20px 0;
+	letter-spacing: 0;
+	text-align: center;
+}
+.onekey-text span,.fich-text span,.plug-text span,.team-text span {
+	font-size: 12px;
+	color: #69827B;
+	letter-spacing: 0;
+	text-align: center;
+	line-height: 18px;
+}
+
+/*使用次数*/ 
+.howmany {
+	width: 100%;
+	position: relative;
+}
+.howmany>img {
+	width: 100%;
+}
+.text-detail {
+	width: 1180px;
+	height: 150px;
+	position: absolute;
+	top: -1%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	text-align: center;
+}
+.text-detail p {
+	font-size: 21px;
+	color: #fff;
+	letter-spacing: 0;
+	text-align: center;
+	margin-bottom: 24px;
+}
+.text-detail p img {
+	display: inline-block;
+	margin: -4px 4px 0 4px;
+}
+.text-detail span {
+	width: 620px;
+	font-size: 100px;
+	color: #fff;
+	letter-spacing: 0.72px;
+	text-align: center;
+}
+
+
+/* 靠谱好物 */
+.koopoo-goods {
+	width: 100%;
+	text-align: center;
+	margin-top: 80px;
+} 
+.koopoo-goods img {
+	text-align: center;
+}
+.koopoo-goods .goods {
+	font-size: 30px;
+	color: #000000;
+	letter-spacing: 0;
+	margin: 15px 0 10px 0;
+	text-align: center;
+	cursor: pointer;
+	cursor: hand;
+}
+.koopoo-goods .gobal {
+	font-size: 16px;
+	color: #4D4D4D;
+	letter-spacing: 0;
+	text-align: center;
+}
+.goods-detail {
+	width: 1200px;
+	height: 1038px;
+	margin: 30px auto;
+	position: relative;
+}
+.goods-detail>img {
+	width: 100%;
+}
+.goods-box {
+	max-width: 190px;
+	position: absolute;
+	top: 438px;
+	left: 528px;
+	opacity: 0;
+}
+.chat-text p,.famous-text p,.slider-text p,.stric-text p {
+	font-size: 15px;
+	color: #000000;
+	margin-bottom: 20px;
+	letter-spacing: 0;
+	text-align: center;
+}
+.chat-text span,.famous-text span,.slider-text span,.stric-text span {
+	font-size: 12px;
+	color: #4D4D4D;
+	letter-spacing: 0;
+	text-align: center;
+	line-height: 18px;
+}
+
+
+/* 靠谱学院 */
+.koopoo-school {
+	width: 100%;
+	text-align: center;
+	margin-top: 80px;
+	padding: 77px 0 10px 0;
+	background: #f7f7f7;
+} 
+.koopoo-school img {
+	text-align: center;
+}
+.koopoo-school .goods {
+	font-size: 30px;
+	color: #000000;
+	letter-spacing: 0;
+	margin: 15px 0 10px 0;
+	text-align: center;
+	cursor: pointer;
+	cursor: hand;
+}
+.koopoo-goods .gobal {
+	font-size: 16px;
+	color: #4D4D4D;
+	letter-spacing: 0;
+	text-align: center;
+}
+.school-detail {
+	width: 1144px;
+	height: 388px;
+	margin: 100px auto 200px;
+}
+.school-left {
+	padding-top: 47px;
+	display: none;
+}
+.school-detail .show-school {
+	display: block;
+}
+.school-left {
+	width: 50%;
+	height: 100%;
+	float: left;
+	position: relative;
+}
+.school-right {
+	width: 50%;
+	height: 100%;
+	float: right;
+	position: relative;
+}
+.school-left p {
+	font-size: 26px;
+	color: #000000;
+	letter-spacing: 0;
+	line-height: 44px;
+	text-align: left;
+	margin-bottom: 44px;
+} 
+.school-left span {
+	width: 429px;
+	font-size: 12px;
+	color: #656565;
+	letter-spacing: 0;
+	line-height: 24px;
+	display: block;
+	text-align: left;
+	margin-bottom: 25px;
+}
+.school-left a {
+	width: 100px;
+	color: #fff;
+	display: block;
+	padding: 11px 16px 11px 13px;
+	font-weight: bold;
+	background-image: linear-gradient(-135deg, #2C85DD 0%, #68CEE7 100%);
+	border-radius: 89px;
+} 
+.school-left a img {
+	display: inline-block;
+	margin: -3px 0 0 12px;
+}
+.slide,.slide-inner,.item-img {
+	width: 572px;
+	height: 388px;
+	overflow: hidden;
+}
+.slide-inner div {
+	display: none;
+}
+.slide img {
+	width: 100%;
+}
+.slide ol {
+	position: absolute;
+	bottom: -30px;
+	right: -20px;
+}
+.slide li {
+	width: 50px;
+	height: 5px;
+	background: #ECECEC;
+	float: left;
+	margin-right: 20px;
+}
+.slide-indicators .cont-show {
+	background: #2ea7e0;
+}
+.color {
+	background: #fff;
+}
+
+
+/*底部*/
+footer {
+	width: 100%;
+	height: 100px;
+	background: url(../img/foot_bac.jpg) no-repeat;
+	background-size: 100% 100%;
+	padding: 15px 104px 15px 104px;
+}
+

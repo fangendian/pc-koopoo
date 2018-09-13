@@ -1,0 +1,281 @@
+html body {
+	background: #f8f8f8;
+}
+
+.clearfix {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+/*我们的使命*/
+.mission {
+	width: 1200px;
+	height: 667px;
+	margin: 90px auto 0;
+	position: relative;
+}
+.ourmission {
+	max-width: 582px;
+	min-height: 430px;
+	background: #fff;
+	margin-left: 70px;
+	opacity: 0.98;
+	padding: 30px 42px 30px 27px;
+	position: relative;
+	top: 84px;
+	z-index: 10;
+}
+.ourmission p {
+	font-size: 35px;
+	color: #000000;
+	letter-spacing: 0;
+	margin-bottom: 40px;
+}
+.ourmission span {
+	font-size: 16px;
+	color: #000000;
+	letter-spacing: 0;
+	text-align: justify;
+	line-height: 24px;
+}
+.mission-img {
+	max-width: 667px;
+	max-height: 667px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: -1;
+}
+.mission-img img {
+	width: 100%;
+}
+
+
+/*我们的价值*/
+.value {
+	max-width: 924px;
+	margin: 100px auto 0;
+	position: relative;
+}
+.center {
+	width: 220px;
+	height: 220px;
+	background: #f8f8f8;
+	border-radius: 50%;
+	position: absolute;
+	top: 110px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.center p {
+	font-size: 24px;
+	color: #4A4E55;
+	letter-spacing: 0;
+	text-align: center;
+	margin: 80px auto;
+}
+.center p span {
+	font-size: 20px;
+	color: #4A4E55;
+	letter-spacing: 0;
+	text-align: center;
+}
+.clearfix {
+	content: '';
+	display: block;
+	clear: both;
+}
+.val-title p {
+	font-size: 24px;
+	margin-bottom: 15px;
+}
+.val-title .line {
+	width: 60px;
+	border-bottom: 6px solid #000;
+	margin-bottom: 52px;
+}
+.top-nav,.bottom-nav {
+	max-width: 924px;
+	max-height: 559px;
+}
+.top-nav .box,.bottom-nav .box {
+	float: left;
+}
+.video {
+	margin: 0 52px 52px 0;
+}
+.video,.tool {
+	width: 436px;
+	height: 559px;
+	background: #fff;
+}
+.video>p {
+	width: 0;
+	height: 0;
+	text-align: center;
+	border-top: 41px solid #829EED;
+	border-left: 41px solid #829EED;
+	border-right: 41px solid transparent;
+	border-bottom: 41px solid transparent;
+	position: relative;
+}
+.video>p>span {
+	width: 44px;
+	font-size: 20px;
+	color: #FFFFFF;
+	letter-spacing: 0;
+	text-align: center;
+	position: absolute;
+	top: -25px;
+	left: -38px;
+	display: block;
+	transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);		
+	-webkit-transform: rotate(-45deg);	
+	-o-transform: rotate(-45deg);		
+	-moz-transform: rotate(-45deg);	
+}
+.box p span svg {
+	font-size: 20px;
+}
+.tool>p {
+	width: 0;
+	height: 0;
+	text-align: center;
+	border-top: 41px solid #829EED;
+	border-left: 41px solid transparent;
+	border-right: 41px solid #829EED;
+	border-bottom: 41px solid transparent;
+	position: relative;
+	float: right;
+}
+.tool>p>span {
+	width: 44px;
+	font-size: 20px;
+	color: #FFFFFF;
+	letter-spacing: 0;
+	text-align: center;
+	position: absolute;
+	top: -25px;
+	left: -6px;
+	display: block;
+	transform: rotate(45deg);
+	-ms-transform: rotate(45deg);		
+	-webkit-transform: rotate(45deg);	
+	-o-transform: rotate(45deg);		
+	-moz-transform: rotate(45deg);
+}
+.video-detail img,.tool-detail img {
+	display: block;
+	margin: 10px auto;
+}
+.video-text .title,.tool-text .title {
+	font-size: 17px;
+	color: #4A4E55;
+	letter-spacing: 0;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.video-text .time,.tool-text .time {
+	width: 93px;
+	height: 20px;
+	background: #D4D4D4;
+	margin: 0 auto 10px;
+	border-radius: 10px;
+	font-size: 10px;
+	color: #FFFFFF;
+	letter-spacing: 0;
+	text-align: center;
+	line-height: 20px;
+}
+.video-text .detail,.tool .detail {
+	width: 210px;
+	font-size: 13px;
+	color: #9B9C9F;
+	letter-spacing: 0;
+	text-align: center;
+	line-height: 24px;
+	margin: 0 auto;
+}
+.tool-detail {
+	margin-top: 92px;
+} 
+
+
+/*我们的融资*/
+.financing {
+	max-width: 924px;
+	height: auto;
+	margin: 180px auto 150px;
+}
+.financ-detail {
+	width: 927px;
+	height: auto;
+	margin: 0 auto;
+}
+.financ-detail ul li {
+	width: 927px;
+	height: 145px;
+	background: #fff;
+	margin-bottom: 30px;
+}
+.financ-left {
+	width: 145px;
+	height: 145px;
+	background: -moz-linear-gradient(top, #FFD200 0%, #FFD200 100%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFD200), color-stop(100%,#FFD200)); 
+	background: -webkit-linear-gradient(top, #FFD200 0%,#FFD200 100%); 
+	background: -o-linear-gradient(top, #FFD200 0%,#FFD200 100%); 
+	background: -ms-linear-gradient(top, #FFD200 0%,#FFD200 100%); 
+	background: linear-gradient(to bottom, #FFD200 0%,#FFD200 100%); 
+	text-align: center;
+	padding-top: 35px;
+	float: left;
+}
+.financ-left p {
+	font-size: 14px;
+	color: #000000;
+	letter-spacing: -0.71px;
+	margin-bottom: 5px;
+}
+.financ-detail span {
+	font-size: 28px;
+	color: #000000;
+	letter-spacing: 0;
+}
+.financ-right {
+	width: 660px;
+	height: 145px;
+	margin-left: 60px;
+	float: left;
+}
+.financ-right div {
+	width: 59px;
+	height: 33px;
+	margin-top: 35px;
+}
+.financ-right div img {
+	width: 100%;
+}
+.financ-right p {
+	font-size: 16px;
+	color: #333333;
+	letter-spacing: -0.71px;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+
+
+
+/*底部*/
+footer {
+	width: 100%;
+	height: 100px;
+	background: url(../../img/foot_bac.jpg) no-repeat;
+	background-size: 100% 100%;
+	padding: 15px 104px 15px 104px;
+}

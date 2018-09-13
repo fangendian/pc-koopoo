@@ -1,0 +1,254 @@
+.banner {
+	position: relative;
+}
+.bg-res {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    height: auto;
+    min-width: 1440px;
+    width: 100%;
+    z-index: -10;
+}
+/*为了屏幕小于1440,图片能居中显示*/
+@media screen and (max-width: 1440px) {
+	.bg-res {
+	    left: 50%;
+	    margin-left: -720px;
+	}
+}
+.ban-text {
+	text-align: right;
+	position: absolute;
+	top: 300px;
+	right: 20%;
+	z-index: 10;
+}
+.ban-text p {
+	font-size: 48px;
+	color: #fff;
+}
+.ban-text span {
+	font-size: 30px;
+	color: #fff;
+}
+@media screen and (max-width: 700px) {
+	.ban-text p {
+		font-size: 30px;
+	}
+	.ban-text span {
+		font-size: 18px;
+	}
+}
+
+
+/*行业动态*/
+.felid {
+	max-width: 1180px;
+	height: auto;
+	margin: 24% auto 0;
+}
+.felid::after {
+	content: '';
+	clear: both;
+	display: block;
+}
+.click-more {
+	position: absolute;
+	right: 0;
+	top: 70px;
+}
+.fe-top>p,.fe-tops>p {
+	width: 86px;
+	padding: 28px 22px;
+	margin-bottom: 60px;
+	background: #0e68aa;
+	color: #fff;
+	font-size: 18px;
+}
+.fe-show {
+	max-width: 1180px;
+	max-height: 430px;
+}
+.fe-show .move-box {
+	max-width: 590px;
+	max-height: 430px;
+	position: relative;
+	float: left;
+}
+.show-left a img {
+	width: 100%;
+}
+.t-detali {
+	width: 295px;
+	height: 215px;
+	padding: 22px 20px;
+	background: rgba(36,117,175,0.8);
+	position: absolute;
+	right: 0;
+	bottom: 0;
+} 
+.t-detali .left-one {
+	margin: 80px 0 0 0;
+	float: right;
+}
+.t-detali:hover .left-one,.two-detail:hover .right-top {
+	margin-right: 200px;
+	transition: all 0.5s;
+	-moz-transition: all 0.5s; 
+	-webkit-transition: all 0.5s; 
+	-o-transition: all 0.5s; 
+}
+.two-details:hover .right-bot {
+	margin-left: 200px;
+	transition: all 0.5s;
+	-moz-transition: all 0.5s; 
+	-webkit-transition: all 0.5s; 
+	-o-transition: all 0.5s; 
+}
+.two-detail .right-top {
+	margin: 60px 0 50px 0;
+	float: right;
+}
+.two-details .right-bot {
+	margin: 68px 0 50px 0;
+}
+.t-detali .date {
+	display: inline-block;
+	margin-left: 180px;
+}
+.t-detali p {
+	color: #fff;
+	font-size: 14px;
+	margin-bottom: 14px;
+}
+.t-detali span {
+	color: #fff;
+	font-size: 14px;
+	display: block;
+}
+.show-right ul li {
+	max-width: 590px;
+	position: relative;
+}
+.show-right {
+	opacity: 0;
+}
+.two-detail,.two-details {
+	width: 295px;
+	height: 215px;
+	background: #f8f8f8;
+	padding: 19px 21px;
+	position: relative;
+}
+.two-detail span,.two-detail p,.two-details span,.two-details p {
+	font-size: 14px;
+}
+.two-detail {
+	float: right;
+}
+.two-details {
+	float: left;
+}
+
+
+
+/*评测视频*/
+.test {
+	width: 100%;
+	height: 520px;
+	background: #eee;
+}
+.test-video {
+	max-width: 1180px;
+	position: relative;
+	margin: 70px auto 0;
+}
+.video-sel {
+	width: 1180px;
+	height: 240px;
+}
+.video-sel .video-box {
+	width: 370px;
+	float: left;
+}
+.center-box {
+	margin: 0 30px 0 30px;
+}
+.video-item{
+    width: 370px;
+    height:200px;
+    display: block;
+}
+.video-item img {
+	width: 100%;
+}
+.video-title{
+    font-size: 14px;
+    color: #666;
+    text-align:center;
+    margin-top: 35px;
+    line-height: 35px;
+    padding-bottom: 20px;
+}
+
+
+/*靠谱新闻*/
+.koopoo-news {
+	width: 1180px;
+	margin: 50px auto 121px;
+	overflow: hidden;
+}
+.news {
+	width: 100%;
+	height: 148px;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	position: relative;
+}
+.news-one,.news-three {
+	margin-left: 1180px;
+}
+.news-two {
+	margin-left: -1180px;
+	border: none;
+}
+.news ul li {
+	float: left;
+}
+.news ul li a img {
+	width: 225px;
+	height: 148px;
+}
+.news-two ul li {
+	float: right;
+}
+.news-one ul li p,.news-three ul li p {
+	font-size: 18px;
+	margin: 40px 0 16px 0;
+}
+.news-two ul li p {
+	font-size: 18px;
+	text-align: right;
+	margin: 40px 0 16px 0;
+}
+.news ul li span {
+	color: #999;
+	font-size: 14px;
+}
+.news .li-margin {
+	margin-left: 40px;
+}
+.news .li-padding {
+	margin-right: 40px;
+}
+
+
+footer {
+	width: 100%;
+	height: 100px;
+	background: url(../../img/foot_bac.jpg) no-repeat;
+	background-size: 100% 100%;
+	padding: 15px 104px 15px 104px;
+}

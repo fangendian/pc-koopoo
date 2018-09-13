@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>意见反馈</title>
+	<link href="../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../styles/common.css" rel="stylesheet">
+	<link href="../../styles/animate.min.css" rel="stylesheet">
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="page-list-container">
+		<div class="search-wrapper mc-bg-white border">
+			<div class="p-15 box-clear">
+                <div class="ml-5 fl">
+                    <div class="input-group search-bar box-clear fl" id="searchBar">
+                        <i class="fa fa-search"></i>
+                        <input type="text" name="keyword" class="form-control" placeholder="关键字查询">
+                        <span class="search-btn-reset"><i class="fa fa-remove"></i></span>
+                        <span class="input-group-addon btn btn-default" id="btnSearch">搜索</span>
+                    </div>
+                </div>
+			</div>
+		</div>
+
+		<div class="mc-bg-white mt-10 mb-10 border">
+			<div class="page-main-wrapper">
+				<table class="mc-list-table main-list" id="categoriesTable" data-mode="edit">
+					<thead>
+					<tr>
+						<td width="50">选择</td>
+						<td width="100">邮箱地址</td>
+						<td width="280">意见</td>
+						<td width="100">时间</td>
+						<td width="100">操作</td>
+					</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+
+				<div class="mc-list-tools box-clear pt-20 pb-20 pl-15 pr-15" id="listTools" hidden>
+                    <div class="fr" id="pageNavWrapper"></div>
+                </div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 查看详细 -->
+	<div class="mc-bg-white border p-15 box-clear view-data-container view-data-mode" id="viewFormContainer" hidden>
+		<div class="form-header box-clear mb-20 b-b">
+			<div class="mr-10 fl f18"><i class="fa fa-search-plus"></i> 查看反馈</div>
+		</div>
+
+		<div class="form-group-wrapper form-view-base">
+			<div class="form-item">
+				<span class="form-item-title">邮箱地址：</span>
+				<div class="form-item-content" data-bind="email" data-default-value="-"></div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">意见：</span>
+				<div class="form-item-content" data-bind="content"></div>
+			</div>
+            <div class="form-item">
+                <span class="form-item-title">时间：</span>
+                <div class="form-item-content" data-bind="create_time"></div>
+            </div>
+
+		</div>
+
+		<div class="form-group-wrapper">
+			<div class="form-item mt-30 mb-15">
+				<span class="form-item-title">&nbsp;</span>
+				<div class="form-item-content">
+					<button class="btn btn-sm btn-default btn-big" id="btnViewFormClose" type="button">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 列表模板 -->
+	<script type="text/html" id="listTemplate">
+		{{each result as item}}<tr data-id="{{item.feedback_id}}">
+			<td><input type="checkbox"></td>
+			<td><span class="text-cover color-light-gray">{{item.email || '-'}}</span></td>
+			<td><span class="text-cover">{{item.content}}</span></td>
+			<td><span class="text-cover">{{item.create_time}}</span></td>
+			<td><span class="mc-btn-text btn-view">查看</span></td>
+		</tr>{{/each}}
+        {{if !result.length}}<tr><td colspan="5" class="td-none text-center">暂无内容</td></tr>{{/if}}
+	</script>
+
+	<script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: false,
+            files: [
+                '../../scripts/local/store-feedback.js'
+            ]
+        });
+	</script>
+</body>
+</html>
+

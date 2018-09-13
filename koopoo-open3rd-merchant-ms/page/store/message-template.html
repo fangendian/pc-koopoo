@@ -1,0 +1,233 @@
+<!-- 消息通知模板 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>消息通知模板</title>
+  <link href="../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../../styles/common.css" rel="stylesheet">
+  <link href="../../styles/animate.min.css" rel="stylesheet">
+</head>
+<style>
+  .temp-left {
+    display: inline-block;
+    float: left;
+  }
+
+  #see_notic {
+    display: inline-block;
+    float: right;
+  }
+</style>
+
+<body class="body-bg-gray p-10">
+
+  <div class="page-list-container">
+
+    <div class="form-group-wrapper tab-content mt-10">
+      <div>
+        <!-- 模板设置 -->
+        <div class="group-base-wrapper tab-pane active" id="baseInfoBox">
+          <div class="form-item mb-0">
+            <div class="form-item-title" style="width:100%;text-align:center">
+              <h4 class="h4 temp-left">消息通知模板设置</h4>
+              <span id="see_notic">
+                <i class="fa fa-info-circle color-cyan"></i> ID使用说明</span>
+            </div>
+          </div>
+          <div class="row" id="baseInfoWrapper">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="form-item" style="margin-bottom:0px">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 拼团成功通知：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="templateId_1" data-width="normal" name="name" placeholder="消息模板ID">
+                </div>
+              </div>
+              <div class="form-item">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 温馨提示：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="remark_1" data-width="normal" name="name" placeholder="自定义文本提示">
+                </div>
+              </div>
+              <div class="form-item" style="margin-bottom:0px">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 快递发货通知：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="templateId_3" data-width="normal" name="name" placeholder="消息模板ID">
+                </div>
+              </div>
+              <div class="form-item">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 温馨提示：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="remark_3" data-width="normal" name="name" placeholder="自定义文本提示">
+                </div>
+              </div>
+
+              <div class="form-item" style="margin-bottom:0px">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 订单支付失败通知：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="templateId_5" data-width="normal" name="name" placeholder="消息模板ID">
+                </div>
+              </div>
+              <div class="form-item">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 温馨提示：</span>
+                <div class="form-item-content">
+  
+                  <input type="text" class="form-control form-input" id="remark_5" data-width="normal" name="name" placeholder="自定义文本提示">
+                </div>
+              </div>
+
+              <div class="form-item" style="margin-bottom:0px">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 订单失效通知：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="templateId_7" data-width="normal" name="name" placeholder="消息模板ID">
+                </div>
+              </div>
+              <div class="form-item">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 温馨提示：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="remark_7" data-width="normal" name="name" placeholder="自定义文本提示">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-xs-12">
+              <div class="form-item" style="margin-bottom:0px">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 拼团失败通知：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="templateId_2" data-width="normal" name="name" placeholder="消息模板ID">
+                </div>
+              </div>
+              <div class="form-item">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 温馨提示：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="remark_2" data-width="normal" name="name" placeholder="自定义文本提示(不填为系统默认)">
+                </div>
+              </div>
+              <div class="form-item" style="margin-bottom:0px">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 退款成功通知：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="templateId_4" data-width="normal" name="name" placeholder="消息模板ID">
+                </div>
+              </div>
+              <div class="form-item">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 温馨提示：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="remark_4" data-width="normal" name="name" placeholder="自定义文本提示(不填为系统默认)">
+                </div>
+              </div>
+              <div class="form-item" style="margin-bottom:0px">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 代付状态通知：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="templateId_6" data-width="normal" name="name" placeholder="消息模板ID">
+                </div>
+              </div>
+              <div class="form-item">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 备注：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="remark_6"  data-width="normal" name="name" placeholder="自定义文本提示(不填为系统默认)">
+                </div>
+              </div>
+              <div class="form-item" style="margin-bottom:0px">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 拼团进度通知：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="templateId_8" data-width="normal" name="name" placeholder="消息模板ID">
+                </div>
+              </div>
+              <div class="form-item">
+                <span class="form-item-title">
+                  <span class="color-red">*</span> 备注：</span>
+                <div class="form-item-content">
+                  <input type="text" class="form-control form-input" id="remark_8" data-width="normal" name="name" placeholder="自定义文本提示(不填为系统默认)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="form-item mt-30 mb-15">
+          <span class="form-item-title">&nbsp;</span>
+          <div class="form-item-content">
+            <button type="button" class="btn btn-primary btn-big mr-5" id="btnFormSubmit">提交</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 查看详细 -->
+  <div class="mc-bg-white border p-15 box-clear view-data-container view-data-mode" id="viewFormContainer" hidden>
+    <div class="form-header box-clear mb-20 b-b">
+      <div class="mr-10 fl f18">
+        <i class="fa fa-search-plus"></i> ID使用说明</div>
+      <div class="fr">
+        <button type="button" class="btn-sm mc-btn-text btn-close">&times; 关闭</button>
+      </div>
+    </div>
+
+    <div class="form-group-wrapper mt-10">
+      <ul>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+        <li>这是id使用说明</li>
+      </ul>
+    </div>
+    <hr>
+    <div class="form-group-wrapper">
+      <div class="form-item mt-30 mb-15">
+        <span class="form-item-title">&nbsp;</span>
+        <div class="form-item-content">
+          <button class="btn btn-sm btn-default btn-big btn-close" type="button">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+  <script type="text/javascript">
+    loadJs({
+      fileUploadJs: true,
+      files: [
+        '../../scripts/local/store-common.js',
+        '../../scripts/local/store-message-template.js'
+      ]
+    });
+  </script>
+</body>
+
+</html>

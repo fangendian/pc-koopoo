@@ -1,0 +1,17 @@
+/*可以在这里添加你自己的css*/
+* { margin:0; padding:0;}
+div, dl, ul, ol, table, span, p, pre {}
+html { width:100%; height:auto; padding:0; overflow:hidden;}
+body { margin:0 70px; padding:40px 20px 10px 20px; background:white url(http://ih.yuele.me/upload/ueditor-static/ud_iframe_ruler.png) no-repeat center 20px; color:#555; font-family:"Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif; font-size:14px; line-height:1.6em;}
+p { margin:0 0 0 0;}
+img { max-width:100%; vertical-align:inherit; border-radius:2px;}
+img[data-img-show] { border-radius:0;}
+hr { border:none; border-top: 1px solid #eee;}
+a { text-decoration:none;}
+span, pre, p, div { white-space:normal; word-wrap:break-word;}
+pre, table { max-width:100%;}
+li { margin:0;}
+li { list-style:none;}
+
+.insert-shop { padding:5px; background-color:#fafafa; border:1px solid #ccc; border-radius:3px;}
+.insert-shop:after { content:''; display:block; clear:both;}

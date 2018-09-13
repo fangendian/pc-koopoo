@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>规格</title>
+	<link href="../../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../../styles/common.css" rel="stylesheet">
+	<link href="../../../styles/animate.min.css" rel="stylesheet">
+	<style>
+		.edit-container { padding-bottom:66px;}
+		.edit-form-left { width:calc(100% - 240px);}
+		input.title-input { border-color:#ddd;}
+		.edit-title-tip { height:14px;}
+		.form-editor-wrapper { min-height:500px;}
+
+		.edit-form-right { width:230px; margin-left:10px;}
+		.form-right-title { padding:8px 15px; border-bottom-color:#f5f5f5; font-weight:600;}
+		.edit-form-right .item-title { width:85px; padding-top:12px; padding-right:5px; font-size:12px; text-align:right; float:left;}
+		.f-r-item-content { width:calc(100% - 85px); float:left;}
+		.edit-form-right .form-item { margin-bottom:5px;}
+
+		.form-buttons { width:100%; left:0; bottom:0; text-align:center; z-index:10000; clear:both;}
+		.form-buttons>.btn { width:89px;}
+		.form-to-top { cursor:pointer; display:none;}
+		.form-buttons.fixed .form-to-top { display:block;}
+	</style>
+</head>
+<body class="body-bg-gray p-10">
+
+<div class="page-list-container">
+	<div class="search-wrapper mc-bg-white border">
+		<div class="p-15 box-clear">
+			<div class="fl">
+				<button class="btn btn-sm btn-primary mr-5" id="btnShowAddBox"><i class="fa fa-plus-circle"></i> 添加</button>
+				<button class="btn btn-sm btn-info mr-5" id="btnShowAddBoxByWx"><i class="fa fa-plus-circle"></i> 采集公众号文章</button>
+			</div>
+			<div class="ml-5 fl">
+				<div class="mr-5 fl" hidden>
+					<span class="btn btn-sm btn-default mr-5" id="btnFilter"><i class="fa fa-filter"></i> 筛选</span>
+				</div>
+				<div class="input-group search-bar box-clear fl" id="searchBar">
+					<i class="fa fa-search"></i>
+					<input type="text" name="keyword" class="form-control" placeholder="名称查询">
+					<span class="search-btn-reset"><i class="fa fa-remove"></i></span>
+					<span class="input-group-addon btn btn-default" id="btnSearch">搜索</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mc-bg-white mt-10 mb-10 border">
+		<div class="page-main-wrapper">
+			<table class="mc-list-table main-list main-images-list" id="listTable" data-mode="edit">
+				<thead>
+				<tr>
+					<td width="50">选择</td>
+					<td width="60">顺序</td>
+					<td width="60">禁用</td>
+					<td width="80">封面</td>
+					<td width="80">阅读量</td>
+					<td>标题</td>
+					<td width="120">操作</td>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+
+			<div class="mc-list-tools box-clear pt-20 pb-20 pl-15 pr-15" id="listTools" hidden>
+				<div class="list-tools-left fl">
+					<div class="mc-table-checkbox-bar ml-5 mr-10 fl">
+						<label><input type="checkbox" id="checkedAll"> 全选</label>
+					</div>
+					<button class="btn btn-sm btn-warning mr-5" id="btnListRemove" disabled="disabled"><i class="fa fa-trash"></i> 禁用</button>
+				</div>
+
+				<div class="fr" id="pageNavWrapper"></div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<!-- 新增、修改 -->
+<div class="edit-container box-clear" id="formContainer" hidden>
+	<input type="file" class="hide" id="fileUploadImage" size="1"/>
+	<div class="form-header box-clear pb-10">
+		<div class="mr-10 fl f18" id="editTile">
+			<span data-mode="new" hidden><i class="fa fa-plus-square"></i> <span>新增文章</span></span>
+			<span data-mode="edit" hidden><i class="fa fa-pencil-square"></i> <span>修改文章</span></span>
+		</div>
+	</div>
+
+	<!-- 左侧 -->
+	<div class="edit-form-left mb-10 box-clear fl">
+		<div class="per-100" id="editTitle">
+			<input type="text" class="form-control form-input title-input" data-width="max" name="title" data-bind="title" data-not-null="1" placeholder="输入文章名称">
+			<div class="mt-5 edit-title-tip f12 color-gray"><i class="fa fa-info-circle color-cyan"></i> 在小程序内展示富文本，需要新版微信的支持！（后续将推出兼容模式）</div>
+		</div>
+
+		<!-- 文章内容编辑器 -->
+		<div class="form-editor-wrapper mc-bg-white mt-10" id="articleEditor"></div>
+	</div> <!-- /End form-left-->
+
+	<!-- 右侧 -->
+	<div class="edit-form-right box-clear fr" id="editRight">
+		<!-- 文章分类 -->
+		<div class="group-category-wrapper mc-bg-white border mb-10" id="categoriesBox">
+			<div class="form-right-title b-b">专题</div>
+			<div class="p-15">
+				<ul class="mc-choose-wrapper" id="themesUl"></ul>
+			</div>
+		</div>
+
+		<div class="mc-bg-white border mb-10">
+			<div class="form-right-title b-b">封面</div>
+
+			<div class="p-15 form-cover-wrapper">
+				<input type="hidden" name="thumbnail_src" data-bind="thumbnail_src" data-not-null="1"/>
+				<div class="form-image-wrapper">
+					<span class="image-contain" id="shopCoverImg" data-bind="thumbnail_src_string" data-bind-type="bg-img" style="background-image:url(../../../images/upload-default-img.png);"></span>
+				</div>
+				<div class="mt-15 color-light-gray">
+					<span class="btn btn-info btn-sm btn-file-single" id="btnCoverImg">上传封面</span>
+					<p class="mt-5 mb-0">
+						<small>仅支持jpg、gif、png，大小不超过1MB。建议尺寸: <span class="color-orange">750 &times; 400px</span></small>
+					</p>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="mc-bg-white border mb-10">
+			<div class="form-right-title b-b">其他</div>
+			<div class="p-15">
+				<div class="form-item">
+					<span class="item-title mb-5">显示顺序：</span>
+					<div class="f-r-item-content mt-5">
+						<input type="text" class="form-control form-input" data-width="max" name="order_number" data-bind="order_number" data-type="number" data-limit="0" data-limit-type="number" placeholder="请输入数字">
+					</div>
+				</div>
+				<div class="form-item from-is-checkbox" id="isDeletedWrapper">
+					<span class="item-title">禁用文章：</span>
+					<div class="f-r-item-content mt-5">
+						<input type="checkbox" name="is_deleted" data-state="false" data-size="small" data-on-color="danger" data-on-text="是" data-off-text="否" />
+					</div>
+				</div>
+				<div class="form-item from-is-checkbox">
+					<span class="item-title mb-5">允许评论：</span>
+					<div class="f-r-item-content mt-5">
+						<input type="checkbox" name="is_can_comment" data-state="false" data-size="small" data-on-color="primary" data-on-text="是" data-off-text="否" />
+					</div>
+				</div>
+				<div class="form-item from-is-checkbox" hidden id="isNeedAuditWrapper">
+					<span class="item-title mb-5">评论需审核：</span>
+					<div class="f-r-item-content mt-5">
+						<input type="checkbox" name="is_need_audit_comment" data-state="false" data-size="small" data-on-color="primary" data-on-text="是" data-off-text="否" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> <!-- /End form-right-->
+
+	<div class="form-buttons mc-bg-white border p-15" id="formButtons">
+		<button type="button" class="btn btn-primary btn-big mr-5" id="btnFormSubmit">保存</button>
+		<button type="button" class="btn btn-default btn-big btn-cancel">取消</button>
+
+		<p class="form-to-top mt-10 mr-10 ml-10 fr"><i class="fa fa-arrow-up"></i> 回顶部</p>
+	</div>
+</div>
+
+
+<!-- 批量采集文章 -->
+<div class="edit-container box-clear" id="wxArticleEditContainer" hidden>
+	<div class="form-header box-clear pb-10">
+		<div class="mr-10 fl f18">
+			<span><i class="fa fa-bullseye"></i> <span>采集微信公众号文章</span></span>
+		</div>
+	</div>
+	<div class="batch-input-wrapper pt-40 pb-40 mc-bg-white border text-center">
+		<div class="per-70 text-center" style="margin:0 auto;">
+			<textarea class="form-control form-input title-input inline h-em-8" data-width="max" name="url" data-not-null="1" data-type="url" placeholder="URL地址"></textarea>
+		</div>
+		<div class="mt-10 mb-20 edit-title-tip f12 color-gray">
+			<i class="fa fa-info-circle color-light-gray"></i>
+			URL查找方式：点击 <a href="http://weixin.sogou.com/" target="_blank">此处</a> 搜索您的‘微信公众号’，然后点击进入公众号复制文章的完整URL地址。
+		</div>
+		<div>
+			<button type="button" class="btn btn-big btn-info mr-5" id="btnFetchContentByWxUrl">获取文章</button>
+			<button type="button" class="btn btn-big btn-default" style="min-width:inherit;padding:0 20px;" id="btnFetchWxCancel">取消</button>
+		</div>
+	</div>
+</div>
+
+
+<!-- 查看详细 -->
+<div class="mc-bg-white border p-15 box-clear view-data-container view-data-mode" id="viewFormContainer" hidden>
+	<div class="form-header box-clear mb-20 b-b">
+		<div class="mr-10 fl f18"><i class="fa fa-search-plus"></i> 文章评论</div>
+		<div class="fr">
+			<button type="button" class="btn-sm mc-btn-text btn-close">&times; 关闭</button>
+		</div>
+	</div>
+
+	<div class="form-group-wrapper mt-10">
+		<div class="form-item mb-0">
+			<div class="form-item-title"><h4 class="h4">文章信息</h4></div>
+		</div>
+		<div class="row" id="baseInfoWrapperView">
+			<div class="form-item pb-10">
+				<span class="form-item-title">封面：</span>
+				<div class="form-item-content">
+					<div class="form-image-wrapper fl">
+						<span class="image-contain" data-bind="cover_src_string" data-bind-type="bg-img" style="background-image:url(../../../images/upload-default-img.png);"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">文章标题：</span>
+				<div class="form-item-content" data-bind="title"></div>
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">是否禁用：</span>
+				<div class="form-item-content" data-bind="is_deleted_text"></div>
+			</div>
+		</div>
+
+		<!--<hr>
+		<div class="form-item mb-0">
+			<div class="form-item-title"><h4 class="h4">评论管理</h4></div>
+		</div>
+
+		<div>
+			<table class="mc-list-table main-list main-images-list" id="commentsTable" data-mode="edit">
+				<thead>
+				<tr>
+					<td width="50">选择</td>
+					<td width="60">禁用</td>
+					<td width="60">状态</td>
+					<td width="80">头像</td>
+					<td>用户名</td>
+					<td>评论内容</td>
+					<td>时间</td>
+					<td width="120">操作</td>
+				</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+
+			<div class="mc-list-tools box-clear pt-20 pb-20 pl-15 pr-15" id="commentsTools" hidden>
+				<div class="list-tools-left fl">
+					<div class="mc-table-checkbox-bar ml-5 mr-10 fl">
+						<label><input type="checkbox" id="commentsCheckedAll"> 全选</label>
+					</div>
+					<button class="btn btn-sm btn-warning mr-5" id="btnCommentsRemove" disabled="disabled"><i class="fa fa-trash"></i> 禁用</button>
+				</div>
+
+				<div class="fr" id="commentsPageNavWrapper"></div>
+			</div>
+		</div>-->
+	</div>
+
+	<hr>
+	<div class="form-group-wrapper">
+		<div class="form-item mt-30 mb-15">
+			<span class="form-item-title">&nbsp;</span>
+			<div class="form-item-content">
+				<button class="btn btn-sm btn-default btn-big btn-close" type="button">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 列表模板 -->
+<script type="text/html" id="listTemplate">
+	{{each result as item}}<tr data-id="{{item.content_id}}" data-is-deleted="{{item.is_deleted}}">
+		<td><input type="checkbox"></td>
+		<td>{{item.order_number || '默认'}}</td>
+		<td>{{if item.is_deleted}}<span class="color-dark-gray">已禁用</span>{{else}}<span class="color-light-gray">否</span>{{/if}}</td>
+		<td><div class="image-contain wh-40" style="background-image: url({{item.thumbnail_src_string || defaultImageUrl}});"></div></td>
+		<td>{{item.view_count}}</td>
+		<td><span class="text-cover strong text-title">{{item.title}}</span></td>
+		<td>
+			<span class="mc-btn-text btn-edit mr-15">修改</span>
+			<!--<span class="mc-btn-text btn-comments mr-15">评论</span>-->
+		</td>
+	</tr>{{/each}}
+	{{if !result.length}}<tr><td class="td-none text-center" colspan="7">暂无内容</td></tr>{{/if}}
+</script>
+
+
+<!-- 文章专题列表模板 -->
+<script type="text/html" id="themesTemplate">
+	{{each result as item}}<li class="mc-choose-item mb-10" data-id="{{item.content_theme_id}}">{{item.title}}</li>{{/each}}
+	{{if !result.length}}<span class="color-gray">请先添加专题！</span>{{/if}}
+</script>
+
+
+<!-- 评论列表模板 -->
+<script type="text/html" id="commentsListTemplate">
+	{{each result as item}}<tr data-id="{{item.content_id}}" data-is-deleted="{{item.is_deleted}}">
+		<td><input type="checkbox"></td>
+		<td>{{if item.is_deleted}}<span class="color-dark-gray">已禁用</span>{{else}}<span class="color-light-gray">否</span>{{/if}}</td>
+		<td>{{item.status}}</td>
+		<td><div class="image-contain wh-40" style="background-image: url({{item.thumbnail_src_string || defaultImageUrl}});"></div></td>
+		<td>{{item.user_name}}</td>
+		<td><span class="text-cover strong text-title">{{item.content}}</span></td>
+		<td><span class="text-cover">{{item.create}}</span></td>
+		<td>
+			<span class="mc-btn-text btn-edit mr-15">审核</span>
+			<span class="mc-btn-text btn-comments mr-15">禁用</span>
+		</td>
+	</tr>{{/each}}
+	{{if !result.length}}<tr><td class="td-none text-center" colspan="8">暂无内容</td></tr>{{/if}}
+</script>
+
+
+<script type="text/javascript" src="../../../scripts/files-ver-controller.js"></script>
+<script type="text/javascript">
+    loadJs({
+        fileUploadJs: true,
+        files: [
+            '../js/articles.js'
+        ]
+    });
+</script>
+<script type="text/javascript" src="../../../scripts/ueditor/ueditor.config.microapp.new.js"></script>
+<script type="text/javascript" src="../../../scripts/ueditor/ueditor.lite.min.js"></script>
+<script type="text/javascript" src="../../../scripts/ueditor/ueditor-customize.js"></script>
+</body>
+</html>

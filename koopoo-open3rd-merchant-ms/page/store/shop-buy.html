@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>续费 - 靠谱</title>
+	<link href="../../../img/logo-sig.png" rel="shortcut icon">
+    <link href="../../scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../styles/animate.min.css?v=3.1.0" rel="stylesheet">
+    <link href="../../scripts/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../styles/common.css" rel="stylesheet">
+	<style>
+		.form-item { margin-bottom:0;}
+
+		.mc-choose-item { padding:10px; color:#555; font-weight:600;}
+
+	</style>
+</head>
+<body class="body-bg-gray p-10">
+
+	<div class="mc-bg-white box-clear p-10 border view-data-mode">
+		<div class="form-item">
+			<span class="form-item-title">小程序名称：</span>
+			<div class="form-item-content form-item-text">
+				<span data-bind="shop_name"></span>
+			</div>
+		</div>
+		<div class="form-item">
+			<span class="form-item-title">小程序类型：</span>
+			<div class="form-item-content form-item-text">
+				<span data-bind="industry_name"></span>
+			</div>
+		</div>
+		<div class="form-item">
+			<span class="form-item-title">模板：</span>
+			<div class="form-item-content form-item-text">
+				<span data-bind="template_name"></span>
+				<span class="ml-20 color-light-gray" hidden>价格：<span class="color-red">￥<strong>3888</strong></span></span>
+			</div>
+		</div>
+		<div class="form-item">
+			<span class="form-item-title">有效期至：</span>
+			<div class="form-item-content form-item-text">
+				<span data-bind="expired_time"></span>
+				<span class="mc-bg-orange" id="expiredText" data-bind="expired_status_text" hidden></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="mc-bg-white box-clear mt-10 p-10 border">
+		<div class="p-10 mb-5 b-b">
+			<button class="btn btn-danger" data-toggle="modal" data-target="#shopBuyModal"><i class="fa fa-diamond"></i> 小程序续费</button>
+			<p class="mt-10 color-gray f12"><i class="fa fa-info-circle"></i> 温馨提示：目前只能按年续费，单次续费购买仅支持一年！</p>
+		</div>
+		<div class="p-10">
+			<ul class="list-ul" id="buyListUl"></ul>
+		</div>
+	</div>
+
+	<!-- set pay Modal -->
+	<div class="modal fade" id="shopBuyModal" tabindex="-1" role="dialog" aria-labelledby="shopBuyModal">
+		<div class="modal-dialog modal-dialog-min" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">小程序续费</h4>
+				</div>
+				<div class="modal-body">
+					<small class="color-gray">提前续费，能避免工作忙时而忘记续费！让小程序绝不打烊~</small>
+					<div class="mt-10" id="shopBuyBox">
+						<p class="mb-10" hidden>续费金额：<span class="color-red">￥<strong>3888</strong></span></p>
+						<!--<p>当前有效期：<span data-bind="expired_time"></span></p>-->
+						<p class="pb-10 b-b">续费时间：<span class="color-dark-gray">续费1年, 至<span id="newTime"></span></span></p>
+						<div class="pay-type-choose-box">
+							<p>付款方式：</p>
+							<ul class="mc-choose-wrapper mt-5 pb-10" id="payMethodUl">
+								<!--<li class="mc-choose-item" data-type="wxpay"><i class="fa fa-wechat"></i> 微信支付</li>-->
+								<li class="mc-choose-item" data-type="code"><i class="fa fa-credit-card"></i> 靠谱票券码</li>
+							</ul>
+							<div class="mt-5" hidden>
+								<p class="inline pay-method-item" data-type="wxpay"><i class="fa fa-wechat"></i> 微信支付</p>
+								<p class="inline pay-method-item" data-type="code"><i class="fa fa-credit-card"></i> 靠谱票券码</p>
+							</div>
+							<div class="mt-5 mb-10 pt-10 pb-10 b-t">
+								<p><small class="color-gray">选定支付方式后，进入下一步购买</small></p>
+								<button class="btn btn-primary btn-big" id="btnPayNext" disabled="disabled">下一步</button>
+							</div>
+						</div>
+						<div class="pay-type-content-box pb-15" hidden>
+							<div data-mode="wxpay" hidden>
+								<p>微信二维码付款</p>
+								<p class="image-cover mt-10 mb-10" style="width:150px;height:150px;" id="wxQrCodeImg"></p>
+								<small>温馨提示：微信扫码支付可能有延迟，请耐心等待，不要返回重复支付!</small>
+								<p class="mt-10">
+									<button type="button" class="btn btn-success btn-big mr-5" id="btnPayWxComplete">支付成功</button>
+									<button type="button" class="btn btn-default btn-big btn-back">返回</button>
+								</p>
+							</div>
+							<div data-mode="code" hidden>
+								<small>请输入靠谱票券码</small>
+								<input type="text" class="form-control form-input mt-10" name="ticket_code" data-not-null="1" placeholder="靠谱票券码" />
+								<p class="mt-20">
+									<button type="button" class="btn btn-primary btn-big mr-5" id="btnSetPay"><i class="fa fa-shield"></i> 购买</button>
+									<button type="button" class="btn btn-default btn-big btn-back">返回</button>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/html" id="buyListTemplate">
+		{{each result as item}}<li class="b-b mb-10 pb-10">
+			<span class="mr-20 block">{{item.title}}</span>
+			<small class="color-light-gray">购买时间：{{item.create_time}}</small>
+		</li>{{/each}}
+		{{if !result.length}}<p class="color-gray">暂无购买记录</p>{{/if}}
+	</script>
+
+
+	<script type="text/javascript" src="../../scripts/files-ver-controller.js"></script>
+	<script type="text/javascript">
+        loadJs({
+            fileUploadJs: false,
+            files: [
+                '../../scripts/global/jquery.qrcode.min.js',
+                '../../scripts/local/store-buy.js'
+            ]
+        });
+	</script>
+</body>
+</html>

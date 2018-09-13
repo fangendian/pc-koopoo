@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页右侧</title>
+</head>
+<body>
+
+<div class="-hide" id="pageRightInsert">
+    <div class="page-right-close" id="btnHidePageRight"><i class="fa fa-angle-double-right"></i> 隐藏右侧</div>
+    <div class="page-right-wrapper" id="pageRightWrapper">
+        <p class="page-right-caption pl-10 b-b"><i class="fa fa-question-circle-o f16"></i> 帮助和服务</p>
+
+        <div class="right-box p-10">
+            <p class="right-title mt-5">帮助中心</p>
+            <div class="right-content mt-10 pt-5 pl-10">
+                <h6>靠谱微商城是什么？</h6>
+                <p class="mt-5 color-gray">全行业的在线销售解决方案，解决在线卖货，互联网营销，会员管理的解决方案</p>
+                <a href="http://koopoo.top/help.html" target="_blank">进入帮助中心 <i class="fa fa-angle-double-right"></i></a>
+                <div class="right-content mt-15 pt-15 b-t link-group" hidden>
+                    <a href="javascript:void(0);">你告诉我什么？</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-box b-t mt-5 p-10">
+            <p class="right-title mt-10">售后服务</p>
+            <div class="right-content link-group mt-5 pl-10">
+                <a href="../../../page/fqa/product.html" target="_blank">如何发布门店商品？</a>
+            </div>
+        </div>
+
+
+        <div class="b-t mt-5 p-10" id="shopInfoBox">
+            <p class="right-title mt-10">小程序信息</p>
+            <div class="mt-10 pl-10">
+                <p><strong data-bind="shop_name"></strong> </p>
+                <p class="mt-5">
+                    <span data-bind="expired_time"></span>
+                    <span class="color-gray" id="expiredText" data-bind="expired_status_text" hidden></span>
+                    <span class="mc-bg-orange" id="expiredText2" data-bind="expired_status_text_2" hidden></span>
+                    <span class="btn btn-danger btn-sm mt-5" id="btnShopBuy" style="display:none;">立即续费</span>
+                </p>
+            </div>
+            <div class="pl-10 pr-5">
+                <div class="shop-qrcode-box mt-10 pt-10 b-t" id="shopQrCodeBox">
+                    <div class="s-qrc-before" hidden>
+                        <span>您还未绑定小程序</span>
+                        <span class="btn btn-success btn-sm mt-5" id="btnBindWx"><i class="fa fa-wechat"></i> 去绑定</span>
+                    </div>
+                    <div class="s-qrc-content" hidden>
+                        <span><span class="s-qrc-text">体验码</span> <small class="color-gray">(微信扫一扫)</small></span>
+                        <p class="s-qrc-view per-100 m-0 pt-5">
+                            <img class="per-100 mt-5 border"/>
+                            <span></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="shop-update-box mt-5 pt-5 b-t" id="shopUpdateBox" hidden>
+                    <div class="s-update-before">
+                        <span><i class="fa fa-bullhorn"></i> 有新版本可以升级啦！</span>
+                        <span class="btn btn-primary btn-sm mt-5" id="btnUpdate"><i class="fa fa-cloud-upload"></i> 去升级</span>
+                    </div>
+                    <div class="s-update-content" hidden><span class="mc-bg-orange">您的小程序正在升级中</span></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="../internal.js"></script>
+        <script type="text/javascript" src="../../ueditor.parse.js"></script>
+        <title></title>
+    </head>
+    <body class="view">
+        <div id="preview"></div>
+    </body>
+    <script>
+        var headerHtml = '';
+        if(window.parent.ue){
+            switch (window.parent.ue.options.contentOrigin) {
+                case '商务配套':
+                    break;
+                case '套餐特色':
+                    headerHtml = '<div class="header">图集</div><h2 class="title">预览的套餐标题</h2>';
+                    break;
+                case '菜单':
+                    break;
+            }
+        }
+        document.getElementById('preview').innerHTML = headerHtml + editor.getContent();
+        uParse('#preview', {
+            rootPath : '../../',
+            chartContainerHeight:500
+        });
+        dialog.oncancel = function(){
+            document.getElementById('preview').innerHTML = '';
+        }
+    </script>
+</html>
